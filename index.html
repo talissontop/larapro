@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#050811">
-    <title>Lara Elite v20.9 - Turbo Core</title>
+    <title>Lara Elite v20.9 - Official PIX</title>
 
     <link rel="preconnect" href="https://text.pollinations.ai">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -16,12 +16,11 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
         :root { --accent: #2563eb; --gold: #D4AF37; --bg: #050811; --card-bg: rgba(15, 20, 35, 0.9); }
         
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none; }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
         input, textarea { -webkit-user-select: auto !important; user-select: auto !important; }
-        .bubble, .txt-area, pre, code { -webkit-user-select: text !important; user-select: text !important; }
+        .bubble, pre, code, #pix-area { -webkit-user-select: text !important; user-select: text !important; }
 
         html, body { background: #000; color: #fff; height: 100%; width: 100%; overflow: hidden; position: fixed; inset: 0; }
-
         #bg-container { position: fixed; inset: 0; z-index: -2; background: #000; }
         .bg-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s ease-in-out; }
         .bg-slide.active { opacity: 1; }
@@ -43,13 +42,13 @@
         .user .bubble { background: linear-gradient(135deg, var(--accent), #1d4ed8); color: #fff; border-bottom-right-radius: 4px; }
         .ai .bubble { background: var(--card-bg); color: #f3f4f6; border-bottom-left-radius: 4px; border: 1px solid rgba(255,255,255,0.08); }
 
-        pre { background: #0d1117; padding: 15px; border-radius: 12px; overflow-x: auto; margin: 15px 0; border: 1px solid rgba(255,255,255,0.1); }
-        code { font-family: monospace; font-size: 13px; }
+        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 5000; display: none; align-items: center; justify-content: center; padding: 25px; }
+        .card-pix { background: #0a0f1e; padding: 40px 30px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; width: 100%; max-width: 380px; }
 
         footer { position: fixed; bottom: 0; left: 0; width: 100%; height: 85px; padding: 15px 20px; background: linear-gradient(to top, #000 80%, transparent); display: flex; justify-content: center; z-index: 100; }
         .in-box { width: 100%; max-width: 800px; background: rgba(25, 30, 45, 0.98); border: 1px solid rgba(255,255,255,0.1); border-radius: 35px; padding: 10px 15px; display: flex; align-items: center; gap: 10px; }
         textarea { flex: 1; background: none; border: none; color: #fff; font-size: 16px; outline: none; resize: none; max-height: 70px; }
-        .btn-send { background: var(--accent); border: none; width: 44px; height: 44px; border-radius: 50%; color: #fff; cursor: pointer; font-size: 18px; }
+        .btn-send { background: var(--accent); border: none; width: 44px; height: 44px; border-radius: 50%; color: #fff; cursor: pointer; }
         
         aside.sidebar { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; z-index: 2100; background: rgba(10, 15, 25, 0.98); backdrop-filter: blur(25px); transition: 0.4s; border-right: 1px solid rgba(255,255,255,0.05); }
         .sidebar.open { left: 0; }
@@ -58,7 +57,6 @@
 
         @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         #gatekeeper, #onboarding { position: fixed; inset: 0; background: #050811; z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .gate-card { background: #0a0f1e; padding: 40px 30px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; width: 100%; max-width: 380px; }
     </style>
 </head>
 <body>
@@ -67,22 +65,32 @@
     <div id="toast" style="position:fixed; top:100px; left:50%; transform:translateX(-50%); background:var(--gold); color:#000; padding:12px 30px; border-radius:30px; font-size:12px; font-weight:900; display:none; z-index:10000;"></div>
 
     <section id="onboarding">
-        <div class="gate-card">
-            <h2 style="color:var(--gold); margin-bottom: 20px;">LARA ELITE v20.9</h2>
-            <p style="font-size: 14px; line-height: 1.6; margin-bottom: 30px;">Iniciando motor Turbo para respostas globais ultra-rápidas.</p>
+        <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 380px;">
+            <h2 style="color:var(--gold); margin-bottom: 20px;">LARA ELITE</h2>
+            <p style="font-size: 14px; margin-bottom: 30px;">Apoie o projeto para manter o motor Turbo sempre ativo.</p>
             <button onclick="Core.skipOnboarding()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:18px; color:#fff; font-weight:900;">INICIAR</button>
         </div>
     </section>
 
     <section id="gatekeeper">
-        <div class="gate-card">
-            <h2 style="color:#fff; margin-bottom: 20px;">Perfil do Mestre</h2>
+        <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 380px;">
+            <h2 style="color:#fff; margin-bottom: 20px;">Mestre</h2>
             <div id="preview" style="width:80px; height:80px; border-radius:50%; background:#000; margin:0 auto 20px; border:2px solid var(--gold); display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="document.getElementById('up').click()">👤</div>
             <input type="file" id="up" accept="image/*" hidden onchange="Core.up(event)">
             <input type="text" id="p-name" placeholder="Seu Nome" style="width:100%; padding:16px; background:#000; border:1px solid #333; border-radius:18px; color:#fff; margin-bottom:20px; text-align:center;">
             <button onclick="Core.save()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:18px; color:#fff; font-weight:900;">SALVAR</button>
         </div>
     </section>
+
+    <!-- MODAL PIX ATUALIZADO -->
+    <div id="modal-pix" class="modal">
+        <div class="card-pix">
+            <h2 style="color:var(--gold); font-size:22px; font-weight:900;">APOIAR PROJETO</h2>
+            <p style="color:#bbb; font-size:13px; margin:20px 0;">Copie a chave PIX abaixo para ajudar.</p>
+            <div id="pix-area" onclick="Core.copy('61318165300')" style="background:rgba(255,255,255,0.05); padding:18px; border-radius:20px; border:1px dashed var(--gold); color:#fff; font-size:12px; cursor:pointer; font-weight: 800;">CHAVE PIX: 61318165300</div>
+            <button onclick="UI.togglePix(false)" style="width:100%; padding:15px; margin-top:20px; border-radius:15px; background:#ef4444; border:none; color:#fff; font-weight:900;">VOLTAR</button>
+        </div>
+    </div>
 
     <header><div class="h-wrap">
         <button onclick="UI.menu(true)" style="background:none; border:none; color:#fff; font-size:24px;">☰</button>
@@ -93,8 +101,9 @@
     <div id="overlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.7); display:none; z-index:2000;" onclick="UI.menu(false)"></div>
     <aside id="menu" class="sidebar">
         <div class="u-box"><div class="u-img" id="menu-photo">👤</div><p id="menu-name" style="font-weight:900;">Mestre</p></div>
-        <nav style="padding:20px; display:flex; flex-direction:column; gap:10px;">
-            <button onclick="Core.clearChat()" style="width:100%; padding:15px; border-radius:12px; background:#ef4444; border:none; color:#fff; font-weight:bold;">LIMPAR CONVERSA</button>
+        <nav style="padding:20px; display:flex; flex-direction:column; gap:12px;">
+            <button onclick="UI.togglePix(true)" style="width:100%; padding:15px; border-radius:12px; background:linear-gradient(to right, #ffd700, #ff8c00); border:none; color:#000; font-weight:900;">APOIAR PROJETO</button>
+            <button onclick="Core.clearChat()" style="width:100%; padding:15px; border-radius:12px; background:#ef4444; border:none; color:#fff; font-weight:bold;">LIMPAR HISTÓRICO</button>
             <button onclick="Core.logout()" style="width:100%; padding:15px; border-radius:12px; background:rgba(255,255,255,0.05); border:1px solid #333; color:#fff;">SAIR</button>
         </nav>
     </aside>
@@ -103,16 +112,13 @@
     
     <footer>
         <div class="in-box">
-            <textarea id="u-in" rows="1" placeholder="Comando Turbo..." oninput="UI.size(this)" onkeydown="if(event.key==='Enter' && !event.shiftKey) { event.preventDefault(); Core.send(); }"></textarea>
+            <textarea id="u-in" rows="1" placeholder="Mande sua mensagem..." oninput="UI.size(this)" onkeydown="if(event.key==='Enter' && !event.shiftKey) { event.preventDefault(); Core.send(); }"></textarea>
             <button class="btn-send" onclick="Core.send()">➤</button>
         </div>
     </footer>
 
     <script>
-        const Storage = {
-            set: (k, v) => localStorage.setItem(k, JSON.stringify(v)),
-            get: (k) => JSON.parse(localStorage.getItem(k))
-        };
+        const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
 
         const Visual = {
             slides: document.querySelectorAll('.bg-slide'), current: 0,
@@ -122,12 +128,7 @@
                 const url = `https://image.pollinations.ai/prompt/anime_${char}_dark_aesthetic_4k?width=1080&height=1920&model=flux&nologo=true&seed=${Math.random()}`;
                 const next = this.slides[1 - this.current];
                 const img = new Image();
-                img.onload = () => {
-                    next.style.backgroundImage = `url(${url})`;
-                    this.slides[this.current].classList.remove('active');
-                    next.classList.add('active');
-                    this.current = 1 - this.current;
-                };
+                img.onload = () => { next.style.backgroundImage = `url(${url})`; this.slides[this.current].classList.remove('active'); next.classList.add('active'); this.current = 1 - this.current; };
                 img.src = url;
             },
             init() { this.update(); setInterval(() => this.update(), 60000); }
@@ -136,84 +137,53 @@
         const Core = {
             h: [], typing: false, name: '', photo: '',
             init() {
-                this.name = Storage.get('l_name') || '';
-                this.photo = Storage.get('l_photo') || '';
-                this.h = Storage.get('l_chat') || [];
-                UI.update();
-                this.h.forEach(m => UI.draw(m.r, m.t));
-                
+                this.name = Storage.get('l_name') || ''; this.photo = Storage.get('l_photo') || ''; this.h = Storage.get('l_chat') || [];
+                UI.update(); this.h.forEach(m => UI.draw(m.r, m.t));
                 if (!Storage.get('l_onboard')) document.getElementById('onboarding').style.display = 'flex';
                 else if (!Storage.get('l_active')) document.getElementById('gatekeeper').style.display = 'flex';
-                
                 Visual.init();
             },
             skipOnboarding() { Storage.set('l_onboard', true); location.reload(); },
-            save() {
-                this.name = document.getElementById('p-name').value || 'Mestre';
-                Storage.set('l_name', this.name);
-                Storage.set('l_photo', this.photo);
-                Storage.set('l_active', true);
-                location.reload();
-            },
+            save() { this.name = document.getElementById('p-name').value || 'Mestre'; Storage.set('l_name', this.name); Storage.set('l_photo', this.photo); Storage.set('l_active', true); location.reload(); },
             async requestAI() {
-                // MODELO TURBO v20.9 - GPT-4o-Mini
-                const sys = `LARA ELITE v20.9 Turbo. Mestre: ${this.name}. Responda de forma ultra-rápida, concisa e direta.`;
+                const sys = `LARA ELITE v20.9. Mestre: ${this.name}. Responda rápido.`;
                 try {
-                    const res = await fetch('https://text.pollinations.ai/openai', {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({
-                            model: 'gpt-4o-mini', 
-                            messages: [{role:"system", content: sys}, {role:"user", content: this.h.slice(-1)[0].t}]
-                        })
-                    });
+                    const prompt = encodeURIComponent(`[SYSTEM: ${sys}] User: ${this.h.slice(-1)[0].t}`);
+                    const res = await fetch(`https://text.pollinations.ai/${prompt}?model=openai&private=true`);
                     const txt = await res.text();
                     UI.dots(false);
                     UI.write(txt.split(/Ad 🌸|Support/i)[0].trim());
-                } catch(e) {
-                    UI.dots(false);
-                    UI.draw('ai', "Erro na conexão Turbo, mestre.");
-                    this.typing = false;
-                }
+                } catch(e) { UI.dots(false); UI.draw('ai', "Erro de conexão Turbo."); this.typing = false; }
             },
             send() {
-                const i = document.getElementById('u-in');
-                const t = i.value.trim();
-                if(!t || this.typing) return;
-                this.typing = true; i.value = ""; i.style.height = "auto";
-                UI.draw('user', t); UI.dots(true);
-                this.h.push({t, r:'user'});
-                this.requestAI();
+                const i = document.getElementById('u-in'); const t = i.value.trim(); if(!t || this.typing) return;
+                this.typing = true; i.value = ""; i.style.height = "auto"; UI.draw('user', t); UI.dots(true); this.h.push({t, r:'user'}); this.requestAI();
+            },
+            copy(text) {
+                const ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); UI.toast("CHAVE COPIADA!");
             },
             clearChat() { if(confirm("Limpar?")) { Storage.set('l_chat', []); location.reload(); } },
             logout() { Storage.set('l_active', false); location.reload(); },
             up(e) {
-                const f = e.target.files[0];
-                const r = new FileReader();
-                r.onload = (ev) => {
-                    this.photo = ev.target.result;
-                    document.getElementById('preview').innerHTML = `<img src="${this.photo}" style="width:100%;height:100%;object-fit:cover;">`;
-                };
+                const f = e.target.files[0]; const r = new FileReader();
+                r.onload = (ev) => { this.photo = ev.target.result; document.getElementById('preview').innerHTML = `<img src="${this.photo}" style="width:100%;height:100%;object-fit:cover;">`; };
                 r.readAsDataURL(f);
             }
         };
 
         const UI = {
             box: document.getElementById('chat-box'),
+            togglePix(s) { document.getElementById('modal-pix').style.display = s ? 'flex' : 'none'; if(s) this.menu(false); },
             toast(m) { const t = document.getElementById('toast'); t.innerHTML = m; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); },
             draw(r, t) {
                 const w = document.createElement('div'); w.className = `msg ${r}`;
                 const av = r === 'user' ? (Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '👤') : '💠';
                 w.innerHTML = r === 'user' ? `<div class="bubble">${marked.parse(t)}</div><div class="avatar">${av}</div>` : `<div class="avatar">${av}</div><div class="bubble">${marked.parse(t)}</div>`;
-                this.box.appendChild(w);
-                document.querySelector('main.chat').scrollTop = document.querySelector('main.chat').scrollHeight;
+                this.box.appendChild(w); document.querySelector('main.chat').scrollTop = document.querySelector('main.chat').scrollHeight;
             },
             write(t) {
-                const w = document.createElement('div'); w.className = 'msg ai';
-                w.innerHTML = `<div class="avatar">💠</div><div class="bubble"></div>`;
-                this.box.appendChild(w);
-                const rend = w.querySelector('.bubble');
-                let i = 0;
+                const w = document.createElement('div'); w.className = 'msg ai'; w.innerHTML = `<div class="avatar">💠</div><div class="bubble"></div>`;
+                this.box.appendChild(w); const rend = w.querySelector('.bubble'); let i = 0;
                 const f = () => {
                     if(i < t.length) { rend.innerHTML = marked.parse(t.substring(0, i+1)); i++; setTimeout(f, 5); }
                     else { Core.typing = false; Core.h.push({t, r:'ai'}); Storage.set('l_chat', Core.h.slice(-15)); }
@@ -225,9 +195,7 @@
             menu(s) { document.getElementById('menu').classList.toggle('open', s); document.getElementById('overlay').style.display = s ? 'block' : 'none'; },
             update() {
                 const img = Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '👤';
-                document.getElementById('p-btn-top').innerHTML = img;
-                document.getElementById('menu-photo').innerHTML = img;
-                document.getElementById('menu-name').textContent = Core.name || 'Mestre';
+                document.getElementById('p-btn-top').innerHTML = img; document.getElementById('menu-photo').innerHTML = img; document.getElementById('menu-name').textContent = Core.name || 'Mestre';
             }
         };
 
