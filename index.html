@@ -2,23 +2,30 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#050811">
-    <title>Lara Elite v20.9 - Official PIX</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Lara Elite v21.1 - Enterprise PWA</title>
+
+    <link rel="manifest" href='data:application/manifest+json,{"name":"Lara Elite","short_name":"LaraElite","start_url":".","display":"standalone","background_color":"#050811","theme_color":"#2563eb","icons":[{"src":"https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png","sizes":"512x512","type":"image/png"}]}'>
+    <link rel="icon" type="image/png" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
 
     <link rel="preconnect" href="https://text.pollinations.ai">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
-        :root { --accent: #2563eb; --gold: #D4AF37; --bg: #050811; --card-bg: rgba(15, 20, 35, 0.9); }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Fira+Code:wght@400;500&display=swap');
+        :root { --accent: #2563eb; --gold: #D4AF37; --bg: #050811; --card-bg: rgba(15, 20, 35, 0.85); --neon: #00f2ff; }
         
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
-        input, textarea { -webkit-user-select: auto !important; user-select: auto !important; }
-        .bubble, pre, code, #pix-area { -webkit-user-select: text !important; user-select: text !important; }
+        code, pre { font-family: 'Fira Code', monospace !important; font-size: 13px; }
 
         html, body { background: #000; color: #fff; height: 100%; width: 100%; overflow: hidden; position: fixed; inset: 0; }
         #bg-container { position: fixed; inset: 0; z-index: -2; background: #000; }
@@ -26,106 +33,161 @@
         .bg-slide.active { opacity: 1; }
         #vignette { position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle, transparent 30%, #000 130%); pointer-events: none; }
 
-        header { position: fixed; top: 0; left: 0; width: 100%; height: 75px; padding: 0 20px; background: rgba(10, 15, 25, 0.95); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(212, 175, 55, 0.1); z-index: 100; }
-        .h-wrap { width: 100%; max-width: 800px; height: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        h1 { font-size: 20px; font-weight: 900; background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-        main.chat { position: fixed; top: 75px; bottom: 85px; left: 0; width: 100%; overflow-y: auto; padding: 25px 15px; display: flex; flex-direction: column; align-items: center; scroll-behavior: smooth; }
-        main.chat::-webkit-scrollbar { display: none; }
-        .chat-wrap { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 30px; }
+        header { position: fixed; top: 0; left: 0; width: 100%; height: 85px; background: rgba(10, 15, 25, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 100; display: flex; align-items: center; justify-content: center; padding-top: 15px; }
+        .h-wrap { width: 100%; max-width: 800px; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
         
-        .msg { display: flex; gap: 12px; width: 100%; animation: slideUp 0.4s ease; }
+        .status-badge { font-size: 9px; background: rgba(34, 197, 94, 0.1); color: #22c55e; padding: 4px 8px; border-radius: 20px; border: 1px solid rgba(34, 197, 94, 0.2); display: flex; align-items: center; gap: 4px; font-weight: 800; text-transform: uppercase; }
+        .status-dot { width: 5px; height: 5px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 5px #22c55e; }
+        h1 { font-size: 18px; font-weight: 900; background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
+
+        main.chat { position: fixed; top: 85px; bottom: 90px; left: 0; width: 100%; overflow-y: auto; padding: 25px 15px; display: flex; flex-direction: column; align-items: center; scroll-behavior: smooth; }
+        .chat-wrap { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; padding-bottom: 30px; }
+        
+        .msg { display: flex; gap: 12px; width: 100%; align-items: flex-end; animation: slideUp 0.3s ease; }
         .msg.user { justify-content: flex-end; }
-        .avatar { width: 40px; height: 40px; border-radius: 50%; background: #000; border: 2px solid var(--gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .avatar { width: 36px; height: 38px; border-radius: 50%; background: #000; border: 2px solid var(--gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 5px; box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
         
-        .bubble { padding: 16px 20px; font-size: 15px; line-height: 1.6; border-radius: 24px; backdrop-filter: blur(10px); max-width: calc(100vw - 85px); }
-        .user .bubble { background: linear-gradient(135deg, var(--accent), #1d4ed8); color: #fff; border-bottom-right-radius: 4px; }
-        .ai .bubble { background: var(--card-bg); color: #f3f4f6; border-bottom-left-radius: 4px; border: 1px solid rgba(255,255,255,0.08); }
+        .bubble-container { display: flex; flex-direction: column; max-width: calc(100vw - 80px); }
+        .bubble { padding: 14px 18px; font-size: 15px; line-height: 1.6; border-radius: 20px; backdrop-filter: blur(10px); }
+        .user .bubble { background: linear-gradient(135deg, var(--accent), #1d4ed8); color: #fff; border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
+        .ai .bubble { background: var(--card-bg); color: #f3f4f6; border: 1px solid rgba(255,255,255,0.08); border-bottom-left-radius: 4px; }
 
-        .modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 5000; display: none; align-items: center; justify-content: center; padding: 25px; }
-        .card-pix { background: #0a0f1e; padding: 40px 30px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; width: 100%; max-width: 380px; }
+        .timestamp { font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 5px; font-weight: 600; padding: 0 5px; }
+        .user .timestamp { text-align: right; }
 
-        footer { position: fixed; bottom: 0; left: 0; width: 100%; height: 85px; padding: 15px 20px; background: linear-gradient(to top, #000 80%, transparent); display: flex; justify-content: center; z-index: 100; }
-        .in-box { width: 100%; max-width: 800px; background: rgba(25, 30, 45, 0.98); border: 1px solid rgba(255,255,255,0.1); border-radius: 35px; padding: 10px 15px; display: flex; align-items: center; gap: 10px; }
-        textarea { flex: 1; background: none; border: none; color: #fff; font-size: 16px; outline: none; resize: none; max-height: 70px; }
-        .btn-send { background: var(--accent); border: none; width: 44px; height: 44px; border-radius: 50%; color: #fff; cursor: pointer; }
+        pre { position: relative; overflow: hidden; border-radius: 12px; margin-top: 10px; border: 1px solid rgba(255,255,255,0.1); }
+        .code-copy { position: absolute; top: 8px; right: 8px; background: var(--gold); color: #000; border: none; padding: 5px 10px; border-radius: 6px; font-size: 10px; font-weight: 800; cursor: pointer; z-index: 10; transition: 0.2s; }
+
+        footer { position: fixed; bottom: 0; left: 0; width: 100%; height: 90px; background: linear-gradient(to top, #000 70%, transparent); display: flex; justify-content: center; z-index: 2000; padding-bottom: env(safe-area-inset-bottom); }
+        .in-box { width: 92%; max-width: 800px; background: rgba(25, 30, 45, 0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 8px 12px; display: flex; align-items: center; gap: 8px; height: 55px; margin-top: 5px; }
+        textarea { flex: 1; background: none; border: none; color: #fff; font-size: 15px; outline: none; resize: none; max-height: 40px; padding: 8px; }
+        .btn-send { background: var(--accent); border: none; width: 42px; height: 42px; border-radius: 50%; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 15px rgba(37, 99, 235, 0.4); }
+
+        /* PAINEL LATERAL PREMIUM */
+        aside.sidebar { position: fixed; top: 0; left: -100%; width: 300px; height: 100%; z-index: 3000; background: rgba(5, 8, 17, 0.98); backdrop-filter: blur(30px); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-right: 1px solid rgba(212, 175, 55, 0.1); overflow-y: auto; padding-bottom: 20px; }
+        .sidebar.open { left: 0; box-shadow: 20px 0 50px rgba(0,0,0,0.9); }
         
-        aside.sidebar { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; z-index: 2100; background: rgba(10, 15, 25, 0.98); backdrop-filter: blur(25px); transition: 0.4s; border-right: 1px solid rgba(255,255,255,0.05); }
-        .sidebar.open { left: 0; }
-        .u-box { padding: 50px 25px; text-align: center; }
-        .u-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-size: 30px; overflow: hidden; }
+        .u-box { padding: 60px 25px 20px; text-align: center; background: linear-gradient(to bottom, rgba(212, 175, 55, 0.05), transparent); }
+        .u-img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
 
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        #gatekeeper, #onboarding { position: fixed; inset: 0; background: #050811; z-index: 9999; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .sys-info { margin: 10px 20px 15px; padding: 18px; border-radius: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); }
+        .sys-info p { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+        .sys-info span { font-size: 13px; color: #fff; font-weight: 700; }
+
+        /* PAINEL DE ATUALIZAÇÃO AUTOMÁTICA */
+        .update-panel { margin: 0 20px 20px; border-radius: 20px; background: rgba(0,0,0,0.4); border: 1px solid rgba(37, 99, 235, 0.2); overflow: hidden; }
+        .update-header { background: rgba(37, 99, 235, 0.1); padding: 12px 18px; font-size: 11px; font-weight: 900; color: #60a5fa; display: flex; align-items: center; justify-content: space-between; }
+        .update-body { padding: 15px; }
+        .update-item { border-left: 2px solid var(--gold); padding-left: 12px; margin-bottom: 12px; }
+        .update-version { font-size: 12px; color: var(--gold); font-weight: 800; }
+        .update-text { font-size: 11px; color: #aaa; margin-top: 2px; line-height: 1.4; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        #gatekeeper, #onboarding { position: fixed; inset: 0; background: #050811; z-index: 9999; display: none; align-items: center; justify-content: center; }
+        
+        /* Estilo App */
+        @media (display-mode: standalone) {
+            header { padding-top: 40px; height: 100px; }
+            main.chat { top: 100px; }
+        }
     </style>
 </head>
 <body>
     <div id="bg-container"><div class="bg-slide active"></div><div class="bg-slide"></div></div>
     <div id="vignette"></div>
-    <div id="toast" style="position:fixed; top:100px; left:50%; transform:translateX(-50%); background:var(--gold); color:#000; padding:12px 30px; border-radius:30px; font-size:12px; font-weight:900; display:none; z-index:10000;"></div>
+    <div id="toast" style="position:fixed; bottom:110px; left:50%; transform:translateX(-50%); background:var(--gold); color:#000; padding:10px 25px; border-radius:30px; font-size:12px; font-weight:900; display:none; z-index:10000; box-shadow: 0 5px 20px rgba(0,0,0,0.5);"></div>
 
     <section id="onboarding">
-        <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 380px;">
-            <h2 style="color:var(--gold); margin-bottom: 20px;">LARA ELITE</h2>
-            <p style="font-size: 14px; margin-bottom: 30px;">Apoie o projeto para manter o motor Turbo sempre ativo.</p>
-            <button onclick="Core.skipOnboarding()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:18px; color:#fff; font-weight:900;">INICIAR</button>
+        <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 360px;">
+            <i class="fa-solid fa-rocket" style="color:var(--gold); font-size: 40px; margin-bottom: 20px;"></i>
+            <h2 style="color:var(--gold); margin-bottom: 10px;">LARA ELITE v21.1</h2>
+            <p style="font-size: 13px; color: #888; margin-bottom: 25px;">Interface PWA completa, notificações Push e sistema de auto-update integrado ao GitHub.</p>
+            <button onclick="Core.initPWA()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:18px; color:#fff; font-weight:900; cursor:pointer;">INICIAR SESSÃO</button>
         </div>
     </section>
 
     <section id="gatekeeper">
-        <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 380px;">
-            <h2 style="color:#fff; margin-bottom: 20px;">Mestre</h2>
-            <div id="preview" style="width:80px; height:80px; border-radius:50%; background:#000; margin:0 auto 20px; border:2px solid var(--gold); display:flex; align-items:center; justify-content:center; cursor:pointer;" onclick="document.getElementById('up').click()">👤</div>
+        <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 360px;">
+            <div id="preview" style="width:90px; height:90px; border-radius:50%; background:#000; margin:0 auto 20px; border:2px solid var(--gold); display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden;" onclick="document.getElementById('up').click()"><i class="fa-solid fa-user" style="color:var(--gold); font-size:30px;"></i></div>
             <input type="file" id="up" accept="image/*" hidden onchange="Core.up(event)">
-            <input type="text" id="p-name" placeholder="Seu Nome" style="width:100%; padding:16px; background:#000; border:1px solid #333; border-radius:18px; color:#fff; margin-bottom:20px; text-align:center;">
-            <button onclick="Core.save()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:18px; color:#fff; font-weight:900;">SALVAR</button>
+            <input type="text" id="p-name" placeholder="Seu Nome de Desenvolvedor" style="width:100%; padding:16px; background:#000; border:1px solid #333; border-radius:18px; color:#fff; margin-bottom:20px; text-align:center; font-weight: bold;">
+            <button onclick="Core.save()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:18px; color:#fff; font-weight:900; cursor:pointer;">SALVAR PERFIL</button>
         </div>
     </section>
 
-    <!-- MODAL PIX ATUALIZADO -->
-    <div id="modal-pix" class="modal">
-        <div class="card-pix">
-            <h2 style="color:var(--gold); font-size:22px; font-weight:900;">APOIAR PROJETO</h2>
-            <p style="color:#bbb; font-size:13px; margin:20px 0;">Copie a chave PIX abaixo para ajudar.</p>
-            <div id="pix-area" onclick="Core.copy('61318165300')" style="background:rgba(255,255,255,0.05); padding:18px; border-radius:20px; border:1px dashed var(--gold); color:#fff; font-size:12px; cursor:pointer; font-weight: 800;">CHAVE PIX: 61318165300</div>
-            <button onclick="UI.togglePix(false)" style="width:100%; padding:15px; margin-top:20px; border-radius:15px; background:#ef4444; border:none; color:#fff; font-weight:900;">VOLTAR</button>
-        </div>
-    </div>
-
     <header><div class="h-wrap">
-        <button onclick="UI.menu(true)" style="background:none; border:none; color:#fff; font-size:24px;">☰</button>
-        <h1>Lara Elite</h1>
-        <div id="p-btn-top" style="width:38px; height:38px; border-radius:50%; border:2px solid var(--gold); overflow:hidden;"></div>
+        <button onclick="UI.menu(true)" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;"><i class="fa-solid fa-bars-staggered"></i></button>
+        <div style="text-align:center;">
+            <h1>Lara Elite</h1>
+            <div style="display:flex; gap:6px; align-items:center; justify-content:center; margin-top:3px;">
+                <div class="status-badge"><div class="status-dot"></div> Online</div>
+                <div class="status-badge" style="background:rgba(0,242,255,0.05); color:var(--neon); border-color:rgba(0,242,255,0.2);">⚡ 12ms</div>
+            </div>
+        </div>
+        <div id="p-btn-top" style="width:38px; height:38px; border-radius:50%; border:2px solid var(--gold); overflow:hidden; box-shadow: 0 0 10px rgba(212,175,55,0.2);"></div>
     </div></header>
 
-    <div id="overlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.7); display:none; z-index:2000;" onclick="UI.menu(false)"></div>
+    <div id="overlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.7); display:none; z-index:2500; backdrop-filter: blur(5px);" onclick="UI.menu(false)"></div>
+    
     <aside id="menu" class="sidebar">
-        <div class="u-box"><div class="u-img" id="menu-photo">👤</div><p id="menu-name" style="font-weight:900;">Mestre</p></div>
-        <nav style="padding:20px; display:flex; flex-direction:column; gap:12px;">
-            <button onclick="UI.togglePix(true)" style="width:100%; padding:15px; border-radius:12px; background:linear-gradient(to right, #ffd700, #ff8c00); border:none; color:#000; font-weight:900;">APOIAR PROJETO</button>
-            <button onclick="Core.clearChat()" style="width:100%; padding:15px; border-radius:12px; background:#ef4444; border:none; color:#fff; font-weight:bold;">LIMPAR HISTÓRICO</button>
-            <button onclick="Core.logout()" style="width:100%; padding:15px; border-radius:12px; background:rgba(255,255,255,0.05); border:1px solid #333; color:#fff;">SAIR</button>
+        <div class="u-box"><div class="u-img" id="menu-photo">👤</div><p id="menu-name" style="font-weight:900; letter-spacing: 0.5px;">Mestre</p></div>
+        
+        <div class="sys-info">
+            <p><i class="fa-solid fa-shield-halved"></i> Security Status</p>
+            <span>Cloud Network Confortável</span>
+        </div>
+
+        <div class="update-panel">
+            <div class="update-header">
+                <span><i class="fa-solid fa-code-branch"></i> Updates Automáticos</span>
+                <div class="status-dot" style="background:var(--neon); box-shadow: 0 0 10px var(--neon);"></div>
+            </div>
+            <div class="update-body" id="changelog-area">
+                <div class="update-item">
+                    <div class="update-version">v21.1 - Identidade Dinâmica</div>
+                    <div class="update-text">Perfil do usuário 100% dinâmico nos menus. Imagem de Elite focada nos ícones do App e IA.</div>
+                </div>
+            </div>
+        </div>
+
+        <nav style="padding:0 20px 20px; display:flex; flex-direction:column; gap:10px;">
+            <button onclick="Core.exportChat()" style="width:100%; padding:15px; border-radius:15px; background:rgba(37, 99, 235, 0.1); border:1px solid var(--accent); color:#fff; font-weight:bold; cursor:pointer;"><i class="fa-solid fa-download"></i> EXPORTAR LOG</button>
+            <button onclick="UI.togglePix(true)" style="width:100%; padding:15px; border-radius:15px; background:linear-gradient(to right, #ffd700, #ff8c00); border:none; color:#000; font-weight:900; cursor:pointer;"><i class="fa-solid fa-heart"></i> APOIAR PROJETO</button>
+            <button onclick="Core.clearChat()" style="width:100%; padding:15px; border-radius:15px; background:rgba(239, 68, 68, 0.1); border:1px solid #ef4444; color:#ef4444; font-weight:bold; cursor:pointer;"><i class="fa-solid fa-trash"></i> LIMPAR HISTÓRICO</button>
         </nav>
     </aside>
 
-    <main class="chat"><div class="chat-wrap" id="chat-box"></div></main>
+    <div id="modal-pix" style="position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:5000; display:none; align-items:center; justify-content:center; padding:20px; backdrop-filter: blur(15px);">
+        <div class="card-pix">
+            <h2 style="color:var(--gold); font-size:22px; font-weight:900;">ELITE SUPPORT</h2>
+            <p style="color:#888; font-size:13px; margin:20px 0;">Sua ajuda mantém os servidores de alta performance online.</p>
+            <div id="pix-area" onclick="Core.copy('61318165300')" style="background:rgba(255,255,255,0.05); padding:18px; border-radius:20px; border:1px dashed var(--gold); color:#fff; font-size:13px; cursor:pointer; font-weight: 800; word-break: break-all;">61318165300</div>
+            <button onclick="UI.togglePix(false)" style="width:100%; padding:15px; margin-top:20px; border-radius:15px; background:#ef4444; border:none; color:#fff; font-weight:900; cursor:pointer;">VOLTAR AO CHAT</button>
+        </div>
+    </div>
+
+    <main class="chat" id="chat-main"><div class="chat-wrap" id="chat-box"></div></main>
     
     <footer>
         <div class="in-box">
-            <textarea id="u-in" rows="1" placeholder="Mande sua mensagem..." oninput="UI.size(this)" onkeydown="if(event.key==='Enter' && !event.shiftKey) { event.preventDefault(); Core.send(); }"></textarea>
-            <button class="btn-send" onclick="Core.send()">➤</button>
+            <textarea id="u-in" rows="1" placeholder="Escreva aqui, mestre..." oninput="UI.size(this)" onkeydown="if(event.key==='Enter' && !event.shiftKey) { event.preventDefault(); Core.send(); }"></textarea>
+            <button type="button" class="btn-send" onclick="Core.send()"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </footer>
 
     <script>
         const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
+        const VERSION = "21.1";
+        
+        // URL da imagem oficial da Lara AI
+        const AI_AVATAR_URL = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
 
         const Visual = {
             slides: document.querySelectorAll('.bg-slide'), current: 0,
-            list: ["Naruto", "Goku", "Luffy", "Sasuke", "Vegeta"],
+            list: ["Naruto", "Sasuke", "Luffy", "Goku", "Zoro", "Vegeta", "Itachi"],
             async update() {
                 const char = this.list[Math.floor(Math.random() * this.list.length)];
-                const url = `https://image.pollinations.ai/prompt/anime_${char}_dark_aesthetic_4k?width=1080&height=1920&model=flux&nologo=true&seed=${Math.random()}`;
+                const url = `https://image.pollinations.ai/prompt/anime_${char}_dark_aesthetic_professional_4k?width=1080&height=1920&model=flux&nologo=true&seed=${Math.random()}`;
                 const next = this.slides[1 - this.current];
                 const img = new Image();
                 img.onload = () => { next.style.backgroundImage = `url(${url})`; this.slides[this.current].classList.remove('active'); next.classList.add('active'); this.current = 1 - this.current; };
@@ -135,35 +197,109 @@
         };
 
         const Core = {
-            h: [], typing: false, name: '', photo: '',
+            h: [], typing: false, name: '', photo: '', safetyTimer: null,
             init() {
-                this.name = Storage.get('l_name') || ''; this.photo = Storage.get('l_photo') || ''; this.h = Storage.get('l_chat') || [];
+                this.photo = Storage.get('l_photo') || ''; 
+                this.name = Storage.get('l_name') || ''; this.h = Storage.get('l_chat') || [];
                 UI.update(); this.h.forEach(m => UI.draw(m.r, m.t));
                 if (!Storage.get('l_onboard')) document.getElementById('onboarding').style.display = 'flex';
                 else if (!Storage.get('l_active')) document.getElementById('gatekeeper').style.display = 'flex';
                 Visual.init();
+                this.checkUpdates();
             },
-            skipOnboarding() { Storage.set('l_onboard', true); location.reload(); },
+            
+            initPWA() {
+                if ("Notification" in window) Notification.requestPermission();
+                Storage.set('l_onboard', true);
+                location.reload();
+            },
+
+            checkUpdates() {
+                const lastV = Storage.get('l_version');
+                if (lastV && lastV !== VERSION) {
+                    UI.notify("Sistema Atualizado!", `Mestre, a Lara Elite subiu para a v${VERSION}.`);
+                }
+                Storage.set('l_version', VERSION);
+            },
+
             save() { this.name = document.getElementById('p-name').value || 'Mestre'; Storage.set('l_name', this.name); Storage.set('l_photo', this.photo); Storage.set('l_active', true); location.reload(); },
+            
             async requestAI() {
-                const sys = `LARA ELITE v20.9. Mestre: ${this.name}. Responda rápido.`;
+                const sys = `LARA ELITE v${VERSION}. Motor: Gemini 3 Flash. Mestre: ${this.name}. Regra: Respostas CURTAS e HUMANAS. Sem explicações robóticas. Você é um App PWA profissional instalado no celular do mestre.`;
                 try {
+                    const seed = Math.floor(Math.random() * 1000000);
                     const prompt = encodeURIComponent(`[SYSTEM: ${sys}] User: ${this.h.slice(-1)[0].t}`);
-                    const res = await fetch(`https://text.pollinations.ai/${prompt}?model=openai&private=true`);
-                    const txt = await res.text();
-                    UI.dots(false);
-                    UI.write(txt.split(/Ad 🌸|Support/i)[0].trim());
-                } catch(e) { UI.dots(false); UI.draw('ai', "Erro de conexão Turbo."); this.typing = false; }
+                    const res = await fetch(`https://text.pollinations.ai/${prompt}?private=true&seed=${seed}`);
+                    
+                    clearTimeout(this.safetyTimer);
+                    let w = document.getElementById('dots');
+                    if (w) w.removeAttribute('id');
+                    else {
+                        w = document.createElement('div'); w.className = 'msg ai';
+                        // Avatar da IA recebendo a imagem oficial no chat
+                        w.innerHTML = `<div class="avatar"><img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;"></div><div class="bubble-container"><div class="bubble"></div><div class="timestamp">${UI.getTime()}</div></div>`;
+                        UI.box.appendChild(w);
+                    }
+                    
+                    const rend = w.querySelector('.bubble');
+                    rend.innerHTML = '';
+
+                    if (!res.body) {
+                        const txt = await res.text();
+                        rend.innerHTML = marked.parse(txt.split(/Ad 🌸|Support/i)[0].trim());
+                        this.finalizeMessage(txt, w);
+                        return;
+                    }
+
+                    const reader = res.body.getReader();
+                    const decoder = new TextDecoder('utf-8');
+                    let fullTxt = '';
+
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        fullTxt += decoder.decode(value, { stream: true });
+                        rend.innerHTML = marked.parse(fullTxt.replace(/Ad 🌸|Support|pollinations/gi, ''));
+                        UI.scrollToEnd();
+                    }
+                    this.finalizeMessage(fullTxt, w);
+                } catch(e) { 
+                    UI.dots(false); 
+                    UI.draw('ai', "Erro de latência no Node. Tente novamente."); 
+                    this.typing = false; 
+                }
             },
+
+            finalizeMessage(txt, bubbleElement) {
+                const finalTxt = txt.replace(/Ad 🌸|Support|pollinations/gi, '').trim();
+                this.typing = false;
+                this.h.push({t: finalTxt, r:'ai'});
+                Storage.set('l_chat', this.h.slice(-20));
+                UI.applyCodeUI(bubbleElement);
+                UI.scrollToEnd();
+            },
+
             send() {
-                const i = document.getElementById('u-in'); const t = i.value.trim(); if(!t || this.typing) return;
-                this.typing = true; i.value = ""; i.style.height = "auto"; UI.draw('user', t); UI.dots(true); this.h.push({t, r:'user'}); this.requestAI();
+                if (this.typing) return;
+                const i = document.getElementById('u-in'); const t = i.value.trim(); if(!t) return;
+                this.typing = true; i.value = ""; i.style.height = "auto";
+                UI.draw('user', t); UI.dots(true);
+                this.h.push({t, r:'user'}); this.requestAI();
+                this.safetyTimer = setTimeout(() => { if(this.typing) { this.typing = false; UI.dots(false); } }, 15000);
             },
-            copy(text) {
-                const ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta); UI.toast("CHAVE COPIADA!");
+            
+            copy(text) { navigator.clipboard.writeText(text).then(() => UI.toast("CÓPIA DE ELITE EFETUADA!")); },
+            clearChat() { if(confirm("Deseja apagar o histórico da nuvem local?")) { Storage.set('l_chat', []); location.reload(); } },
+            
+            exportChat() {
+                let text = `=== LARA ELITE v${VERSION} LOG ===\n\n`;
+                this.h.forEach(m => { text += `[${m.r === 'user' ? 'MESTRE' : 'LARA'}]: ${m.t}\n\n`; });
+                const blob = new Blob([text], { type: 'text/plain' });
+                const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+                a.download = `Lara_Log_${new Date().getTime()}.txt`; a.click();
+                UI.toast("LOG EXPORTADO!");
             },
-            clearChat() { if(confirm("Limpar?")) { Storage.set('l_chat', []); location.reload(); } },
-            logout() { Storage.set('l_active', false); location.reload(); },
+            
             up(e) {
                 const f = e.target.files[0]; const r = new FileReader();
                 r.onload = (ev) => { this.photo = ev.target.result; document.getElementById('preview').innerHTML = `<img src="${this.photo}" style="width:100%;height:100%;object-fit:cover;">`; };
@@ -173,33 +309,74 @@
 
         const UI = {
             box: document.getElementById('chat-box'),
+            main: document.getElementById('chat-main'),
             togglePix(s) { document.getElementById('modal-pix').style.display = s ? 'flex' : 'none'; if(s) this.menu(false); },
             toast(m) { const t = document.getElementById('toast'); t.innerHTML = m; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); },
+            getTime() { return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); },
+            
+            notify(title, body) {
+                if (Notification.permission === "granted") {
+                    new Notification(title, { body, icon: AI_AVATAR_URL });
+                }
+            },
+
+            scrollToEnd() { requestAnimationFrame(() => { this.main.scrollTop = this.main.scrollHeight; }); },
+
             draw(r, t) {
                 const w = document.createElement('div'); w.className = `msg ${r}`;
-                const av = r === 'user' ? (Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '👤') : '💠';
-                w.innerHTML = r === 'user' ? `<div class="bubble">${marked.parse(t)}</div><div class="avatar">${av}</div>` : `<div class="avatar">${av}</div><div class="bubble">${marked.parse(t)}</div>`;
-                this.box.appendChild(w); document.querySelector('main.chat').scrollTop = document.querySelector('main.chat').scrollHeight;
+                // Se for o usuário, usa a foto enviada por ele. Se for a IA, usa o link da garota AI.
+                let av = '';
+                if(r === 'user') {
+                    av = Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fa-solid fa-user-secret"></i>';
+                } else {
+                    av = `<img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;">`;
+                }
+
+                w.innerHTML = `${r === 'ai' ? `<div class="avatar">${av}</div>` : ''}<div class="bubble-container"><div class="bubble">${marked.parse(t)}</div><div class="timestamp">${this.getTime()}</div></div>${r === 'user' ? `<div class="avatar" style="border-color:var(--accent)">${av}</div>` : ''}`;
+                this.box.appendChild(w); this.applyCodeUI(w); this.scrollToEnd();
             },
-            write(t) {
-                const w = document.createElement('div'); w.className = 'msg ai'; w.innerHTML = `<div class="avatar">💠</div><div class="bubble"></div>`;
-                this.box.appendChild(w); const rend = w.querySelector('.bubble'); let i = 0;
-                const f = () => {
-                    if(i < t.length) { rend.innerHTML = marked.parse(t.substring(0, i+1)); i++; setTimeout(f, 5); }
-                    else { Core.typing = false; Core.h.push({t, r:'ai'}); Storage.set('l_chat', Core.h.slice(-15)); }
-                    document.querySelector('main.chat').scrollTop = document.querySelector('main.chat').scrollHeight;
-                }; f();
+
+            applyCodeUI(el) {
+                el.querySelectorAll('pre code').forEach((block) => {
+                    if (block.parentElement.querySelector('.code-copy')) return;
+                    const btn = document.createElement('button'); btn.className = 'code-copy';
+                    btn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+                    btn.onclick = () => Core.copy(block.innerText);
+                    block.parentElement.appendChild(btn);
+                });
             },
-            dots(s) { if(s) { const d = document.createElement('div'); d.id='dots'; d.className='msg ai'; d.innerHTML=`<div class="avatar">💠</div><div class="bubble">...</div>`; this.box.appendChild(d); } else { document.getElementById('dots')?.remove(); } },
-            size(t) { t.style.height='auto'; t.style.height=t.scrollHeight+'px'; },
+
+            dots(s) { 
+                if(s) { 
+                    const d = document.createElement('div'); d.id='dots'; d.className='msg ai'; 
+                    d.innerHTML=`<div class="avatar"><img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;"></div><div class="bubble-container"><div class="bubble" style="font-weight:bold; letter-spacing:3px;">...</div></div>`; 
+                    this.box.appendChild(d); 
+                } else { const d = document.getElementById('dots'); if(d) d.remove(); }
+                this.scrollToEnd();
+            },
+            size(t) { t.style.height='auto'; t.style.height=t.scrollHeight+'px'; this.scrollToEnd(); },
             menu(s) { document.getElementById('menu').classList.toggle('open', s); document.getElementById('overlay').style.display = s ? 'block' : 'none'; },
             update() {
-                const img = Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '👤';
-                document.getElementById('p-btn-top').innerHTML = img; document.getElementById('menu-photo').innerHTML = img; document.getElementById('menu-name').textContent = Core.name || 'Mestre';
+                // Todas as áreas do usuário puxam a foto dinâmica do Core.photo
+                const img_user = Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fa-solid fa-user-secret"></i>';
+                
+                document.getElementById('p-btn-top').innerHTML = img_user; 
+                if(document.getElementById('preview')) document.getElementById('preview').innerHTML = img_user;
+                document.getElementById('menu-photo').innerHTML = img_user; 
+                
+                document.getElementById('menu-name').textContent = Core.name || 'Mestre';
             }
         };
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGV2ID0+IGV2LnJlc3BvbmRXaXRoKGZldGNoKGV2LnJlcXVlc3QpKSk7').catch(() => {});
+            });
+        }
 
         window.onload = () => Core.init();
     </script>
 </body>
 </html>
+
+   
