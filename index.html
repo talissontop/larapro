@@ -14,13 +14,13 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Lara Elite">
     
-    <title>Lara Elite v21.6 - Mobile PWA</title>
+    <title>Lara Elite v21.7 - Mobile PWA</title>
 
     <link rel="apple-touch-icon" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" sizes="512x512" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
 
-    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Lara%20Elite%22%2C%22short_name%22%3A%22LaraElite%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23050811%22%2C%22theme_color%22%3A%22%232563eb%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fspicy-harlequin-pqaujlkovi.edgeone.app%2Fpngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fspicy-harlequin-pqaujlkovi.edgeone.app%2Fpngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
+    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Lara%20Elite%22%2C%22short_name%22%3A%22LaraElite%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23050811%22%2C%22theme_color%22%3A%22%232563eb%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fspicy-harlequin-pqaujlkovi.edgeone.app%2Fpngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fspicy-harlequin-pqaujlkovi.edgeone.app%2Fpngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
 
     <link rel="preconnect" href="https://text.pollinations.ai">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -58,6 +58,14 @@
         .msg.user { justify-content: flex-end; }
         .avatar { width: 36px; height: 38px; border-radius: 50%; background: #000; border: 2px solid var(--gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 5px; box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
         
+        /* ANIMAÇÃO FLUTUANTE DA LARA (AVATAR IA) */
+        @keyframes floatAvatar {
+            0% { transform: translateY(0px); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
+            50% { transform: translateY(-4px); box-shadow: 0 0 20px rgba(0, 242, 255, 0.7); border-color: var(--neon); }
+            100% { transform: translateY(0px); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
+        }
+        .ai .avatar { animation: floatAvatar 3s infinite ease-in-out; border-color: rgba(0, 242, 255, 0.4); }
+
         .bubble-container { display: flex; flex-direction: column; max-width: calc(100vw - 80px); }
         .bubble { padding: 14px 18px; font-size: 15px; line-height: 1.6; border-radius: 20px; backdrop-filter: blur(10px); }
         .user .bubble { background: linear-gradient(135deg, var(--accent), #1d4ed8); color: #fff; border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
@@ -143,7 +151,7 @@
     <section id="onboarding">
         <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 360px;">
             <i class="fa-solid fa-rocket" style="color:var(--gold); font-size: 40px; margin-bottom: 20px;"></i>
-            <h2 style="color:var(--gold); margin-bottom: 10px;">LARA ELITE v21.6</h2>
+            <h2 style="color:var(--gold); margin-bottom: 10px;">LARA ELITE v21.7</h2>
             <p style="font-size: 13px; color: #888; margin-bottom: 25px;">Notificações Forçadas e Anti-Cache ativados. Prossiga para iniciar.</p>
             <button onclick="Core.initOnboarding()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:18px; color:#fff; font-weight:900; cursor:pointer;">INICIAR SESSÃO</button>
         </div>
@@ -187,12 +195,12 @@
             </div>
             <div class="update-body" id="changelog-area">
                 <div class="update-item">
-                    <div class="update-version">v21.6 - Correção Extrema Android</div>
-                    <div class="update-text">Notificações nativas forçadas com Service Worker. Bloqueio de Cache ativado para o painel de atualização funcionar 100% das vezes.</div>
+                    <div class="update-version">v21.7 - Design Visual Elite</div>
+                    <div class="update-text">Animações holográficas (flutuantes e neon) aplicadas ao avatar da IA. Ícone mobile otimizado (Maskable) para cobrir a tela cheia.</div>
                 </div>
                 <div class="update-item">
-                    <div class="update-version">v21.5 - Sistema de Logout</div>
-                    <div class="update-text">Adicionado botão de Trocar Perfil. Saia da sessão sem perder os dados armazenados.</div>
+                    <div class="update-version">v21.6 - Correção Extrema Android</div>
+                    <div class="update-text">Notificações nativas forçadas com Service Worker. Bloqueio de Cache ativado.</div>
                 </div>
             </div>
         </div>
@@ -225,7 +233,9 @@
 
     <script>
         const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
-        const VERSION = "21.6"; 
+        
+        // --- VERSÃO ATUALIZADA PARA DISPARAR O TESTE DE ATUALIZAÇÃO ---
+        const VERSION = "21.7"; 
 
         const AI_AVATAR_URL = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
         
@@ -315,10 +325,8 @@
             checkUpdates() {
                 const lastV = Storage.get('l_version');
                 
-                // Se for exatamente a mesma versão, interrompe aqui.
                 if (lastV === VERSION) return;
 
-                // Se existe uma versão antiga gravada e ela é diferente, Dispara o Splash!
                 if (lastV && lastV !== VERSION && Storage.get('l_active')) {
                     const splash = document.getElementById('update-splash');
                     const bar = document.getElementById('u-progress');
@@ -343,7 +351,6 @@
                         }
                     }, 150);
                 } else {
-                    // Primeira vez abrindo o app, só grava a versão atual e não faz o show de loading
                     Storage.set('l_version', VERSION);
                 }
             },
@@ -405,7 +412,6 @@
             },
 
             send() {
-                // Gatilho silencioso: Força o Android a pedir notificação ao enviar uma mensagem
                 if (window.Notification && Notification.permission === "default") {
                     Notification.requestPermission();
                 }
@@ -444,7 +450,6 @@
             toast(m) { const t = document.getElementById('toast'); t.innerHTML = m; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); },
             getTime() { return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); },
             
-            // MÉTODO EXTREMO DE NOTIFICAÇÃO NATIVA ANDROID
             notify(title, body) {
                 if (window.Notification && Notification.permission === "granted") {
                     if ('serviceWorker' in navigator) {
@@ -507,11 +512,10 @@
             }
         };
 
-        // REGISTRO DO SERVICE WORKER (Necessário criar o arquivo sw.js no GitHub)
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js').catch((err) => {
-                    console.warn('Lara Info: sw.js não encontrado na raiz. Crie esse arquivo no GitHub para liberar as notificações nativas no Android.');
+                    console.warn('Lara Info: sw.js não encontrado.');
                 });
             });
         }
