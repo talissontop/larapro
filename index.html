@@ -10,13 +10,13 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Lara Elite">
     
-    <title>Lara Elite v21.2 - Enterprise PWA</title>
+    <title>Lara Elite v21.2 - Mobile PWA</title>
 
     <link rel="apple-touch-icon" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" sizes="512x512" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
 
-    <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiTGFyYSBFbGl0ZSIsInNob3J0X25hbWUiOiJMYXJhRWxpdGUiLCJzdGFydF91cmwiOiIuLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMwNTA4MTEiLCJ0aGVtZV9jb2xvciI6IiMyNTYzZWIiLCJpY29ucyI6W3sic3JjIjoiaHR0cHM6Ly9zcGljeS1oYXJsZXF1aW4tcHFhdWpsa292aS5lZGdlb25lLmFwcC9wbmd0cmVlLWJlYXV0aWZ1bC1haS1nZW5lcmF0ZWQtZ2lybC1zby1tdWNoLWF0dHJhY3RpdmUtcG5nLWltYWdlXzEyMzQyMTA5LnBuZyIsInNpemVzIjoiMTkyeDE5MiIsInR5cGUiOiJpbWFnZS9wbmciLCJwdXJwb3NlIjoiYW55IG1hc2thYmxlIn0seyJzcmMiOiJodHRwczovL3NwaWN5LWhhcmxlcXVpbi1wcWF1amxrb3ZpLmVkZ2VvbmUuYXBwL3BuZ3RyZWUtYmVhdXRpZnVsLWFpLWdlbmVyYXRlZC1naXJsLXNvLW11Y2gtYXR0cmFjdGl2ZS1wbmctaW1hZ2VfMTIzNDIxMDkucG5nIiwic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyIsInB1cnBvc2UiOiJhbnkgbWFza2FibGUifV19">
+    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Lara%20Elite%22%2C%22short_name%22%3A%22LaraElite%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23050811%22%2C%22theme_color%22%3A%22%232563eb%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fspicy-harlequin-pqaujlkovi.edgeone.app%2Fpngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fspicy-harlequin-pqaujlkovi.edgeone.app%2Fpngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
 
     <link rel="preconnect" href="https://text.pollinations.ai">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -106,7 +106,7 @@
         <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 360px;">
             <i class="fa-solid fa-rocket" style="color:var(--gold); font-size: 40px; margin-bottom: 20px;"></i>
             <h2 style="color:var(--gold); margin-bottom: 10px;">LARA ELITE v21.2</h2>
-            <p style="font-size: 13px; color: #888; margin-bottom: 25px;">App Standalone ativado! Agora instalável nativamente no seu smartphone.</p>
+            <p style="font-size: 13px; color: #888; margin-bottom: 25px;">Instalação Nativa Mobile Corrigida. Acesse pelo celular e instale o App.</p>
             <button onclick="Core.initPWA()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:18px; color:#fff; font-weight:900; cursor:pointer;">INICIAR SESSÃO</button>
         </div>
     </section>
@@ -149,8 +149,8 @@
             </div>
             <div class="update-body" id="changelog-area">
                 <div class="update-item">
-                    <div class="update-version">v21.2 - Modo PWA Nativo</div>
-                    <div class="update-text">App renderizado em modo Standalone (tela cheia). O ícone do Google Chrome não aparece mais no Atalho.</div>
+                    <div class="update-version">v21.2 - Mobile Fix Absoluto</div>
+                    <div class="update-text">App reconhecido nativamente por navegadores de celular (Android/iOS). Instalação independente da versão Desktop.</div>
                 </div>
             </div>
         </div>
@@ -184,9 +184,8 @@
         const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
         const VERSION = "21.2";
         const AI_AVATAR_URL = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
-        let deferredPrompt; // Variável global para o Prompt de Instalação Nativado
+        let deferredPrompt; 
 
-        // Captura o evento nativo do Android para instalação de App
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
@@ -221,7 +220,6 @@
             initPWA() {
                 if ("Notification" in window) Notification.requestPermission();
                 
-                // DISPARA A JANELA NATIVA DE INSTALAÇÃO DO ANDROID
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
                     deferredPrompt.userChoice.then((choiceResult) => {
@@ -384,16 +382,10 @@
             }
         };
 
-        // Service Worker Genérico para Ativação PWA Total
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGV2ID0+IGV2LnJlc3BvbmRXaXRoKGZldGNoKGV2LnJlcXVlc3QpKSk7').catch(() => {});
-            });
-        }
+        // REMOVIDO: Service Worker base64 que causa falha de segurança no Mobile
+        // O Chrome mobile atual lerá o manifesto URL-encoded e instalará o App Standalone nativamente.
 
         window.onload = () => Core.init();
     </script>
 </body>
 </html>
-
-            
