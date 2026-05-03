@@ -4,12 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#050811">
+    
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Lara Elite v21.1 - Enterprise PWA</title>
+    <meta name="apple-mobile-web-app-title" content="Lara Elite">
+    
+    <title>Lara Elite v21.2 - Enterprise PWA</title>
 
-    <link rel="manifest" href='data:application/manifest+json,{"name":"Lara Elite","short_name":"LaraElite","start_url":".","display":"standalone","background_color":"#050811","theme_color":"#2563eb","icons":[{"src":"https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png","sizes":"512x512","type":"image/png"}]}'>
-    <link rel="icon" type="image/png" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
+
+    <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiTGFyYSBFbGl0ZSIsInNob3J0X25hbWUiOiJMYXJhRWxpdGUiLCJzdGFydF91cmwiOiIuLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMwNTA4MTEiLCJ0aGVtZV9jb2xvciI6IiMyNTYzZWIiLCJpY29ucyI6W3sic3JjIjoiaHR0cHM6Ly9zcGljeS1oYXJsZXF1aW4tcHFhdWpsa292aS5lZGdlb25lLmFwcC9wbmd0cmVlLWJlYXV0aWZ1bC1haS1nZW5lcmF0ZWQtZ2lybC1zby1tdWNoLWF0dHJhY3RpdmUtcG5nLWltYWdlXzEyMzQyMTA5LnBuZyIsInNpemVzIjoiMTkyeDE5MiIsInR5cGUiOiJpbWFnZS9wbmciLCJwdXJwb3NlIjoiYW55IG1hc2thYmxlIn0seyJzcmMiOiJodHRwczovL3NwaWN5LWhhcmxlcXVpbi1wcWF1amxrb3ZpLmVkZ2VvbmUuYXBwL3BuZ3RyZWUtYmVhdXRpZnVsLWFpLWdlbmVyYXRlZC1naXJsLXNvLW11Y2gtYXR0cmFjdGl2ZS1wbmctaW1hZ2VfMTIzNDIxMDkucG5nIiwic2l6ZXMiOiI1MTJ4NTEyIiwidHlwZSI6ImltYWdlL3BuZyIsInB1cnBvc2UiOiJhbnkgbWFza2FibGUifV19">
 
     <link rel="preconnect" href="https://text.pollinations.ai">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -63,7 +70,6 @@
         textarea { flex: 1; background: none; border: none; color: #fff; font-size: 15px; outline: none; resize: none; max-height: 40px; padding: 8px; }
         .btn-send { background: var(--accent); border: none; width: 42px; height: 42px; border-radius: 50%; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 15px rgba(37, 99, 235, 0.4); }
 
-        /* PAINEL LATERAL PREMIUM */
         aside.sidebar { position: fixed; top: 0; left: -100%; width: 300px; height: 100%; z-index: 3000; background: rgba(5, 8, 17, 0.98); backdrop-filter: blur(30px); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-right: 1px solid rgba(212, 175, 55, 0.1); overflow-y: auto; padding-bottom: 20px; }
         .sidebar.open { left: 0; box-shadow: 20px 0 50px rgba(0,0,0,0.9); }
         
@@ -74,7 +80,6 @@
         .sys-info p { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
         .sys-info span { font-size: 13px; color: #fff; font-weight: 700; }
 
-        /* PAINEL DE ATUALIZAÇÃO AUTOMÁTICA */
         .update-panel { margin: 0 20px 20px; border-radius: 20px; background: rgba(0,0,0,0.4); border: 1px solid rgba(37, 99, 235, 0.2); overflow: hidden; }
         .update-header { background: rgba(37, 99, 235, 0.1); padding: 12px 18px; font-size: 11px; font-weight: 900; color: #60a5fa; display: flex; align-items: center; justify-content: space-between; }
         .update-body { padding: 15px; }
@@ -85,7 +90,7 @@
         @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         #gatekeeper, #onboarding { position: fixed; inset: 0; background: #050811; z-index: 9999; display: none; align-items: center; justify-content: center; }
         
-        /* Estilo App */
+        /* ADAPTAÇÃO PARA QUANDO ABERTO COMO APP NATIVO */
         @media (display-mode: standalone) {
             header { padding-top: 40px; height: 100px; }
             main.chat { top: 100px; }
@@ -100,8 +105,8 @@
     <section id="onboarding">
         <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 360px;">
             <i class="fa-solid fa-rocket" style="color:var(--gold); font-size: 40px; margin-bottom: 20px;"></i>
-            <h2 style="color:var(--gold); margin-bottom: 10px;">LARA ELITE v21.1</h2>
-            <p style="font-size: 13px; color: #888; margin-bottom: 25px;">Interface PWA completa, notificações Push e sistema de auto-update integrado ao GitHub.</p>
+            <h2 style="color:var(--gold); margin-bottom: 10px;">LARA ELITE v21.2</h2>
+            <p style="font-size: 13px; color: #888; margin-bottom: 25px;">App Standalone ativado! Agora instalável nativamente no seu smartphone.</p>
             <button onclick="Core.initPWA()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:18px; color:#fff; font-weight:900; cursor:pointer;">INICIAR SESSÃO</button>
         </div>
     </section>
@@ -144,8 +149,8 @@
             </div>
             <div class="update-body" id="changelog-area">
                 <div class="update-item">
-                    <div class="update-version">v21.1 - Identidade Dinâmica</div>
-                    <div class="update-text">Perfil do usuário 100% dinâmico nos menus. Imagem de Elite focada nos ícones do App e IA.</div>
+                    <div class="update-version">v21.2 - Modo PWA Nativo</div>
+                    <div class="update-text">App renderizado em modo Standalone (tela cheia). O ícone do Google Chrome não aparece mais no Atalho.</div>
                 </div>
             </div>
         </div>
@@ -177,10 +182,15 @@
 
     <script>
         const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
-        const VERSION = "21.1";
-        
-        // URL da imagem oficial da Lara AI
+        const VERSION = "21.2";
         const AI_AVATAR_URL = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
+        let deferredPrompt; // Variável global para o Prompt de Instalação Nativado
+
+        // Captura o evento nativo do Android para instalação de App
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+        });
 
         const Visual = {
             slides: document.querySelectorAll('.bg-slide'), current: 0,
@@ -210,8 +220,17 @@
             
             initPWA() {
                 if ("Notification" in window) Notification.requestPermission();
+                
+                // DISPARA A JANELA NATIVA DE INSTALAÇÃO DO ANDROID
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        deferredPrompt = null;
+                    });
+                }
+                
                 Storage.set('l_onboard', true);
-                location.reload();
+                setTimeout(() => location.reload(), 1000);
             },
 
             checkUpdates() {
@@ -236,7 +255,6 @@
                     if (w) w.removeAttribute('id');
                     else {
                         w = document.createElement('div'); w.className = 'msg ai';
-                        // Avatar da IA recebendo a imagem oficial no chat
                         w.innerHTML = `<div class="avatar"><img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;"></div><div class="bubble-container"><div class="bubble"></div><div class="timestamp">${UI.getTime()}</div></div>`;
                         UI.box.appendChild(w);
                     }
@@ -324,7 +342,6 @@
 
             draw(r, t) {
                 const w = document.createElement('div'); w.className = `msg ${r}`;
-                // Se for o usuário, usa a foto enviada por ele. Se for a IA, usa o link da garota AI.
                 let av = '';
                 if(r === 'user') {
                     av = Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fa-solid fa-user-secret"></i>';
@@ -357,7 +374,6 @@
             size(t) { t.style.height='auto'; t.style.height=t.scrollHeight+'px'; this.scrollToEnd(); },
             menu(s) { document.getElementById('menu').classList.toggle('open', s); document.getElementById('overlay').style.display = s ? 'block' : 'none'; },
             update() {
-                // Todas as áreas do usuário puxam a foto dinâmica do Core.photo
                 const img_user = Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fa-solid fa-user-secret"></i>';
                 
                 document.getElementById('p-btn-top').innerHTML = img_user; 
@@ -368,6 +384,7 @@
             }
         };
 
+        // Service Worker Genérico para Ativação PWA Total
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('data:text/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdmZXRjaCcsIGV2ID0+IGV2LnJlc3BvbmRXaXRoKGZldGNoKGV2LnJlcXVlc3QpKSk7').catch(() => {});
@@ -379,4 +396,4 @@
 </body>
 </html>
 
-   
+            
