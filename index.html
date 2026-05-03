@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Lara Elite">
     
-    <title>Lara Elite v21.7 - Mobile PWA</title>
+    <title>Lara Elite v21.8 - Mobile PWA</title>
 
     <link rel="apple-touch-icon" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
@@ -58,7 +58,6 @@
         .msg.user { justify-content: flex-end; }
         .avatar { width: 36px; height: 38px; border-radius: 50%; background: #000; border: 2px solid var(--gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 5px; box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
         
-        /* ANIMAÇÃO FLUTUANTE DA LARA (AVATAR IA) */
         @keyframes floatAvatar {
             0% { transform: translateY(0px); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
             50% { transform: translateY(-4px); box-shadow: 0 0 20px rgba(0, 242, 255, 0.7); border-color: var(--neon); }
@@ -118,6 +117,7 @@
             header { padding-top: 40px; height: 100px; }
             main.chat { top: 100px; }
             #smart-install-banner { display: none !important; } 
+            #onboarding { display: none !important; } /* Esconde o onboarding se já for App */
         }
     </style>
 </head>
@@ -149,11 +149,20 @@
     </div>
 
     <section id="onboarding">
-        <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 360px;">
+        <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 360px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);">
             <i class="fa-solid fa-rocket" style="color:var(--gold); font-size: 40px; margin-bottom: 20px;"></i>
-            <h2 style="color:var(--gold); margin-bottom: 10px;">LARA ELITE v21.7</h2>
-            <p style="font-size: 13px; color: #888; margin-bottom: 25px;">Notificações Forçadas e Anti-Cache ativados. Prossiga para iniciar.</p>
-            <button onclick="Core.initOnboarding()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:18px; color:#fff; font-weight:900; cursor:pointer;">INICIAR SESSÃO</button>
+            <h2 style="color:var(--gold); margin-bottom: 10px;">LARA ELITE v21.8</h2>
+            <p style="font-size: 13px; color: #888; margin-bottom: 20px;">Bem-vindo ao sistema! Para a experiência completa e off-line, instale o aplicativo oficial no seu aparelho.</p>
+            
+            <button onclick="Core.triggerInstallOnboarding()" style="width:100%; padding:15px; background:linear-gradient(135deg, var(--accent), #1d4ed8); border:none; border-radius:15px; color:#fff; font-weight:900; cursor:pointer; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);"><i class="fa-solid fa-download"></i> INSTALAR APP AGORA</button>
+            
+            <div style="background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.15); padding: 12px; border-radius: 12px; margin-bottom: 25px; text-align: left;">
+                <p style="font-size: 11px; color: #bbb; margin: 0; line-height: 1.5;">
+                    <strong style="color:var(--gold);">Instalação Manual:</strong> Se o botão acima não abrir, clique nos <strong>3 pontinhos (⋮)</strong> no canto do seu navegador e selecione <strong>"Adicionar à tela inicial"</strong>.
+                </p>
+            </div>
+
+            <button onclick="Core.initOnboarding()" style="width:100%; padding:15px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:15px; color:#fff; font-weight:bold; cursor:pointer;">JÁ INSTALEI / CONTINUAR</button>
         </div>
     </section>
 
@@ -195,12 +204,12 @@
             </div>
             <div class="update-body" id="changelog-area">
                 <div class="update-item">
-                    <div class="update-version">v21.7 - Design Visual Elite</div>
-                    <div class="update-text">Animações holográficas (flutuantes e neon) aplicadas ao avatar da IA. Ícone mobile otimizado (Maskable) para cobrir a tela cheia.</div>
+                    <div class="update-version">v21.8 - Smart Onboarding</div>
+                    <div class="update-text">Novo painel de entrada ensinando usuários via navegador a instalar o App na tela inicial (Automático e Manual).</div>
                 </div>
                 <div class="update-item">
-                    <div class="update-version">v21.6 - Correção Extrema Android</div>
-                    <div class="update-text">Notificações nativas forçadas com Service Worker. Bloqueio de Cache ativado.</div>
+                    <div class="update-version">v21.7 - Design Visual Elite</div>
+                    <div class="update-text">Animações holográficas aplicadas ao avatar da IA. Ícone mobile otimizado (Maskable).</div>
                 </div>
             </div>
         </div>
@@ -234,8 +243,8 @@
     <script>
         const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
         
-        // --- VERSÃO ATUALIZADA PARA DISPARAR O TESTE DE ATUALIZAÇÃO ---
-        const VERSION = "21.7"; 
+        // VERSÃO ATUALIZADA
+        const VERSION = "21.8"; 
 
         const AI_AVATAR_URL = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
         
@@ -273,8 +282,13 @@
 
                 UI.update(); this.h.forEach(m => UI.draw(m.r, m.t));
                 
-                if (!Storage.get('l_onboard')) document.getElementById('onboarding').style.display = 'flex';
-                else if (!Storage.get('l_active')) document.getElementById('gatekeeper').style.display = 'flex';
+                // Só mostra o onboarding se não for standalone E se não tiver passado por ele
+                if (!window.matchMedia('(display-mode: standalone)').matches && !Storage.get('l_onboard')) {
+                    document.getElementById('onboarding').style.display = 'flex';
+                }
+                else if (!Storage.get('l_active')) {
+                    document.getElementById('gatekeeper').style.display = 'flex';
+                }
                 else {
                     this.startInstallLoop();
                 }
@@ -283,6 +297,18 @@
                 this.checkUpdates();
             },
             
+            // FUNÇÃO PARA O BOTÃO DA TELA INICIAL
+            triggerInstallOnboarding() {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        deferredPrompt = null;
+                    });
+                } else {
+                    UI.toast("Use os 3 pontinhos do navegador como indicado abaixo!");
+                }
+            },
+
             initOnboarding() {
                 if (window.Notification) Notification.requestPermission();
                 Storage.set('l_onboard', true);
@@ -324,7 +350,6 @@
 
             checkUpdates() {
                 const lastV = Storage.get('l_version');
-                
                 if (lastV === VERSION) return;
 
                 if (lastV && lastV !== VERSION && Storage.get('l_active')) {
