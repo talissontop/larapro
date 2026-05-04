@@ -1,4 +1,4 @@
-const CACHE_NAME = 'LaraElite-v25.2';
+const CACHE_NAME = 'LaraElite-v25.7';
 
 const ASSETS = [
     './',
@@ -8,63 +8,37 @@ const ASSETS = [
     'https://quick-plum-ydrhk4qkr9.edgeone.app/images.jpeg'
 ];
 
-// ================= INSTALL ROBUSTO =================
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then(async (cache) => {
             for (const asset of ASSETS) {
-                try {
-                    await cache.add(asset);
-                } catch (e) {
-                    // Ignora falhas individuais (principalmente URLs externas)
-                }
+                try { await cache.add(asset); } catch (e) {}
             }
         })
     );
     self.skipWaiting();
 });
 
-// ================= ACTIVATE LIMPO =================
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then((keys) =>
-            Promise.all(
-                keys
-                    .filter((key) => key !== CACHE_NAME)
-                    .map((key) => caches.delete(key))
-            )
+            Promise.all( keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)) )
         )
     );
     self.clients.claim();
 });
 
-// ================= FETCH INTELIGENTE =================
 self.addEventListener('fetch', (event) => {
     const req = event.request;
-
     event.respondWith(
         caches.match(req).then((cached) => {
-
-            const networked = fetch(req)
-                .then((response) => {
-
-                    // Só cacheia respostas válidas
-                    if (
-                        response &&
-                        response.status === 200 &&
-                        response.type === 'basic'
-                    ) {
-                        const clone = response.clone();
-                        caches.open(CACHE_NAME).then((cache) => {
-                            cache.put(req, clone);
-                        });
-                    }
-
-                    return response;
-                })
-                .catch(() => cached); // offline seguro
-
-            // Se tem cache → responde instantâneo
+            const networked = fetch(req).then((response) => {
+                if (response && response.status === 200 && response.type === 'basic') {
+                    const clone = response.clone();
+                    caches.open(CACHE_NAME).then((cache) => cache.put(req, clone));
+                }
+                return response;
+            }).catch(() => cached);
             return cached || networked;
         })
     );
