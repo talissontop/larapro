@@ -1,43 +1,45 @@
-// 🛡️ MOTOR DE PERSISTÊNCIA EXTREMA (sw.js) v25
-// Objetivo: Impedir a exclusão de arquivos e manter permissões ativas
+function iniciarMonitoramentoOmegaNeural(doc) {
+    const netEl = doc.getElementById('pip-net');
+    const batEl = doc.getElementById('pip-bat');
+    
+    // 🛡️ MEMÓRIA DE ESTADO (Fora da função updateNet para persistir)
+    let ultimoEstadoGlitch = false; 
 
-const CACHE_NAME = 'LaraElite-Permanente-v25';
-const ASSETS_TO_BLOCK = [
-  './',
-  './index.html',
-  './manifest.json',
-  'https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png'
-];
+    // ================= 🌐 REDE REATIVA COM TRAVA DE ESTADO =================
+    const conn = navigator.connection;
+    if (conn) {
+        const updateNet = () => {
+            const type = (conn.effectiveType || '').toUpperCase();
+            netEl.innerText = `LINK: ${type || '--'}`;
 
-self.addEventListener('install', (event) => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_BLOCK);
-    })
-  );
-  self.skipWaiting();
-});
+            const precisaDeGlitch = type.includes('2G');
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys().then((keys) => {
-      return Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
-      );
-    })
-  );
-});
+            // ⚡ SÓ ENVIA SE O ESTADO MUDAR (A Blindagem)
+            if (precisaDeGlitch !== ultimoEstadoGlitch) {
+                ultimoEstadoGlitch = precisaDeGlitch;
+                pipChannel.postMessage({ type: precisaDeGlitch ? "glitch-on" : "glitch-off" });
+            }
+        };
 
-self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      const networkFetch = fetch(event.request).then((networkResponse) => {
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, networkResponse.clone());
-        });
-        return networkResponse;
-      });
-      return cachedResponse || networkFetch;
-    })
-  );
-});
+        updateNet();
+        conn.addEventListener('change', updateNet);
+    }
+
+    // ================= 🔋 BATERIA REATIVA (Padrão Elite) =================
+    const updateStatus = (bat) => {
+        batEl.innerText = `${Math.round(bat.level * 100)}%`;
+        batEl.style.color = bat.level < 0.2 ? '#ff4444' : 'inherit';
+    };
+
+    if (navigator.getBattery) {
+        if (!window.__batCache) {
+            navigator.getBattery().then(bat => {
+                window.__batCache = bat;
+                updateStatus(bat);
+                bat.addEventListener('levelchange', () => updateStatus(bat));
+            });
+        } else {
+            updateStatus(window.__batCache);
+        }
+    }
+}
