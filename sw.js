@@ -1,4 +1,4 @@
-const CACHE_NAME = 'LaraElite-v25.7';
+const CACHE_NAME = 'Lara Elite-V26.0';
 
 const ASSETS = [
     './',
