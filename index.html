@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Lara Elite">
     
-    <title>Lara Elite v21.9 - Mobile PWA</title>
+    <title>Lara Elite v21.10 - Mobile PWA</title>
 
     <link rel="apple-touch-icon" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
@@ -40,7 +40,10 @@
 
         html, body { background: #000; color: #fff; height: 100%; width: 100%; overflow: hidden; position: fixed; inset: 0; }
         #bg-container { position: fixed; inset: 0; z-index: -2; background: #000; }
-        .bg-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s ease-in-out; }
+        
+        /* EFEITO 1: Fundo Respirando (Parallax Automático) */
+        @keyframes bgPan { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
+        .bg-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s ease-in-out; animation: bgPan 30s infinite alternate ease-in-out; }
         .bg-slide.active { opacity: 1; }
         #vignette { position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle, transparent 30%, #000 130%); pointer-events: none; }
 
@@ -67,8 +70,29 @@
 
         .bubble-container { display: flex; flex-direction: column; max-width: calc(100vw - 80px); }
         .bubble { padding: 14px 18px; font-size: 15px; line-height: 1.6; border-radius: 20px; backdrop-filter: blur(10px); }
-        .user .bubble { background: linear-gradient(135deg, var(--accent), #1d4ed8); color: #fff; border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
-        .ai .bubble { background: var(--card-bg); color: #f3f4f6; border: 1px solid rgba(255,255,255,0.08); border-bottom-left-radius: 4px; }
+        
+        /* EFEITO 2: Bolha do Usuário com Energia Fluida */
+        @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .user .bubble { 
+            background: linear-gradient(135deg, var(--accent), #1d4ed8, #0ea5e9, var(--accent)); 
+            background-size: 300% 300%; 
+            animation: gradientFlow 6s ease infinite; 
+            color: #fff; 
+            border-bottom-right-radius: 4px; 
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); 
+        }
+
+        /* EFEITO 3: Bolha da IA com Scanner Holográfico */
+        @keyframes holoScan { 0% { transform: translateX(-150%) rotate(45deg); } 100% { transform: translateX(150%) rotate(45deg); } }
+        .ai .bubble { 
+            background: var(--card-bg); color: #f3f4f6; border: 1px solid rgba(255,255,255,0.08); border-bottom-left-radius: 4px; 
+            position: relative; overflow: hidden; box-shadow: inset 0 0 15px rgba(0, 242, 255, 0.03), 0 4px 15px rgba(0,0,0,0.5); 
+        }
+        .ai .bubble::after { 
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; 
+            background: linear-gradient(to right, transparent, rgba(0, 242, 255, 0.05), transparent); 
+            transform: rotate(45deg); animation: holoScan 5s infinite linear; pointer-events: none; 
+        }
 
         .timestamp { font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 5px; font-weight: 600; padding: 0 5px; }
         .user .timestamp { text-align: right; }
@@ -151,7 +175,7 @@
     <section id="onboarding">
         <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 360px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);">
             <i class="fa-solid fa-rocket" style="color:var(--gold); font-size: 40px; margin-bottom: 20px;"></i>
-            <h2 style="color:var(--gold); margin-bottom: 10px;">LARA ELITE v21.9</h2>
+            <h2 style="color:var(--gold); margin-bottom: 10px;">LARA ELITE v21.10</h2>
             <p style="font-size: 13px; color: #888; margin-bottom: 20px;">Bem-vindo ao sistema! Para a experiência completa e off-line, instale o aplicativo oficial no seu aparelho.</p>
             
             <button onclick="Core.triggerInstallOnboarding()" style="width:100%; padding:15px; background:linear-gradient(135deg, var(--accent), #1d4ed8); border:none; border-radius:15px; color:#fff; font-weight:900; cursor:pointer; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);"><i class="fa-solid fa-download"></i> INSTALAR APP AGORA</button>
@@ -204,12 +228,12 @@
             </div>
             <div class="update-body" id="changelog-area">
                 <div class="update-item">
-                    <div class="update-version">v21.9 - Auto-Verificador PWA</div>
-                    <div class="update-text">App instalado agora fura o cache nativo do Android, verifica o GitHub sozinho e se atualiza de forma autônoma!</div>
+                    <div class="update-version">v21.10 - Chat Dinâmico Imersivo</div>
+                    <div class="update-text">Fundo com efeito parallax contínuo. Bolhas de IA com scanner holográfico e bolhas do mestre com fluidez de energia.</div>
                 </div>
                 <div class="update-item">
-                    <div class="update-version">v21.8 - Smart Onboarding</div>
-                    <div class="update-text">Novo painel instrucional para forçar e ensinar a instalação via navegador.</div>
+                    <div class="update-version">v21.9 - Auto-Verificador PWA</div>
+                    <div class="update-text">App instalado agora fura o cache nativo do Android e se atualiza sozinho.</div>
                 </div>
             </div>
         </div>
@@ -244,7 +268,7 @@
         const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
         
         // VERSÃO ATUALIZADA
-        const VERSION = "21.9"; 
+        const VERSION = "21.10"; 
 
         const AI_AVATAR_URL = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
         
@@ -282,48 +306,35 @@
 
                 UI.update(); this.h.forEach(m => UI.draw(m.r, m.t));
                 
-                // SISTEMA DE SEPARAÇÃO E ATUALIZAÇÃO EXTREMA
                 if (window.matchMedia('(display-mode: standalone)').matches) {
-                    // 1. Se já for o App instalado: Fura o cache nativo silenciosamente para buscar versão nova!
                     this.forceNetworkUpdate();
                 } else if (!Storage.get('l_onboard')) {
-                    // 2. Se for navegador e é a primeira vez: Mostra como instalar!
                     document.getElementById('onboarding').style.display = 'flex';
                 } else if (!Storage.get('l_active')) {
-                    // 3. Cadastrar perfil
                     document.getElementById('gatekeeper').style.display = 'flex';
                 } else {
-                    // Navegador mas já passou pelo onboarding, liga o painel irritante
                     this.startInstallLoop();
-                    this.forceNetworkUpdate(); // Força update aqui também por segurança
+                    this.forceNetworkUpdate();
                 }
 
                 Visual.init();
                 this.checkUpdates();
             },
             
-            // ENGINE SILENCIOSA PARA FURAR O CACHE DO ANDROID/IOS
             async forceNetworkUpdate() {
                 try {
-                    // Adiciona data atual na URL para enganar o cache do Android e ler direto do GitHub
                     const res = await fetch(window.location.href.split('?')[0] + '?bypassCache=' + new Date().getTime(), { cache: 'no-store' });
                     const txt = await res.text();
                     
-                    // Procura no código online qual é a versão real
                     const vMatch = txt.match(/const VERSION\s*=\s*"([^"]+)"/);
                     if (vMatch && vMatch[1]) {
                         const githubVersion = vMatch[1];
-                        
-                        // Se a versão online for diferente da versão desse arquivo local
                         if (githubVersion !== VERSION) {
-                            // Salva a versão atual pra disparar o efeito visual e FORÇA a página a baixar os arquivos novos
                             Storage.set('l_version', VERSION);
                             window.location.reload(true); 
                         }
                     }
-                } catch(e) {
-                    // Offline, ignora silenciosamente.
-                }
+                } catch(e) {}
             },
 
             triggerInstallOnboarding() {
