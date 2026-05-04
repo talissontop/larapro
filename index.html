@@ -65,12 +65,10 @@
         aside.sidebar { position: fixed; top: 0; left: -100%; width: 300px; height: 100%; z-index: 3000; background: rgba(5, 8, 17, 0.98); backdrop-filter: blur(30px); transition: 0.5s; overflow-y: auto; }
         .sidebar.open { left: 0; }
         
-        /* ⚙️ AJUSTE DO NOME E HEADER DO MENU */
         .u-box { padding: 60px 25px 15px; text-align: center; }
         .u-img { width: 95px; height: 95px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
         #menu-name { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 20px; }
 
-        /* ⚙️ CORREÇÃO SECURITY STATUS */
         .sys-info { margin: 10px 20px 20px; padding: 15px; border-radius: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); }
         .sys-info p { font-size: 12px; color: #fff; font-weight: 500; margin-bottom: 4px; opacity: 0.9; }
         .sys-info span { font-size: 13px; color: #fff; font-weight: 800; display: block; }
@@ -86,12 +84,20 @@
         .update-item { border-left: 2px solid var(--gold); padding-left: 12px; margin: 15px; }
 
         @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        #update-splash { position: fixed; inset: 0; background: #050811; z-index: 99999; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
+        .progress-container { width: 100%; max-width: 280px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; position: relative; }
+        #u-progress { width: 0%; height: 100%; background: var(--neon); transition: width 0.3s ease; }
         #gatekeeper, #onboarding { position: fixed; inset: 0; background: #050811; z-index: 9999; display: none; align-items: center; justify-content: center; }
     </style>
 </head>
 <body>
     <div id="bg-container"><div class="bg-slide active"></div><div class="bg-slide"></div></div>
-    <div id="vignette" style="position:fixed; inset:0; z-index:-1; background:radial-gradient(circle, transparent 30%, #000 130%); pointer-events:none;"></div>
+    <div id="update-splash">
+        <img src="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png" style="width:110px; border-radius:25px; margin-bottom:25px; object-fit:cover;">
+        <h2 style="color:#fff; font-size:17px; font-weight:900;">ATUALIZAÇÃO DE SISTEMA</h2>
+        <div class="progress-container"><div id="u-progress"></div></div>
+        <div id="u-perc" style="color:var(--neon); font-size:15px; font-weight:900; margin-top:15px;">0%</div>
+    </div>
 
     <section id="onboarding">
         <div style="background:#0a0f1e; padding:40px; border-radius:40px; border:1px solid var(--gold); text-align:center; max-width:360px;">
@@ -122,12 +128,10 @@
     <div id="overlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.7); display:none; z-index:2500;" onclick="UI.menu(false)"></div>
     <aside id="menu" class="sidebar">
         <div class="u-box"><div class="u-img" id="menu-photo">👤</div><p id="menu-name">Mestre</p></div>
-        
         <div class="sys-info">
             <p><i class="fa-solid fa-shield-halved"></i> Security Status</p>
             <span>Cloud Network Confortável</span>
         </div>
-
         <div class="skin-panel">
             <div class="skin-grid">
                 <button onclick="UI.setSkin('gold')" id="skin-gold" class="skin-btn active"><i class="fa-solid fa-crown"></i>Elite Gold</button>
@@ -135,7 +139,6 @@
                 <button onclick="UI.setSkin('stealth')" id="skin-stealth" class="skin-btn"><i class="fa-solid fa-user-ninja"></i>Modo Furtivo</button>
             </div>
         </div>
-
         <div class="update-panel">
             <div class="update-header">UPDATES v25</div>
             <div class="update-item">
@@ -143,17 +146,14 @@
                 <div style="font-size:11px; color:#aaa;">Persistência extrema de cache ativa.</div>
             </div>
         </div>
-
         <nav style="padding:0 20px 20px; display:flex; flex-direction:column; gap:10px;">
             <button onclick="Core.exportChat()" style="width:100%; padding:15px; border-radius:15px; background:rgba(37,99,235,0.1); border:1px solid var(--accent); color:#fff; font-weight:bold;"><i class="fa-solid fa-download"></i> EXPORTAR LOG</button>
-            <button style="width:100%; padding:15px; border-radius:15px; background:linear-gradient(to right, #ffd700, #ff8c00); border:none; color:#000; font-weight:900;"><i class="fa-solid fa-heart"></i> APOIAR PROJETO</button>
             <button onclick="Core.clearChat()" style="width:100%; padding:15px; border-radius:15px; background:rgba(239, 68, 68, 0.1); border:1px solid #ef4444; color:#ef4444; font-weight:bold;"><i class="fa-solid fa-trash"></i> LIMPAR HISTÓRICO</button>
             <button onclick="Core.logout()" style="width:100%; padding:15px; border-radius:15px; background:rgba(255, 255, 255, 0.05); border:1px solid rgba(255,255,255,0.1); color:#ccc; font-weight:bold;"><i class="fa-solid fa-right-from-bracket"></i> TROCAR PERFIL</button>
         </nav>
     </aside>
 
     <main class="chat" id="chat-main"><div class="chat-wrap" id="chat-box"></div></main>
-    
     <footer>
         <div class="in-box">
             <textarea id="u-in" placeholder="Escreva aqui, mestre..." oninput="UI.size(this)" onkeydown="if(event.key==='Enter' && !event.shiftKey) { event.preventDefault(); Core.send(); }"></textarea>
@@ -188,9 +188,38 @@
                 UI.setSkin(Storage.get('l_skin') || 'gold');
                 if (!Storage.get('l_onboard')) document.getElementById('onboarding').style.display = 'flex';
                 else if (!Storage.get('l_active')) document.getElementById('gatekeeper').style.display = 'flex';
-                Visual.init();
+                Visual.init(); this.checkUpdates();
             },
-            save() { this.name = document.getElementById('p-name').value || 'Mestre'; Storage.set('l_name', this.name); Storage.set('l_photo', this.photo); Storage.set('l_active', true); location.reload(); },
+            checkUpdates() {
+                const lastV = Storage.get('l_version');
+                if (lastV !== VERSION && Storage.get('l_active')) {
+                    const splash = document.getElementById('update-splash');
+                    const bar = document.getElementById('u-progress');
+                    splash.style.display = 'flex';
+                    let p = 0;
+                    const interval = setInterval(() => {
+                        p += 5; if (p >= 100) p = 100;
+                        bar.style.width = p + '%'; document.getElementById('u-perc').innerText = p + '%';
+                        if (p === 100) { 
+                            clearInterval(interval); 
+                            setTimeout(() => { 
+                                splash.style.display = 'none'; 
+                                Storage.set('l_version', VERSION);
+                                // DISPARO DA NOTIFICAÇÃO REAL APÓS CARREGAR
+                                UI.notify("SISTEMA v25 ATIVO", "Blindagem extrema e motor de imortalidade online.");
+                            }, 600); 
+                        }
+                    }, 100);
+                }
+            },
+            save() { 
+                this.name = document.getElementById('p-name').value || 'Mestre'; 
+                Storage.set('l_name', this.name); 
+                Storage.set('l_photo', this.photo); 
+                Storage.set('l_active', true); 
+                if (window.Notification) Notification.requestPermission(); // PEDE PERMISSÃO AQUI
+                location.reload(); 
+            },
             initOnboarding() { Storage.set('l_onboard', true); location.reload(); },
             logout() { if(confirm("Sair?")) { Storage.set('l_active', false); location.reload(); } },
             async send() {
@@ -226,6 +255,13 @@
                 Storage.set('l_skin', skin);
             },
             scrollToEnd() { this.main.scrollTop = this.main.scrollHeight; },
+            notify(title, body) {
+                if (window.Notification && Notification.permission === "granted") {
+                    navigator.serviceWorker.ready.then(reg => {
+                        reg.showNotification(title, { body: body, icon: AI_AVATAR_URL, badge: AI_AVATAR_URL });
+                    });
+                }
+            },
             draw(r, t) {
                 const w = document.createElement('div'); w.className = `msg ${r}`;
                 let av = r === 'user' ? (Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fa-solid fa-user-secret"></i>') : `<img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;">`;
@@ -241,13 +277,15 @@
             }
         };
 
+        // ⚡ REGISTRO DE ATIVAÇÃO v25 (AJUSTADO)
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.register('./sw.js').then(reg => {
             reg.onupdatefound = () => {
               const installingWorker = reg.installing;
               installingWorker.onstatechange = () => {
-                if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                  alert("Lara Elite: Sistema Atualizado para v25! Reinicie para ativar a blindagem.");
+                if (installingWorker.state === 'installed') {
+                   // ALERTA FORÇADO NA TELA DO NAVEGADOR
+                   alert("Lara Elite: Motor v25 Instalado! Reinicie o app para blindar.");
                 }
               };
             };
