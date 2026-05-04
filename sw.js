@@ -1,45 +1,71 @@
-function iniciarMonitoramentoOmegaNeural(doc) {
-    const netEl = doc.getElementById('pip-net');
-    const batEl = doc.getElementById('pip-bat');
-    
-    // 🛡️ MEMÓRIA DE ESTADO (Fora da função updateNet para persistir)
-    let ultimoEstadoGlitch = false; 
+const CACHE_NAME = 'LaraElite-v25.2';
 
-    // ================= 🌐 REDE REATIVA COM TRAVA DE ESTADO =================
-    const conn = navigator.connection;
-    if (conn) {
-        const updateNet = () => {
-            const type = (conn.effectiveType || '').toUpperCase();
-            netEl.innerText = `LINK: ${type || '--'}`;
+const ASSETS = [
+    './',
+    './index.html',
+    './manifest.json',
+    'https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png',
+    'https://quick-plum-ydrhk4qkr9.edgeone.app/images.jpeg'
+];
 
-            const precisaDeGlitch = type.includes('2G');
-
-            // ⚡ SÓ ENVIA SE O ESTADO MUDAR (A Blindagem)
-            if (precisaDeGlitch !== ultimoEstadoGlitch) {
-                ultimoEstadoGlitch = precisaDeGlitch;
-                pipChannel.postMessage({ type: precisaDeGlitch ? "glitch-on" : "glitch-off" });
+// ================= INSTALL ROBUSTO =================
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME).then(async (cache) => {
+            for (const asset of ASSETS) {
+                try {
+                    await cache.add(asset);
+                } catch (e) {
+                    // Ignora falhas individuais (principalmente URLs externas)
+                }
             }
-        };
+        })
+    );
+    self.skipWaiting();
+});
 
-        updateNet();
-        conn.addEventListener('change', updateNet);
-    }
+// ================= ACTIVATE LIMPO =================
+self.addEventListener('activate', (event) => {
+    event.waitUntil(
+        caches.keys().then((keys) =>
+            Promise.all(
+                keys
+                    .filter((key) => key !== CACHE_NAME)
+                    .map((key) => caches.delete(key))
+            )
+        )
+    );
+    self.clients.claim();
+});
 
-    // ================= 🔋 BATERIA REATIVA (Padrão Elite) =================
-    const updateStatus = (bat) => {
-        batEl.innerText = `${Math.round(bat.level * 100)}%`;
-        batEl.style.color = bat.level < 0.2 ? '#ff4444' : 'inherit';
-    };
+// ================= FETCH INTELIGENTE =================
+self.addEventListener('fetch', (event) => {
+    const req = event.request;
 
-    if (navigator.getBattery) {
-        if (!window.__batCache) {
-            navigator.getBattery().then(bat => {
-                window.__batCache = bat;
-                updateStatus(bat);
-                bat.addEventListener('levelchange', () => updateStatus(bat));
-            });
-        } else {
-            updateStatus(window.__batCache);
-        }
-    }
-}
+    event.respondWith(
+        caches.match(req).then((cached) => {
+
+            const networked = fetch(req)
+                .then((response) => {
+
+                    // Só cacheia respostas válidas
+                    if (
+                        response &&
+                        response.status === 200 &&
+                        response.type === 'basic'
+                    ) {
+                        const clone = response.clone();
+                        caches.open(CACHE_NAME).then((cache) => {
+                            cache.put(req, clone);
+                        });
+                    }
+
+                    return response;
+                })
+                .catch(() => cached); // offline seguro
+
+            // Se tem cache → responde instantâneo
+            return cached || networked;
+        })
+    );
+});
