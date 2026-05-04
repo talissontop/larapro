@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Lara Elite">
     
-    <title>Lara Elite v25</title>
+    <title>Lara Elite v25.1</title>
 
     <link rel="apple-touch-icon" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
@@ -42,14 +42,12 @@
 
         header { position: fixed; top: 0; left: 0; width: 100%; height: 85px; background: rgba(10, 15, 25, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 100; display: flex; align-items: center; justify-content: center; padding-top: 15px; }
         .h-wrap { width: 100%; max-width: 800px; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        
         .status-badge { font-size: 9px; background: rgba(34, 197, 94, 0.1); color: #22c55e; padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(34, 197, 94, 0.2); display: flex; align-items: center; gap: 6px; font-weight: 800; text-transform: uppercase; }
         .status-dot { width: 5px; height: 5px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 5px #22c55e; }
         h1 { font-size: 18px; font-weight: 900; background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
 
         main.chat { position: fixed; top: 85px; bottom: 90px; left: 0; width: 100%; overflow-y: auto; padding: 25px 15px; display: flex; flex-direction: column; align-items: center; scroll-behavior: smooth; }
         .chat-wrap { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; padding-bottom: 30px; }
-        
         .msg { display: flex; gap: 12px; width: 100%; align-items: flex-end; animation: slideUp 0.3s ease; }
         .msg.user { justify-content: flex-end; }
         .avatar { width: 36px; height: 38px; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; display: flex; align-items: center; justify-content: center; }
@@ -64,7 +62,6 @@
 
         aside.sidebar { position: fixed; top: 0; left: -100%; width: 300px; height: 100%; z-index: 3000; background: rgba(5, 8, 17, 0.98); backdrop-filter: blur(30px); transition: 0.5s; overflow-y: auto; }
         .sidebar.open { left: 0; }
-        
         .u-box { padding: 60px 25px 15px; text-align: center; }
         .u-img { width: 95px; height: 95px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 12px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
         #menu-name { font-size: 20px; font-weight: 900; color: #fff; margin-bottom: 20px; }
@@ -74,16 +71,17 @@
         .sys-info span { font-size: 13px; color: #fff; font-weight: 800; display: block; }
 
         .skin-panel { margin: 15px 20px; padding: 15px; border-radius: 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
-        .skin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .skin-btn { aspect-ratio: 1; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; font-size: 8px; font-weight: 800; color: #aaa; background: none; }
-        .skin-btn i { font-size: 14px; }
+        .skin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        .skin-btn { 
+            aspect-ratio: 1; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); 
+            cursor: pointer; display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; gap: 4px; font-size: 7.5px;
+            font-weight: 900; color: #aaa; background: none; text-transform: uppercase;
+            line-height: 1; text-align: center;
+        }
+        .skin-btn i { font-size: 13px; margin-bottom: 2px; }
         .skin-btn.active { border-color: var(--gold); color: #fff; background: rgba(212,175,55,0.1); }
 
-        .update-panel { margin: 0 20px 20px; border-radius: 20px; background: rgba(0,0,0,0.4); border: 1px solid rgba(37, 99, 235, 0.2); overflow: hidden; }
-        .update-header { background: rgba(37, 99, 235, 0.1); padding: 12px 18px; font-size: 11px; font-weight: 900; color: #60a5fa; }
-        .update-item { border-left: 2px solid var(--gold); padding-left: 12px; margin: 15px; }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         #update-splash { position: fixed; inset: 0; background: #050811; z-index: 99999; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
         .progress-container { width: 100%; max-width: 280px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; position: relative; }
         #u-progress { width: 0%; height: 100%; background: var(--neon); transition: width 0.3s ease; }
@@ -92,6 +90,7 @@
 </head>
 <body>
     <div id="bg-container"><div class="bg-slide active"></div><div class="bg-slide"></div></div>
+    
     <div id="update-splash">
         <img src="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png" style="width:110px; border-radius:25px; margin-bottom:25px; object-fit:cover;">
         <h2 style="color:#fff; font-size:17px; font-weight:900;">ATUALIZAÇÃO DE SISTEMA</h2>
@@ -102,7 +101,7 @@
     <section id="onboarding">
         <div style="background:#0a0f1e; padding:40px; border-radius:40px; border:1px solid var(--gold); text-align:center; max-width:360px;">
             <i class="fa-solid fa-rocket" style="color:var(--gold); font-size:40px; margin-bottom:20px;"></i>
-            <h2 style="color:var(--gold); margin-bottom:10px;">LARA ELITE v25</h2>
+            <h2 style="color:var(--gold); margin-bottom:10px;">LARA ELITE v25.1</h2>
             <button onclick="Core.initOnboarding()" style="width:100%; padding:15px; background:var(--accent); border:none; border-radius:15px; color:#fff; font-weight:900;">INICIAR SISTEMA</button>
         </div>
     </section>
@@ -120,7 +119,7 @@
         <button onclick="UI.menu(true)" style="background:none; border:none; color:#fff; font-size:22px;"><i class="fa-solid fa-bars-staggered"></i></button>
         <div style="text-align:center;">
             <h1>Lara Elite</h1>
-            <div class="status-badge" style="margin-top:3px;"><div class="status-dot"></div> ONLINE | ⚡ 12MS</div>
+            <div class="status-badge" style="margin-top:3px;"><div class="status-dot"></div> ONLINE | OMEGA NEURAL</div>
         </div>
         <div id="p-btn-top" style="width:38px; height:38px; border-radius:50%; border:2px solid var(--gold); overflow:hidden;"></div>
     </div></header>
@@ -139,14 +138,8 @@
                 <button onclick="UI.setSkin('stealth')" id="skin-stealth" class="skin-btn"><i class="fa-solid fa-user-ninja"></i>Modo Furtivo</button>
             </div>
         </div>
-        <div class="update-panel">
-            <div class="update-header">UPDATES v25</div>
-            <div class="update-item">
-                <div style="font-size:12px; color:var(--gold); font-weight:800;">Blindagem v25 Ativada</div>
-                <div style="font-size:11px; color:#aaa;">Persistência extrema de cache ativa.</div>
-            </div>
-        </div>
         <nav style="padding:0 20px 20px; display:flex; flex-direction:column; gap:10px;">
+            <button onclick="ativarProjeçãoLara()" style="width:100%; padding:15px; border-radius:15px; background:rgba(0, 242, 255, 0.1); border:1px solid var(--neon); color:#fff; font-weight:bold;"><i class="fa-solid fa-person-walking"></i> MODO PROJEÇÃO</button>
             <button onclick="Core.exportChat()" style="width:100%; padding:15px; border-radius:15px; background:rgba(37,99,235,0.1); border:1px solid var(--accent); color:#fff; font-weight:bold;"><i class="fa-solid fa-download"></i> EXPORTAR LOG</button>
             <button onclick="Core.clearChat()" style="width:100%; padding:15px; border-radius:15px; background:rgba(239, 68, 68, 0.1); border:1px solid #ef4444; color:#ef4444; font-weight:bold;"><i class="fa-solid fa-trash"></i> LIMPAR HISTÓRICO</button>
             <button onclick="Core.logout()" style="width:100%; padding:15px; border-radius:15px; background:rgba(255, 255, 255, 0.05); border:1px solid rgba(255,255,255,0.1); color:#ccc; font-weight:bold;"><i class="fa-solid fa-right-from-bracket"></i> TROCAR PERFIL</button>
@@ -163,9 +156,11 @@
 
     <script>
         const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
-        const VERSION = "25.0"; 
+        const VERSION = "25.1"; 
         const AI_AVATAR_URL = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
-        
+        const pipChannel = new BroadcastChannel("lara_pip_sync");
+        let laraPipWindow = null;
+
         const Visual = {
             slides: document.querySelectorAll('.bg-slide'), current: 0,
             list: ["Naruto", "Sasuke", "Luffy", "Goku", "Zoro", "Vegeta", "Itachi"],
@@ -205,19 +200,16 @@
                             setTimeout(() => { 
                                 splash.style.display = 'none'; 
                                 Storage.set('l_version', VERSION);
-                                // DISPARO DA NOTIFICAÇÃO REAL APÓS CARREGAR
-                                UI.notify("SISTEMA v25 ATIVO", "Blindagem extrema e motor de imortalidade online.");
+                                UI.notify("LARA ELITE OMEGA ONLINE", "Motor neural v25.1 blindado.");
                             }, 600); 
                         }
-                    }, 100);
+                    }, 80);
                 }
             },
             save() { 
                 this.name = document.getElementById('p-name').value || 'Mestre'; 
-                Storage.set('l_name', this.name); 
-                Storage.set('l_photo', this.photo); 
-                Storage.set('l_active', true); 
-                if (window.Notification) Notification.requestPermission(); // PEDE PERMISSÃO AQUI
+                Storage.set('l_name', this.name); Storage.set('l_photo', this.photo); Storage.set('l_active', true); 
+                if (window.Notification) Notification.requestPermission();
                 location.reload(); 
             },
             initOnboarding() { Storage.set('l_onboard', true); location.reload(); },
@@ -258,7 +250,7 @@
             notify(title, body) {
                 if (window.Notification && Notification.permission === "granted") {
                     navigator.serviceWorker.ready.then(reg => {
-                        reg.showNotification(title, { body: body, icon: AI_AVATAR_URL, badge: AI_AVATAR_URL });
+                        reg.showNotification(title, { body: body, icon: AI_AVATAR_URL });
                     });
                 }
             },
@@ -277,15 +269,89 @@
             }
         };
 
-        // ⚡ REGISTRO DE ATIVAÇÃO v25 (AJUSTADO)
+        async function ativarProjeçãoLara() {
+            try {
+                if (!('documentPictureInPicture' in window)) { UI.toast("PiP não suportado."); return; }
+                if (documentPictureInPicture.window) { laraPipWindow = documentPictureInPicture.window; laraPipWindow.focus(); return; }
+
+                laraPipWindow = await documentPictureInPicture.requestWindow({ width: 280, height: 420 });
+                const pipDoc = laraPipWindow.document;
+
+                pipDoc.write(`<!DOCTYPE html><html><head><style id="dynamic-style"></style></head>
+                <body>
+                    <div class="ui-top"><span id="pip-net">LINK: --</span><span id="pip-bat">--%</span></div>
+                    <div id="holograma"><img id="lara-img" src="https://quick-plum-ydrhk4qkr9.edgeone.app/images.jpeg"/></div>
+                    <button id="focusBtn">FOCO TOTAL</button>
+                </body></html>`);
+                pipDoc.close();
+
+                const { accentColor, neonColor } = detectarTema();
+                aplicarEstilosOmega(pipDoc, accentColor, neonColor);
+                iniciarMonitoramentoOmegaNeural(pipDoc);
+
+                pipDoc.body.onclick = () => pipChannel.postMessage({ type: "vibrate" });
+                pipDoc.getElementById("focusBtn").onclick = () => pipChannel.postMessage({ type: "focus-main" });
+
+                laraPipWindow.addEventListener("pagehide", () => laraPipWindow = null);
+            } catch { }
+        }
+
+        function detectarTema() {
+            if (document.body.classList.contains('theme-cyber')) return { accentColor:"#c026d3", neonColor:"#f0abfc" };
+            if (document.body.classList.contains('theme-stealth')) return { accentColor:"#334155", neonColor:"#cbd5e1" };
+            return { accentColor:"#D4AF37", neonColor:"#00f2ff" };
+        }
+
+        function aplicarEstilosOmega(doc, accent, neon) {
+            doc.getElementById("dynamic-style").textContent = `
+                body { margin:0; height:100vh; background:#000; display:flex; flex-direction:column; align-items:center; justify-content:center; border:2px solid ${accent}; border-radius:25px; overflow:hidden; font-family:sans-serif; }
+                .ui-top { position:absolute; top:10px; width:90%; display:flex; justify-content:space-between; color:${neon}; font-size:10px; font-weight:bold; }
+                #lara-img { width:80%; height:80%; object-fit:contain; filter: drop-shadow(0 0 10px ${neon}); animation: float 3s infinite ease-in-out; }
+                #focusBtn { position:absolute; bottom:15px; background:rgba(255,255,255,0.1); border:1px solid ${accent}; color:#fff; padding:5px 15px; border-radius:10px; font-size:10px; }
+                @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-15px); } }
+            `;
+        }
+
+        function iniciarMonitoramentoOmegaNeural(doc) {
+            const netEl = doc.getElementById('pip-net');
+            const batEl = doc.getElementById('pip-bat');
+            let ultimoEstadoGlitch = false;
+
+            const updateNet = () => {
+                const conn = navigator.connection;
+                if (conn) {
+                    const type = (conn.effectiveType || '').toUpperCase();
+                    netEl.innerText = `LINK: ${type}`;
+                    const precisaDeGlitch = type.includes('2G');
+                    if (precisaDeGlitch !== ultimoEstadoGlitch) {
+                        ultimoEstadoGlitch = precisaDeGlitch;
+                        pipChannel.postMessage({ type: precisaDeGlitch ? "vibrate" : "vibrate-off" });
+                    }
+                }
+            };
+
+            if (navigator.getBattery) {
+                navigator.getBattery().then(bat => {
+                    const upBat = () => batEl.innerText = `${Math.round(bat.level * 100)}%`;
+                    upBat(); bat.addEventListener('levelchange', upBat);
+                });
+            }
+            updateNet();
+            if (navigator.connection) navigator.connection.addEventListener('change', updateNet);
+        }
+
+        pipChannel.onmessage = (e) => {
+            if (e.data.type === "focus-main") window.focus();
+            if (e.data.type === "vibrate") navigator.vibrate?.(20);
+        };
+
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.register('./sw.js').then(reg => {
             reg.onupdatefound = () => {
               const installingWorker = reg.installing;
               installingWorker.onstatechange = () => {
                 if (installingWorker.state === 'installed') {
-                   // ALERTA FORÇADO NA TELA DO NAVEGADOR
-                   alert("Lara Elite: Motor v25 Instalado! Reinicie o app para blindar.");
+                   alert("Lara Elite: Motor OMEGA v25.1 Pronto!");
                 }
               };
             };
