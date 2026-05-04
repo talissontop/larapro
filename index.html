@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Lara Elite">
     
-    <title>Lara Elite v25.2 OMEGA</title>
+    <title>Lara Elite v25.3 OMEGA</title>
 
     <link rel="apple-touch-icon" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
@@ -72,17 +72,10 @@
 
         .skin-panel { margin: 15px 20px; padding: 15px; border-radius: 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
         .skin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-        .skin-btn { 
-            aspect-ratio: 1; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); 
-            cursor: pointer; display: flex; flex-direction: column; align-items: center; 
-            justify-content: center; gap: 4px; font-size: 7.5px;
-            font-weight: 900; color: #aaa; background: none; text-transform: uppercase;
-            line-height: 1; text-align: center;
-        }
+        .skin-btn { aspect-ratio: 1; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 7.5px; font-weight: 900; color: #aaa; background: none; text-transform: uppercase; line-height: 1; text-align: center; }
         .skin-btn i { font-size: 13px; margin-bottom: 2px; }
         .skin-btn.active { border-color: var(--gold); color: #fff; background: rgba(212,175,55,0.1); }
 
-        /* PAINEL DE EVOLUÇÃO (LOG DE ATUALIZAÇÃO RESTAURADO) */
         .update-panel { margin: 0 20px 20px; border-radius: 20px; background: rgba(0,0,0,0.4); border: 1px solid rgba(37, 99, 235, 0.2); overflow: hidden; }
         .update-header { background: rgba(37, 99, 235, 0.1); padding: 12px 18px; font-size: 11px; font-weight: 900; color: #60a5fa; }
         .update-item { border-left: 2px solid var(--gold); padding-left: 12px; margin: 15px; }
@@ -99,7 +92,7 @@
     
     <div id="update-splash">
         <img src="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png" style="width:110px; border-radius:25px; margin-bottom:25px; object-fit:cover;">
-        <h2 style="color:#fff; font-size:17px; font-weight:900;">INICIALIZANDO OMEGA v25.2</h2>
+        <h2 style="color:#fff; font-size:17px; font-weight:900;">INICIALIZANDO OMEGA v25.3</h2>
         <div class="progress-container"><div id="u-progress"></div></div>
         <div id="u-perc" style="color:var(--neon); font-size:15px; font-weight:900; margin-top:15px;">0%</div>
     </div>
@@ -107,7 +100,7 @@
     <section id="onboarding">
         <div style="background:#0a0f1e; padding:40px; border-radius:40px; border:1px solid var(--gold); text-align:center; max-width:360px;">
             <i class="fa-solid fa-rocket" style="color:var(--gold); font-size:40px; margin-bottom:20px;"></i>
-            <h2 style="color:var(--gold); margin-bottom:10px;">LARA ELITE v25.2</h2>
+            <h2 style="color:var(--gold); margin-bottom:10px;">LARA ELITE v25.3</h2>
             <button onclick="Core.initOnboarding()" style="width:100%; padding:15px; background:var(--accent); border:none; border-radius:15px; color:#fff; font-weight:900;">INICIAR SISTEMA</button>
         </div>
     </section>
@@ -144,12 +137,11 @@
                 <button onclick="UI.setSkin('stealth')" id="skin-stealth" class="skin-btn"><i class="fa-solid fa-user-ninja"></i>Modo Furtivo</button>
             </div>
         </div>
-
         <div class="update-panel">
-            <div class="update-header">LOG DE EVOLUÇÃO v25.2</div>
+            <div class="update-header">LOG DE EVOLUÇÃO v25.3</div>
             <div class="update-item">
-                <div style="font-size:12px; color:var(--gold); font-weight:800;">Blindagem v25.2 Ativa</div>
-                <div style="font-size:11px; color:#aaa;">Correção do bug de reversão e motor PiP Hardened.</div>
+                <div style="font-size:12px; color:var(--gold); font-weight:800;">Blindagem v25.3 Ativa</div>
+                <div style="font-size:11px; color:#aaa;">Correção do bug de reversão e Motor Android PiP ativo.</div>
             </div>
         </div>
 
@@ -171,7 +163,7 @@
 
     <script>
         const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
-        const VERSION = "25.2"; 
+        const VERSION = "25.3"; 
         const AI_AVATAR_URL = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
         const pipChannel = new BroadcastChannel("lara_pip_sync");
         let laraPipWindow = null;
@@ -215,7 +207,7 @@
                             setTimeout(() => { 
                                 splash.style.display = 'none'; 
                                 Storage.set('l_version', VERSION);
-                                UI.notify("LARA ELITE OMEGA v25.2", "Blindagem de Cache e Motor Neural ativos.");
+                                UI.notify("LARA ELITE OMEGA v25.3", "Blindagem de Cache e Motor Neural ativos.");
                             }, 600); 
                         }
                     }, 80);
@@ -240,9 +232,8 @@
                 UI.draw('ai', finalTxt); this.h.push({t: finalTxt, r:'ai'});
                 Storage.set('l_chat', this.h.slice(-20)); this.typing = false;
             },
-            /* CORREÇÃO DO BUG DE REVERSÃO: LIMPA APENAS O CHAT */
             clearChat() { 
-                if(confirm("Deseja apagar as mensagens? O sistema v25.2 será preservado.")) { 
+                if(confirm("Deseja apagar as mensagens? O sistema v25.3 será preservado.")) { 
                     Storage.set('l_chat', []); 
                     location.reload(); 
                 } 
@@ -290,31 +281,97 @@
             }
         };
 
+        /* ================= HACK DA MATRIZ: MÓDULO OMEGA NATIVO ================= */
         async function ativarProjeçãoLara() {
             try {
-                if (!('documentPictureInPicture' in window)) { UI.toast("PiP não suportado."); return; }
-                if (documentPictureInPicture.window) { laraPipWindow = documentPictureInPicture.window; laraPipWindow.focus(); return; }
+                // 1. TENTA O MODO DESKTOP (PC)
+                if ('documentPictureInPicture' in window && !/Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                    if (documentPictureInPicture.window) { laraPipWindow = documentPictureInPicture.window; laraPipWindow.focus(); return; }
 
-                laraPipWindow = await documentPictureInPicture.requestWindow({ width: 280, height: 420 });
-                const pipDoc = laraPipWindow.document;
+                    laraPipWindow = await documentPictureInPicture.requestWindow({ width: 280, height: 420 });
+                    const pipDoc = laraPipWindow.document;
 
-                pipDoc.write(`<!DOCTYPE html><html><head><style id="dynamic-style"></style></head>
-                <body>
-                    <div class="ui-top"><span id="pip-net">LINK: --</span><span id="pip-bat">--%</span></div>
-                    <div id="holograma"><img id="lara-img" src="https://quick-plum-ydrhk4qkr9.edgeone.app/images.jpeg"/></div>
-                    <button id="focusBtn">FOCO TOTAL</button>
-                </body></html>`);
-                pipDoc.close();
+                    pipDoc.write(`<!DOCTYPE html><html><head><style id="dynamic-style"></style></head>
+                    <body>
+                        <div class="ui-top"><span id="pip-net">LINK: --</span><span id="pip-bat">--%</span></div>
+                        <div id="holograma"><img id="lara-img" src="https://quick-plum-ydrhk4qkr9.edgeone.app/images.jpeg"/></div>
+                        <button id="focusBtn">FOCO TOTAL</button>
+                    </body></html>`);
+                    pipDoc.close();
 
-                const { accentColor, neonColor } = detectarTema();
-                aplicarEstilosOmega(pipDoc, accentColor, neonColor);
-                iniciarMonitoramentoOmegaNeural(pipDoc);
+                    const { accentColor, neonColor } = detectarTema();
+                    aplicarEstilosOmega(pipDoc, accentColor, neonColor);
+                    iniciarMonitoramentoOmegaNeural(pipDoc);
 
-                pipDoc.body.onclick = () => pipChannel.postMessage({ type: "vibrate" });
-                pipDoc.getElementById("focusBtn").onclick = () => pipChannel.postMessage({ type: "focus-main" });
+                    pipDoc.body.onclick = () => pipChannel.postMessage({ type: "vibrate" });
+                    pipDoc.getElementById("focusBtn").onclick = () => pipChannel.postMessage({ type: "focus-main" });
 
-                laraPipWindow.addEventListener("pagehide", () => laraPipWindow = null);
-            } catch { }
+                    laraPipWindow.addEventListener("pagehide", () => laraPipWindow = null);
+                    return;
+                }
+
+                // 2. MODO MOBILE OMEGA (HACK DE VÍDEO NATIVO PARA ANDROID)
+                // Cria uma transmissão de vídeo ao vivo no aparelho para burlar o bloqueio
+                const canvas = document.createElement('canvas');
+                canvas.width = 300; canvas.height = 400;
+                const ctx = canvas.getContext('2d');
+                
+                const img = new Image();
+                img.crossOrigin = "anonymous";
+                img.src = "https://quick-plum-ydrhk4qkr9.edgeone.app/images.jpeg";
+                
+                await new Promise((resolve) => {
+                    img.onload = resolve;
+                    img.onerror = resolve; // Previne travamento
+                });
+
+                let floatY = 0;
+                let dir = 1;
+                
+                function renderizarHolograma() {
+                    // Fundo da interface
+                    ctx.fillStyle = '#050811';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                    // Elementos do sistema
+                    ctx.fillStyle = '#00f2ff';
+                    ctx.font = 'bold 16px sans-serif';
+                    ctx.fillText('⚡ LARA OMEGA', 15, 30);
+                    ctx.fillStyle = '#22c55e';
+                    ctx.fillText('ONLINE', 210, 30);
+                    
+                    // Cálculo da Flutuação
+                    floatY += dir * 0.4;
+                    if(floatY > 15) dir = -1;
+                    if(floatY < -15) dir = 1;
+                    
+                    // Renderiza o corpo flutuante
+                    if(img.complete) {
+                        ctx.drawImage(img, 20, 60 + floatY, 260, 260);
+                    }
+                    requestAnimationFrame(renderizarHolograma);
+                }
+                renderizarHolograma();
+
+                // Converte em Sinal de Vídeo (30 frames por segundo)
+                const stream = canvas.captureStream(30);
+                const video = document.createElement('video');
+                video.srcObject = stream;
+                video.muted = true;
+                video.playsInline = true;
+                
+                // Anexa oculto no sistema para forçar o Player Nativo
+                video.style.display = 'none';
+                document.body.appendChild(video);
+                
+                await video.play();
+                
+                // Força a janela flutuante real do Android!
+                await video.requestPictureInPicture();
+
+            } catch (e) {
+                alert("Bloqueio de Sistema: O Android está exigindo que você toque na tela antes de abrir a projeção.");
+            }
         }
 
         function detectarTema() {
@@ -372,7 +429,7 @@
               const installingWorker = reg.installing;
               installingWorker.onstatechange = () => {
                 if (installingWorker.state === 'installed') {
-                   alert("Lara Elite OMEGA: Motor v25.2 Sincronizado!");
+                   alert("Lara Elite OMEGA: Motor v25.3 Sincronizado!");
                 }
               };
             };
