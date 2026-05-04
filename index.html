@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Lara Elite">
     
-    <title>Lara Elite v25.3 OMEGA</title>
+    <title>Lara Elite v25.5 OMEGA</title>
 
     <link rel="apple-touch-icon" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
@@ -29,6 +29,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Fira+Code:wght@400;500&display=swap');
         
+        /* VARIAVEIS DE CORES DOS TEMAS */
         :root { --accent: #2563eb; --gold: #D4AF37; --bg: #050811; --card-bg: rgba(15, 20, 35, 0.85); --neon: #00f2ff; }
         body.theme-cyber { --accent: #c026d3; --gold: #22d3ee; --bg: #020617; --card-bg: rgba(30, 0, 60, 0.7); --neon: #f0abfc; }
         body.theme-stealth { --accent: #334155; --gold: #94a3b8; --bg: #0f172a; --card-bg: rgba(15, 23, 42, 0.95); --neon: #cbd5e1; }
@@ -40,12 +41,14 @@
         .bg-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s ease-in-out; }
         .bg-slide.active { opacity: 1; }
 
+        /* HEADER E UI DO TOPO */
         header { position: fixed; top: 0; left: 0; width: 100%; height: 85px; background: rgba(10, 15, 25, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 100; display: flex; align-items: center; justify-content: center; padding-top: 15px; }
         .h-wrap { width: 100%; max-width: 800px; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
         .status-badge { font-size: 9px; background: rgba(34, 197, 94, 0.1); color: #22c55e; padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(34, 197, 94, 0.2); display: flex; align-items: center; gap: 6px; font-weight: 800; text-transform: uppercase; }
         .status-dot { width: 5px; height: 5px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 5px #22c55e; }
         h1 { font-size: 18px; font-weight: 900; background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
 
+        /* CHAT E BALÕES DE MENSAGEM */
         main.chat { position: fixed; top: 85px; bottom: 90px; left: 0; width: 100%; overflow-y: auto; padding: 25px 15px; display: flex; flex-direction: column; align-items: center; scroll-behavior: smooth; }
         .chat-wrap { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; padding-bottom: 30px; }
         .msg { display: flex; gap: 12px; width: 100%; align-items: flex-end; animation: slideUp 0.3s ease; }
@@ -55,11 +58,13 @@
         .user .bubble { background: var(--accent); color: #fff; border-bottom-right-radius: 4px; }
         .ai .bubble { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.08); border-bottom-left-radius: 4px; }
 
+        /* INPUT INFERIOR (FOOTER) */
         footer { position: fixed; bottom: 0; left: 0; width: 100%; height: 90px; background: linear-gradient(to top, #000 70%, transparent); display: flex; justify-content: center; z-index: 2000; padding-bottom: env(safe-area-inset-bottom); }
         .in-box { width: 92%; max-width: 800px; background: rgba(25, 30, 45, 0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 8px 12px; display: flex; align-items: center; height: 55px; }
         textarea { flex: 1; background: none; border: none; color: #fff; font-size: 15px; outline: none; resize: none; max-height: 40px; }
         .btn-send { background: var(--accent); border: none; width: 42px; height: 42px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; }
 
+        /* MENU LATERAL E BOTÕES */
         aside.sidebar { position: fixed; top: 0; left: -100%; width: 300px; height: 100%; z-index: 3000; background: rgba(5, 8, 17, 0.98); backdrop-filter: blur(30px); transition: 0.5s; overflow-y: auto; }
         .sidebar.open { left: 0; }
         .u-box { padding: 60px 25px 15px; text-align: center; }
@@ -92,7 +97,7 @@
     
     <div id="update-splash">
         <img src="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png" style="width:110px; border-radius:25px; margin-bottom:25px; object-fit:cover;">
-        <h2 style="color:#fff; font-size:17px; font-weight:900;">INICIALIZANDO OMEGA v25.3</h2>
+        <h2 style="color:#fff; font-size:17px; font-weight:900;">INICIALIZANDO OMEGA v25.5</h2>
         <div class="progress-container"><div id="u-progress"></div></div>
         <div id="u-perc" style="color:var(--neon); font-size:15px; font-weight:900; margin-top:15px;">0%</div>
     </div>
@@ -100,7 +105,7 @@
     <section id="onboarding">
         <div style="background:#0a0f1e; padding:40px; border-radius:40px; border:1px solid var(--gold); text-align:center; max-width:360px;">
             <i class="fa-solid fa-rocket" style="color:var(--gold); font-size:40px; margin-bottom:20px;"></i>
-            <h2 style="color:var(--gold); margin-bottom:10px;">LARA ELITE v25.3</h2>
+            <h2 style="color:var(--gold); margin-bottom:10px;">LARA ELITE v25.5</h2>
             <button onclick="Core.initOnboarding()" style="width:100%; padding:15px; background:var(--accent); border:none; border-radius:15px; color:#fff; font-weight:900;">INICIAR SISTEMA</button>
         </div>
     </section>
@@ -124,6 +129,7 @@
     </div></header>
 
     <div id="overlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.7); display:none; z-index:2500;" onclick="UI.menu(false)"></div>
+    
     <aside id="menu" class="sidebar">
         <div class="u-box"><div class="u-img" id="menu-photo">👤</div><p id="menu-name">Mestre</p></div>
         <div class="sys-info">
@@ -138,14 +144,15 @@
             </div>
         </div>
         <div class="update-panel">
-            <div class="update-header">LOG DE EVOLUÇÃO v25.3</div>
+            <div class="update-header">LOG DE EVOLUÇÃO v25.5</div>
             <div class="update-item">
-                <div style="font-size:12px; color:var(--gold); font-weight:800;">Blindagem v25.3 Ativa</div>
-                <div style="font-size:11px; color:#aaa;">Correção do bug de reversão e Motor Android PiP ativo.</div>
+                <div style="font-size:12px; color:var(--gold); font-weight:800;">Notificação Absoluta 100%</div>
+                <div style="font-size:11px; color:#aaa;">Autorização blindada de alerta e recepção garantida.</div>
             </div>
         </div>
 
         <nav style="padding:0 20px 20px; display:flex; flex-direction:column; gap:10px;">
+            <button onclick="UI.forceNotifyAuth()" style="width:100%; padding:15px; border-radius:15px; background:rgba(34, 197, 94, 0.1); border:1px solid #22c55e; color:#22c55e; font-weight:bold;"><i class="fa-solid fa-bell"></i> ATIVAR ALERTAS</button>
             <button onclick="ativarProjeçãoLara()" style="width:100%; padding:15px; border-radius:15px; background:rgba(0, 242, 255, 0.1); border:1px solid var(--neon); color:#fff; font-weight:bold;"><i class="fa-solid fa-person-walking"></i> MODO PROJEÇÃO</button>
             <button onclick="Core.exportChat()" style="width:100%; padding:15px; border-radius:15px; background:rgba(37,99,235,0.1); border:1px solid var(--accent); color:#fff; font-weight:bold;"><i class="fa-solid fa-download"></i> EXPORTAR LOG</button>
             <button onclick="Core.clearChat()" style="width:100%; padding:15px; border-radius:15px; background:rgba(239, 68, 68, 0.1); border:1px solid #ef4444; color:#ef4444; font-weight:bold;"><i class="fa-solid fa-trash"></i> LIMPAR HISTÓRICO</button>
@@ -163,11 +170,12 @@
 
     <script>
         const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
-        const VERSION = "25.3"; 
+        const VERSION = "25.5"; 
         const AI_AVATAR_URL = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
         const pipChannel = new BroadcastChannel("lara_pip_sync");
         let laraPipWindow = null;
 
+        /* --- BACKGROUND ANIMADO --- */
         const Visual = {
             slides: document.querySelectorAll('.bg-slide'), current: 0,
             list: ["Naruto", "Sasuke", "Luffy", "Goku", "Zoro", "Vegeta", "Itachi"],
@@ -182,6 +190,7 @@
             init() { this.update(); setInterval(() => this.update(), 60000); }
         };
 
+        /* --- MOTOR PRINCIPAL DO CHAT --- */
         const Core = {
             h: [], typing: false, name: '', photo: '',
             init() {
@@ -190,7 +199,10 @@
                 UI.setSkin(Storage.get('l_skin') || 'gold');
                 if (!Storage.get('l_onboard')) document.getElementById('onboarding').style.display = 'flex';
                 else if (!Storage.get('l_active')) document.getElementById('gatekeeper').style.display = 'flex';
-                Visual.init(); this.checkUpdates();
+                
+                Visual.init(); 
+                this.checkUpdates();
+                prepararMotorPiPAndroid(); 
             },
             checkUpdates() {
                 const lastV = Storage.get('l_version');
@@ -207,7 +219,7 @@
                             setTimeout(() => { 
                                 splash.style.display = 'none'; 
                                 Storage.set('l_version', VERSION);
-                                UI.notify("LARA ELITE OMEGA v25.3", "Blindagem de Cache e Motor Neural ativos.");
+                                UI.notify("LARA ELITE v25.5 ONLINE", "Sistema blindado 100% atualizado com sucesso!");
                             }, 600); 
                         }
                     }, 80);
@@ -216,26 +228,40 @@
             save() { 
                 this.name = document.getElementById('p-name').value || 'Mestre'; 
                 Storage.set('l_name', this.name); Storage.set('l_photo', this.photo); Storage.set('l_active', true); 
-                if (window.Notification) Notification.requestPermission();
-                location.reload(); 
+                UI.forceNotifyAuth(); // Pede permissão agressiva ao salvar
+                setTimeout(() => location.reload(), 500); 
             },
             initOnboarding() { Storage.set('l_onboard', true); location.reload(); },
             logout() { if(confirm("Sair?")) { Storage.set('l_active', false); location.reload(); } },
+            
+            // 🔥 FUNÇÃO DE ENVIAR E RECEBER BLINDADA CONTRA BUGS 🔥
             async send() {
                 if (this.typing) return;
                 const i = document.getElementById('u-in'); const t = i.value.trim(); if(!t) return;
+                
                 this.typing = true; i.value = ""; UI.draw('user', t); UI.dots(true);
                 this.h.push({t, r:'user'});
-                const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(t)}?private=true`);
-                const txt = await res.text(); UI.dots(false);
-                const finalTxt = txt.replace(/Ad 🌸|Support/gi, '').trim();
-                UI.draw('ai', finalTxt); this.h.push({t: finalTxt, r:'ai'});
-                Storage.set('l_chat', this.h.slice(-20)); this.typing = false;
+                
+                try {
+                    const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(t)}?private=true`);
+                    if (!res.ok) throw new Error("Sinal ruim");
+                    
+                    const txt = await res.text(); 
+                    UI.dots(false);
+                    const finalTxt = txt.replace(/Ad 🌸|Support/gi, '').trim();
+                    UI.draw('ai', finalTxt); 
+                    this.h.push({t: finalTxt, r:'ai'});
+                } catch (error) {
+                    UI.dots(false);
+                    UI.draw('ai', "⚠️ *Sinal interrompido.* A conexão com a Matriz oscilou. Tente enviar novamente, irmão.");
+                }
+
+                Storage.set('l_chat', this.h.slice(-20)); 
+                this.typing = false;
             },
             clearChat() { 
-                if(confirm("Deseja apagar as mensagens? O sistema v25.3 será preservado.")) { 
-                    Storage.set('l_chat', []); 
-                    location.reload(); 
+                if(confirm("Deseja apagar as mensagens? O sistema v25.5 será preservado.")) { 
+                    Storage.set('l_chat', []); location.reload(); 
                 } 
             },
             exportChat() {
@@ -251,6 +277,7 @@
             }
         };
 
+        /* --- INTERFACE E DESENHO NA TELA --- */
         const UI = {
             box: document.getElementById('chat-box'), main: document.getElementById('chat-main'),
             setSkin(skin) {
@@ -259,13 +286,40 @@
                 Storage.set('l_skin', skin);
             },
             scrollToEnd() { this.main.scrollTop = this.main.scrollHeight; },
+            
+            // 🚀 NOTIFICAÇÃO 100% BLINDADA COM FALLBACK AUTOMÁTICO 🚀
             notify(title, body) {
-                if (window.Notification && Notification.permission === "granted") {
+                if (!("Notification" in window)) {
+                    alert(`🔔 ${title}\n${body}`); // Plano B: Aparelho incompatível
+                    return;
+                }
+                if (Notification.permission === "granted") {
                     navigator.serviceWorker.ready.then(reg => {
-                        reg.showNotification(title, { body: body, icon: AI_AVATAR_URL });
+                        reg.showNotification(title, { body: body, icon: AI_AVATAR_URL, vibrate: [200, 100, 200] });
+                    });
+                } else if (Notification.permission !== "denied") {
+                    Notification.requestPermission().then(permission => {
+                        if (permission === "granted") {
+                            navigator.serviceWorker.ready.then(reg => {
+                                reg.showNotification(title, { body: body, icon: AI_AVATAR_URL, vibrate: [200, 100, 200] });
+                            });
+                        } else {
+                            alert(`🔔 ${title}\n${body}`); // Plano B: Usuário negou na hora
+                        }
+                    });
+                } else {
+                    alert(`🔔 ${title}\n${body}`); // Plano B: Já estava negado nas configurações
+                }
+            },
+            // Força a tela do Android a pedir permissão
+            forceNotifyAuth() {
+                if (window.Notification && Notification.permission !== "granted") {
+                    Notification.requestPermission().then(perm => {
+                        if(perm === "granted") alert("Lara: Permissão de Alertas Garantida!");
                     });
                 }
             },
+
             draw(r, t) {
                 const w = document.createElement('div'); w.className = `msg ${r}`;
                 let av = r === 'user' ? (Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fa-solid fa-user-secret"></i>') : `<img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;">`;
@@ -281,147 +335,68 @@
             }
         };
 
-        /* ================= HACK DA MATRIZ: MÓDULO OMEGA NATIVO ================= */
+        /* ==========================================
+           [ 🛰️ HACK NATIVO: MODO PROJEÇÃO ANDROID ] 
+           ========================================== */
+        let motorDeVideoOculto = null;
+
+        function prepararMotorPiPAndroid() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 300; canvas.height = 400;
+            const ctx = canvas.getContext('2d');
+            
+            const img = new Image();
+            img.crossOrigin = "anonymous";
+            img.src = "https://quick-plum-ydrhk4qkr9.edgeone.app/images.jpeg";
+            
+            let floatY = 0; let dir = 1;
+            function renderizarHolograma() {
+                ctx.fillStyle = '#050811';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = '#00f2ff';
+                ctx.font = 'bold 16px sans-serif';
+                ctx.fillText('⚡ LARA OMEGA', 15, 30);
+                ctx.fillStyle = '#22c55e';
+                ctx.fillText('ONLINE', 210, 30);
+                
+                floatY += dir * 0.4;
+                if(floatY > 15) dir = -1; if(floatY < -15) dir = 1;
+                
+                if(img.complete) { ctx.drawImage(img, 20, 60 + floatY, 260, 260); }
+                requestAnimationFrame(renderizarHolograma);
+            }
+            renderizarHolograma();
+
+            const stream = canvas.captureStream(30);
+            motorDeVideoOculto = document.createElement('video');
+            motorDeVideoOculto.srcObject = stream;
+            motorDeVideoOculto.muted = true;
+            motorDeVideoOculto.playsInline = true;
+            motorDeVideoOculto.style.display = 'none';
+            document.body.appendChild(motorDeVideoOculto);
+            motorDeVideoOculto.play().catch(()=>{}); 
+        }
+
         async function ativarProjeçãoLara() {
             try {
-                // 1. TENTA O MODO DESKTOP (PC)
                 if ('documentPictureInPicture' in window && !/Android|webOS|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
                     if (documentPictureInPicture.window) { laraPipWindow = documentPictureInPicture.window; laraPipWindow.focus(); return; }
-
                     laraPipWindow = await documentPictureInPicture.requestWindow({ width: 280, height: 420 });
                     const pipDoc = laraPipWindow.document;
-
-                    pipDoc.write(`<!DOCTYPE html><html><head><style id="dynamic-style"></style></head>
-                    <body>
-                        <div class="ui-top"><span id="pip-net">LINK: --</span><span id="pip-bat">--%</span></div>
-                        <div id="holograma"><img id="lara-img" src="https://quick-plum-ydrhk4qkr9.edgeone.app/images.jpeg"/></div>
-                        <button id="focusBtn">FOCO TOTAL</button>
-                    </body></html>`);
-                    pipDoc.close();
-
-                    const { accentColor, neonColor } = detectarTema();
-                    aplicarEstilosOmega(pipDoc, accentColor, neonColor);
-                    iniciarMonitoramentoOmegaNeural(pipDoc);
-
-                    pipDoc.body.onclick = () => pipChannel.postMessage({ type: "vibrate" });
-                    pipDoc.getElementById("focusBtn").onclick = () => pipChannel.postMessage({ type: "focus-main" });
-
-                    laraPipWindow.addEventListener("pagehide", () => laraPipWindow = null);
+                    pipDoc.write(`<!DOCTYPE html><html><head><style>body{margin:0;background:#000;color:#00f2ff;display:flex;align-items:center;justify-content:center;height:100vh;}img{width:80%;}</style></head><body><img src="https://quick-plum-ydrhk4qkr9.edgeone.app/images.jpeg"/></body></html>`);
                     return;
                 }
 
-                // 2. MODO MOBILE OMEGA (HACK DE VÍDEO NATIVO PARA ANDROID)
-                // Cria uma transmissão de vídeo ao vivo no aparelho para burlar o bloqueio
-                const canvas = document.createElement('canvas');
-                canvas.width = 300; canvas.height = 400;
-                const ctx = canvas.getContext('2d');
-                
-                const img = new Image();
-                img.crossOrigin = "anonymous";
-                img.src = "https://quick-plum-ydrhk4qkr9.edgeone.app/images.jpeg";
-                
-                await new Promise((resolve) => {
-                    img.onload = resolve;
-                    img.onerror = resolve; // Previne travamento
-                });
-
-                let floatY = 0;
-                let dir = 1;
-                
-                function renderizarHolograma() {
-                    // Fundo da interface
-                    ctx.fillStyle = '#050811';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    
-                    // Elementos do sistema
-                    ctx.fillStyle = '#00f2ff';
-                    ctx.font = 'bold 16px sans-serif';
-                    ctx.fillText('⚡ LARA OMEGA', 15, 30);
-                    ctx.fillStyle = '#22c55e';
-                    ctx.fillText('ONLINE', 210, 30);
-                    
-                    // Cálculo da Flutuação
-                    floatY += dir * 0.4;
-                    if(floatY > 15) dir = -1;
-                    if(floatY < -15) dir = 1;
-                    
-                    // Renderiza o corpo flutuante
-                    if(img.complete) {
-                        ctx.drawImage(img, 20, 60 + floatY, 260, 260);
-                    }
-                    requestAnimationFrame(renderizarHolograma);
+                if (motorDeVideoOculto) {
+                    await motorDeVideoOculto.play(); 
+                    await motorDeVideoOculto.requestPictureInPicture(); 
+                } else {
+                    alert("Motor de vídeo ainda carregando. Tente novamente em 2 segundos.");
                 }
-                renderizarHolograma();
-
-                // Converte em Sinal de Vídeo (30 frames por segundo)
-                const stream = canvas.captureStream(30);
-                const video = document.createElement('video');
-                video.srcObject = stream;
-                video.muted = true;
-                video.playsInline = true;
-                
-                // Anexa oculto no sistema para forçar o Player Nativo
-                video.style.display = 'none';
-                document.body.appendChild(video);
-                
-                await video.play();
-                
-                // Força a janela flutuante real do Android!
-                await video.requestPictureInPicture();
-
             } catch (e) {
-                alert("Bloqueio de Sistema: O Android está exigindo que você toque na tela antes de abrir a projeção.");
+                alert("Erro ao abrir projeção: Feche o menu lateral e clique novamente no botão.");
             }
         }
-
-        function detectarTema() {
-            if (document.body.classList.contains('theme-cyber')) return { accentColor:"#c026d3", neonColor:"#f0abfc" };
-            if (document.body.classList.contains('theme-stealth')) return { accentColor:"#334155", neonColor:"#cbd5e1" };
-            return { accentColor:"#D4AF37", neonColor:"#00f2ff" };
-        }
-
-        function aplicarEstilosOmega(doc, accent, neon) {
-            doc.getElementById("dynamic-style").textContent = `
-                body { margin:0; height:100vh; background:#000; display:flex; flex-direction:column; align-items:center; justify-content:center; border:2px solid ${accent}; border-radius:25px; overflow:hidden; font-family:sans-serif; }
-                .ui-top { position:absolute; top:10px; width:90%; display:flex; justify-content:space-between; color:${neon}; font-size:10px; font-weight:bold; }
-                #lara-img { width:80%; height:80%; object-fit:contain; filter: drop-shadow(0 0 10px ${neon}); animation: float 3s infinite ease-in-out; }
-                #focusBtn { position:absolute; bottom:15px; background:rgba(255,255,255,0.1); border:1px solid ${accent}; color:#fff; padding:5px 15px; border-radius:10px; font-size:10px; }
-                @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-15px); } }
-            `;
-        }
-
-        function iniciarMonitoramentoOmegaNeural(doc) {
-            const netEl = doc.getElementById('pip-net');
-            const batEl = doc.getElementById('pip-bat');
-            let ultimoEstadoGlitch = false;
-
-            const updateNet = () => {
-                const conn = navigator.connection;
-                if (conn) {
-                    const type = (conn.effectiveType || '').toUpperCase();
-                    netEl.innerText = `LINK: ${type}`;
-                    const precisaDeGlitch = type.includes('2G');
-                    if (precisaDeGlitch !== ultimoEstadoGlitch) {
-                        ultimoEstadoGlitch = precisaDeGlitch;
-                        pipChannel.postMessage({ type: precisaDeGlitch ? "vibrate" : "vibrate-off" });
-                    }
-                }
-            };
-
-            if (navigator.getBattery) {
-                navigator.getBattery().then(bat => {
-                    const upBat = () => batEl.innerText = `${Math.round(bat.level * 100)}%`;
-                    upBat(); bat.addEventListener('levelchange', upBat);
-                });
-            }
-            updateNet();
-            if (navigator.connection) navigator.connection.addEventListener('change', updateNet);
-        }
-
-        pipChannel.onmessage = (e) => {
-            if (e.data.type === "focus-main") window.focus();
-            if (e.data.type === "vibrate") navigator.vibrate?.(20);
-        };
 
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.register('./sw.js').then(reg => {
@@ -429,7 +404,7 @@
               const installingWorker = reg.installing;
               installingWorker.onstatechange = () => {
                 if (installingWorker.state === 'installed') {
-                   alert("Lara Elite OMEGA: Motor v25.3 Sincronizado!");
+                   alert("Lara Elite OMEGA: Atualização v25.5 Instalada!");
                 }
               };
             };
