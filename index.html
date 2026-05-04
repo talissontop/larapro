@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Lara Elite">
     
-    <title>Lara Elite v26.0 OMEGA</title>
+    <title>Lara Elite v27.0 OMEGA</title>
 
     <link rel="apple-touch-icon" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
@@ -80,7 +80,7 @@
         .update-header { background: rgba(37, 99, 235, 0.1); padding: 12px 18px; font-size: 11px; font-weight: 900; color: #60a5fa; }
         .update-item { border-left: 2px solid var(--gold); padding-left: 12px; margin: 15px; }
 
-        /* 🔥 MODAL DE DOAÇÃO (NOVA VERSÃO PULSANTE - TESTE) 🔥 */
+        /* 🔥 MODAL DE DOAÇÃO PULSANTE 🔥 */
         #donate-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.90); z-index: 4000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(20px); }
         .donate-box { background: linear-gradient(145deg, rgba(15, 20, 35, 0.95), rgba(5, 8, 17, 0.95)); border: 2px solid var(--gold); border-radius: 30px; padding: 35px 25px; text-align: center; max-width: 340px; width: 90%; box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); position: relative; animation: slideUp 0.4s ease, pulseGold 2.5s infinite alternate; }
         .pix-key { background: #02040a; padding: 18px; border-radius: 15px; color: var(--neon); font-size: 21px; font-weight: 900; letter-spacing: 3px; margin: 25px 0; border: 1px solid var(--neon); box-shadow: inset 0 0 15px rgba(0, 242, 255, 0.1); word-break: break-all; text-shadow: 0 0 8px var(--neon); }
@@ -101,7 +101,7 @@
     
     <div id="update-splash">
         <img src="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png" style="width:110px; border-radius:25px; margin-bottom:25px; object-fit:cover;">
-        <h2 style="color:#fff; font-size:17px; font-weight:900;">INICIALIZANDO OMEGA v26.0</h2>
+        <h2 style="color:#fff; font-size:17px; font-weight:900;">INICIALIZANDO OMEGA v27.0</h2>
         <div class="progress-container"><div id="u-progress"></div></div>
         <div id="u-perc" style="color:var(--neon); font-size:15px; font-weight:900; margin-top:15px;">0%</div>
     </div>
@@ -120,7 +120,7 @@
     <section id="onboarding">
         <div style="background:#0a0f1e; padding:40px; border-radius:40px; border:1px solid var(--gold); text-align:center; max-width:360px;">
             <i class="fa-solid fa-rocket" style="color:var(--gold); font-size:40px; margin-bottom:20px;"></i>
-            <h2 style="color:var(--gold); margin-bottom:10px;">LARA ELITE v26.0</h2>
+            <h2 style="color:var(--gold); margin-bottom:10px;">LARA ELITE v27.0</h2>
             <button onclick="Core.initOnboarding()" style="width:100%; padding:15px; background:var(--accent); border:none; border-radius:15px; color:#fff; font-weight:900;">INICIAR SISTEMA</button>
         </div>
     </section>
@@ -159,10 +159,10 @@
             </div>
         </div>
         <div class="update-panel">
-            <div class="update-header">LOG DE EVOLUÇÃO v26.0</div>
+            <div class="update-header">LOG DE EVOLUÇÃO v27.0</div>
             <div class="update-item">
-                <div style="font-size:12px; color:var(--gold); font-weight:800;">Radar Agressivo + Módulo PIX</div>
-                <div style="font-size:11px; color:#aaa;">Força o reload automático em tempo real no app.</div>
+                <div style="font-size:12px; color:var(--gold); font-weight:800;">Purga de Cache Atômica</div>
+                <div style="font-size:11px; color:#aaa;">O sistema elimina resíduos antigos automaticamente.</div>
             </div>
         </div>
 
@@ -187,10 +187,20 @@
 
     <script>
         const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
-        const VERSION = "26.0"; 
+        const VERSION = "27.0"; 
         const AI_AVATAR_URL = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
-        const pipChannel = new BroadcastChannel("lara_pip_sync");
-        let laraPipWindow = null;
+
+        // ================= PROTOCOLO DE PURGA ATÔMICA =================
+        async function hardReloadPWA() {
+            console.log("⚡ Lara Elite: Iniciando Purga de Cache...");
+            try {
+                const regs = await navigator.serviceWorker.getRegistrations();
+                for (const reg of regs) { await reg.unregister(); }
+                const keys = await caches.keys();
+                for (const key of keys) { await caches.delete(key); }
+                window.location.replace(window.location.href.split('?')[0] + '?update=' + Date.now());
+            } catch (e) { window.location.reload(true); }
+        }
 
         const Visual = {
             slides: document.querySelectorAll('.bg-slide'), current: 0,
@@ -214,45 +224,22 @@
                 UI.setSkin(Storage.get('l_skin') || 'gold');
                 if (!Storage.get('l_onboard')) document.getElementById('onboarding').style.display = 'flex';
                 else if (!Storage.get('l_active')) document.getElementById('gatekeeper').style.display = 'flex';
-                
                 Visual.init(); 
                 this.checkUpdates();
                 prepararMotorPiPAndroid(); 
             },
-            
             checkUpdates() {
                 const lastV = Storage.get('l_version');
                 if (lastV !== VERSION) {
                     const splash = document.getElementById('update-splash');
                     const bar = document.getElementById('u-progress');
-                    if (splash && bar) {
-                        splash.style.display = 'flex';
-                        let p = 0;
-                        const interval = setInterval(() => {
-                            p += 5; if (p >= 100) p = 100;
-                            bar.style.width = p + '%'; document.getElementById('u-perc').innerText = p + '%';
-                            if (p === 100) { 
-                                clearInterval(interval); 
-                                setTimeout(() => { 
-                                    splash.style.display = 'none'; 
-                                    Storage.set('l_version', VERSION);
-                                    UI.notify("LARA ELITE v" + VERSION + " ONLINE", "Sincronização completa mestre!");
-                                    
-                                    if (Storage.get('l_active')) {
-                                        setTimeout(() => {
-                                            const aviso = "⚡ **SISTEMA ATUALIZADO:** Mestre, a Matriz subiu para a **v" + VERSION + "** com sucesso. Notificações e Radar Agressivo em 100% de performance.";
-                                            UI.draw('ai', aviso);
-                                            Core.h.push({t: aviso, r:'ai'});
-                                            Storage.set('l_chat', Core.h);
-                                        }, 1500);
-                                    }
-                                }, 600); 
-                            }
-                        }, 80);
-                    }
+                    if (splash) splash.style.display = 'flex';
+                    setTimeout(async () => {
+                        Storage.set('l_version', VERSION);
+                        await hardReloadPWA();
+                    }, 800);
                 }
             },
-            
             save() { 
                 this.name = document.getElementById('p-name').value || 'Mestre'; 
                 Storage.set('l_name', this.name); Storage.set('l_photo', this.photo); Storage.set('l_active', true); 
@@ -261,18 +248,13 @@
             },
             initOnboarding() { Storage.set('l_onboard', true); location.reload(); },
             logout() { if(confirm("Sair?")) { Storage.set('l_active', false); location.reload(); } },
-            
             async send() {
                 if (this.typing) return;
                 const i = document.getElementById('u-in'); const t = i.value.trim(); if(!t) return;
-                
                 this.typing = true; i.value = ""; UI.draw('user', t); UI.dots(true);
                 this.h.push({t, r:'user'});
-                
                 try {
                     const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(t)}?private=true`);
-                    if (!res.ok) throw new Error("Sinal ruim");
-                    
                     const txt = await res.text(); 
                     UI.dots(false);
                     const finalTxt = txt.replace(/Ad 🌸|Support/gi, '').trim();
@@ -280,22 +262,17 @@
                     this.h.push({t: finalTxt, r:'ai'});
                 } catch (error) {
                     UI.dots(false);
-                    UI.draw('ai', "⚠️ *Sinal interrompido.* A conexão com a Matriz oscilou. Tente enviar novamente, irmão.");
+                    UI.draw('ai', "⚠️ Sinal interrompido, irmão. Tente novamente.");
                 }
-
                 Storage.set('l_chat', this.h.slice(-20)); 
                 this.typing = false;
             },
-            clearChat() { 
-                if(confirm("Deseja apagar as mensagens? O sistema v" + VERSION + " será preservado.")) { 
-                    Storage.set('l_chat', []); location.reload(); 
-                } 
-            },
+            clearChat() { if(confirm("Apagar histórico?")) { Storage.set('l_chat', []); location.reload(); } },
             exportChat() {
                 let text = this.h.map(m => `[${m.r}]: ${m.t}`).join('\n\n');
                 const blob = new Blob([text], { type: 'text/plain' });
                 const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-                a.download = `Log_Lara_v25.txt`; a.click();
+                a.download = `Log_Lara_v27.txt`; a.click();
             },
             up(e) {
                 const f = e.target.files[0]; const r = new FileReader();
@@ -312,40 +289,20 @@
                 Storage.set('l_skin', skin);
             },
             scrollToEnd() { this.main.scrollTop = this.main.scrollHeight; },
-
             copyPix() {
                 const pixText = "61318165300";
                 if (navigator.clipboard) {
-                    navigator.clipboard.writeText(pixText).then(() => {
-                        alert("Lara: Chave PIX copiada com sucesso! Obrigado pelo apoio, mestre!");
-                    });
-                } else {
-                    alert("Sua chave PIX é: " + pixText);
-                }
+                    navigator.clipboard.writeText(pixText).then(() => { alert("Lara: Chave PIX copiada!"); });
+                } else { alert("Chave PIX: " + pixText); }
             },
-
             notify(title, body) {
-                if (!("Notification" in window)) {
-                    alert(`🔔 ${title}\n${body}`); return;
-                }
                 if (Notification.permission === "granted") {
-                    navigator.serviceWorker.ready.then(reg => {
-                        reg.showNotification(title, { 
-                            body: body, 
-                            icon: AI_AVATAR_URL, 
-                            vibrate: [200, 100, 200, 100, 200],
-                            requireInteraction: true 
-                        }).catch(() => console.log("Notificação Nativa suprimida."));
-                    });
-                } else if (Notification.permission !== "denied") {
-                    Notification.requestPermission();
-                }
+                    new Notification(title, { body: body, icon: AI_AVATAR_URL });
+                } else { alert(`🔔 ${title}\n${body}`); }
             },
             forceNotifyAuth() {
                 if (window.Notification && Notification.permission !== "granted") {
-                    Notification.requestPermission().then(perm => {
-                        if(perm === "granted") alert("Lara: Permissão de Alertas Garantida!");
-                    });
+                    Notification.requestPermission();
                 }
             },
             draw(r, t) {
@@ -364,7 +321,6 @@
         };
 
         let motorDeVideoOculto = null;
-
         function prepararMotorPiPAndroid() {
             const canvas = document.createElement('canvas');
             canvas.width = 300; canvas.height = 400;
@@ -389,7 +345,6 @@
                 floatY += dir * 0.4;
                 if(floatY > 15) dir = -1; if(floatY < -15) dir = 1;
                 if(img.complete && img.naturalWidth > 0) { ctx.drawImage(img, 20, 60 + floatY, 260, 260); }
-                else { ctx.fillStyle = '#00f2ff'; ctx.font = '14px monospace'; ctx.fillText('[ Carregando Matriz... ]', 55, 190); }
                 requestAnimationFrame(renderizarHolograma);
             }
             renderizarHolograma();
@@ -409,27 +364,9 @@
                     await motorDeVideoOculto.play(); 
                     await motorDeVideoOculto.requestPictureInPicture(); 
                 }
-            } catch (e) {
-                alert("Abra o menu lateral primeiro.");
-            }
+            } catch (e) { alert("Abra o menu primeiro."); }
         }
 
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('./sw.js').then(reg => {
-              reg.update();
-              document.addEventListener('visibilitychange', () => {
-                  if (document.visibilityState === 'visible') reg.update();
-              });
-              setInterval(() => reg.update(), 60000);
-          });
-          let isRefreshing = false;
-          navigator.serviceWorker.addEventListener('controllerchange', () => {
-              if (!isRefreshing) {
-                  isRefreshing = true;
-                  window.location.reload(true); 
-              }
-          });
-        }
         window.onload = () => Core.init();
     </script>
 </body>
