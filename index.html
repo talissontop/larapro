@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Lara Elite">
     
-    <title>Lara Elite v21.10 - Mobile PWA</title>
+    <title>Lara Elite v21.11 - Mobile PWA</title>
 
     <link rel="apple-touch-icon" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
@@ -33,15 +33,19 @@
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Fira+Code:wght@400;500&display=swap');
+        
+        /* TEMAS DINÂMICOS */
         :root { --accent: #2563eb; --gold: #D4AF37; --bg: #050811; --card-bg: rgba(15, 20, 35, 0.85); --neon: #00f2ff; }
         
+        body.theme-cyber { --accent: #c026d3; --gold: #22d3ee; --bg: #020617; --card-bg: rgba(30, 0, 60, 0.7); --neon: #f0abfc; }
+        body.theme-stealth { --accent: #334155; --gold: #94a3b8; --bg: #0f172a; --card-bg: rgba(15, 23, 42, 0.95); --neon: #cbd5e1; }
+
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
         code, pre { font-family: 'Fira Code', monospace !important; font-size: 13px; }
 
-        html, body { background: #000; color: #fff; height: 100%; width: 100%; overflow: hidden; position: fixed; inset: 0; }
+        html, body { background: #000; color: #fff; height: 100%; width: 100%; overflow: hidden; position: fixed; inset: 0; transition: background 0.5s ease; }
         #bg-container { position: fixed; inset: 0; z-index: -2; background: #000; }
         
-        /* EFEITO 1: Fundo Respirando (Parallax Automático) */
         @keyframes bgPan { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
         .bg-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s ease-in-out; animation: bgPan 30s infinite alternate ease-in-out; }
         .bg-slide.active { opacity: 1; }
@@ -52,14 +56,14 @@
         
         .status-badge { font-size: 9px; background: rgba(34, 197, 94, 0.1); color: #22c55e; padding: 4px 8px; border-radius: 20px; border: 1px solid rgba(34, 197, 94, 0.2); display: flex; align-items: center; gap: 4px; font-weight: 800; text-transform: uppercase; }
         .status-dot { width: 5px; height: 5px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 5px #22c55e; }
-        h1 { font-size: 18px; font-weight: 900; background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
+        h1 { font-size: 18px; font-weight: 900; background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; transition: 0.3s; }
 
         main.chat { position: fixed; top: 85px; bottom: 90px; left: 0; width: 100%; overflow-y: auto; padding: 25px 15px; display: flex; flex-direction: column; align-items: center; scroll-behavior: smooth; }
         .chat-wrap { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; padding-bottom: 30px; }
         
         .msg { display: flex; gap: 12px; width: 100%; align-items: flex-end; animation: slideUp 0.3s ease; }
         .msg.user { justify-content: flex-end; }
-        .avatar { width: 36px; height: 38px; border-radius: 50%; background: #000; border: 2px solid var(--gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 5px; box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); }
+        .avatar { width: 36px; height: 38px; border-radius: 50%; background: #000; border: 2px solid var(--gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 5px; box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); transition: 0.3s; }
         
         @keyframes floatAvatar {
             0% { transform: translateY(0px); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
@@ -69,9 +73,8 @@
         .ai .avatar { animation: floatAvatar 3s infinite ease-in-out; border-color: rgba(0, 242, 255, 0.4); }
 
         .bubble-container { display: flex; flex-direction: column; max-width: calc(100vw - 80px); }
-        .bubble { padding: 14px 18px; font-size: 15px; line-height: 1.6; border-radius: 20px; backdrop-filter: blur(10px); }
+        .bubble { padding: 14px 18px; font-size: 15px; line-height: 1.6; border-radius: 20px; backdrop-filter: blur(10px); transition: 0.3s; }
         
-        /* EFEITO 2: Bolha do Usuário com Energia Fluida */
         @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
         .user .bubble { 
             background: linear-gradient(135deg, var(--accent), #1d4ed8, #0ea5e9, var(--accent)); 
@@ -82,7 +85,6 @@
             box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); 
         }
 
-        /* EFEITO 3: Bolha da IA com Scanner Holográfico */
         @keyframes holoScan { 0% { transform: translateX(-150%) rotate(45deg); } 100% { transform: translateX(150%) rotate(45deg); } }
         .ai .bubble { 
             background: var(--card-bg); color: #f3f4f6; border: 1px solid rgba(255,255,255,0.08); border-bottom-left-radius: 4px; 
@@ -109,11 +111,19 @@
         .sidebar.open { left: 0; box-shadow: 20px 0 50px rgba(0,0,0,0.9); }
         
         .u-box { padding: 60px 25px 20px; text-align: center; background: linear-gradient(to bottom, rgba(212, 175, 55, 0.05), transparent); }
-        .u-img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
+        .u-img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); transition: 0.3s; }
 
         .sys-info { margin: 10px 20px 15px; padding: 18px; border-radius: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); }
         .sys-info p { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
         .sys-info span { font-size: 13px; color: #fff; font-weight: 700; }
+
+        /* SEÇÃO DE SKINS NO MENU */
+        .skin-panel { margin: 15px 20px; padding: 15px; border-radius: 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
+        .skin-title { font-size: 10px; color: var(--gold); text-transform: uppercase; font-weight: 900; letter-spacing: 1px; margin-bottom: 12px; display: block; }
+        .skin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .skin-btn { aspect-ratio: 1; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; font-size: 8px; font-weight: 800; color: #aaa; transition: 0.2s; }
+        .skin-btn i { font-size: 14px; }
+        .skin-btn.active { border-color: var(--gold); color: #fff; background: rgba(212,175,55,0.1); }
 
         .update-panel { margin: 0 20px 20px; border-radius: 20px; background: rgba(0,0,0,0.4); border: 1px solid rgba(37, 99, 235, 0.2); overflow: hidden; }
         .update-header { background: rgba(37, 99, 235, 0.1); padding: 12px 18px; font-size: 11px; font-weight: 900; color: #60a5fa; display: flex; align-items: center; justify-content: space-between; }
@@ -175,7 +185,7 @@
     <section id="onboarding">
         <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 360px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);">
             <i class="fa-solid fa-rocket" style="color:var(--gold); font-size: 40px; margin-bottom: 20px;"></i>
-            <h2 style="color:var(--gold); margin-bottom: 10px;">LARA ELITE v21.10</h2>
+            <h2 style="color:var(--gold); margin-bottom: 10px;">LARA ELITE v21.11</h2>
             <p style="font-size: 13px; color: #888; margin-bottom: 20px;">Bem-vindo ao sistema! Para a experiência completa e off-line, instale o aplicativo oficial no seu aparelho.</p>
             
             <button onclick="Core.triggerInstallOnboarding()" style="width:100%; padding:15px; background:linear-gradient(135deg, var(--accent), #1d4ed8); border:none; border-radius:15px; color:#fff; font-weight:900; cursor:pointer; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);"><i class="fa-solid fa-download"></i> INSTALAR APP AGORA</button>
@@ -221,6 +231,16 @@
             <span>Cloud Network Confortável</span>
         </div>
 
+        <!-- NOVO PAINEL DE SKINS -->
+        <div class="skin-panel">
+            <span class="skin-title">Seletor de Aparência Elite</span>
+            <div class="skin-grid">
+                <button onclick="UI.setSkin('gold')" id="skin-gold" class="skin-btn active"><i class="fa-solid fa-crown"></i>Elite Gold</button>
+                <button onclick="UI.setSkin('cyber')" id="skin-cyber" class="skin-btn"><i class="fa-solid fa-bolt"></i>Cyber Neon</button>
+                <button onclick="UI.setSkin('stealth')" id="skin-stealth" class="skin-btn"><i class="fa-solid fa-user-ninja"></i>Modo Furtivo</button>
+            </div>
+        </div>
+
         <div class="update-panel">
             <div class="update-header">
                 <span><i class="fa-solid fa-code-branch"></i> Updates Automáticos</span>
@@ -228,12 +248,12 @@
             </div>
             <div class="update-body" id="changelog-area">
                 <div class="update-item">
-                    <div class="update-version">v21.10 - Chat Dinâmico Imersivo</div>
-                    <div class="update-text">Fundo com efeito parallax contínuo. Bolhas de IA com scanner holográfico e bolhas do mestre com fluidez de energia.</div>
+                    <div class="update-version">v21.11 - Seletor de Skins</div>
+                    <div class="update-text">Novos temas visuais aplicados: Cyber Neon e Modo Furtivo. Troca de cores em tempo real via menu.</div>
                 </div>
                 <div class="update-item">
-                    <div class="update-version">v21.9 - Auto-Verificador PWA</div>
-                    <div class="update-text">App instalado agora fura o cache nativo do Android e se atualiza sozinho.</div>
+                    <div class="update-version">v21.10 - Chat Imersivo</div>
+                    <div class="update-text">Fundo parallax e animações holográficas em todas as bolhas de chat.</div>
                 </div>
             </div>
         </div>
@@ -266,15 +286,11 @@
 
     <script>
         const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
-        
-        // VERSÃO ATUALIZADA
-        const VERSION = "21.10"; 
-
+        const VERSION = "21.11"; 
         const AI_AVATAR_URL = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
         
         let deferredPrompt; 
         let installPromptCount = Storage.get('l_install_count') || 0;
-        let installTimer;
 
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
@@ -303,8 +319,11 @@
                 this.h = Storage.get('l_chat') || [];
                 
                 if(this.name) document.getElementById('p-name').value = this.name;
-
                 UI.update(); this.h.forEach(m => UI.draw(m.r, m.t));
+                
+                // Carrega Skin Salva
+                const savedSkin = Storage.get('l_skin') || 'gold';
+                UI.setSkin(savedSkin);
                 
                 if (window.matchMedia('(display-mode: standalone)').matches) {
                     this.forceNetworkUpdate();
@@ -325,14 +344,10 @@
                 try {
                     const res = await fetch(window.location.href.split('?')[0] + '?bypassCache=' + new Date().getTime(), { cache: 'no-store' });
                     const txt = await res.text();
-                    
                     const vMatch = txt.match(/const VERSION\s*=\s*"([^"]+)"/);
-                    if (vMatch && vMatch[1]) {
-                        const githubVersion = vMatch[1];
-                        if (githubVersion !== VERSION) {
-                            Storage.set('l_version', VERSION);
-                            window.location.reload(true); 
-                        }
+                    if (vMatch && vMatch[1] && vMatch[1] !== VERSION) {
+                        Storage.set('l_version', VERSION);
+                        window.location.reload(true); 
                     }
                 } catch(e) {}
             },
@@ -340,12 +355,8 @@
             triggerInstallOnboarding() {
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then((choiceResult) => {
-                        deferredPrompt = null;
-                    });
-                } else {
-                    UI.toast("Use os 3 pontinhos do navegador como indicado abaixo!");
-                }
+                    deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
+                } else UI.toast("Use os 3 pontinhos do navegador!");
             },
 
             initOnboarding() {
@@ -355,7 +366,7 @@
             },
 
             logout() {
-                if(confirm("Deseja sair da sessão e voltar para a tela de perfil? (O histórico não será apagado)")) {
+                if(confirm("Deseja sair da sessão?")) {
                     Storage.set('l_active', false);
                     location.reload();
                 }
@@ -363,12 +374,11 @@
 
             startInstallLoop() {
                 if (!window.matchMedia('(display-mode: standalone)').matches && installPromptCount < 3) {
-                    installTimer = setInterval(() => {
+                    setInterval(() => {
                         if (deferredPrompt && installPromptCount < 3) {
                             document.getElementById('smart-install-banner').classList.add('show');
                             installPromptCount++;
                             Storage.set('l_install_count', installPromptCount);
-                            if (installPromptCount >= 3) clearInterval(installTimer); 
                         }
                     }, 120000); 
                 }
@@ -380,54 +390,44 @@
                 this.hideInstallBanner();
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then((choiceResult) => {
-                        if (choiceResult.outcome === 'accepted') clearInterval(installTimer);
-                        deferredPrompt = null;
-                    });
+                    deferredPrompt = null;
                 }
             },
 
             checkUpdates() {
                 const lastV = Storage.get('l_version');
                 if (lastV === VERSION) return;
-
                 if (lastV && lastV !== VERSION && Storage.get('l_active')) {
                     const splash = document.getElementById('update-splash');
                     const bar = document.getElementById('u-progress');
                     const perc = document.getElementById('u-perc');
                     splash.style.display = 'flex';
-                    
                     let p = 0;
                     const interval = setInterval(() => {
                         p += Math.floor(Math.random() * 15) + 5; 
                         if (p >= 100) p = 100;
                         bar.style.width = p + '%';
                         perc.innerText = p + '%';
-                        
                         if (p === 100) {
                             clearInterval(interval);
                             setTimeout(() => {
                                 splash.style.display = 'none'; 
-                                UI.notify("Sistema Atualizado!", `Mestre, as melhorias da v${VERSION} foram aplicadas.`);
-                                UI.menu(true); 
+                                UI.notify("Sistema Atualizado!", `Mestre, v${VERSION} instalada.`);
                                 Storage.set('l_version', VERSION);
                             }, 600);
                         }
                     }, 150);
-                } else {
-                    Storage.set('l_version', VERSION);
-                }
+                } else Storage.set('l_version', VERSION);
             },
 
             save() { this.name = document.getElementById('p-name').value || 'Mestre'; Storage.set('l_name', this.name); Storage.set('l_photo', this.photo); Storage.set('l_active', true); location.reload(); },
             
             async requestAI() {
-                const sys = `LARA ELITE v${VERSION}. Motor: Gemini 3 Flash. Mestre: ${this.name}. Regra: Respostas CURTAS e HUMANAS. Sem explicações robóticas. Você é um App PWA profissional instalado no celular do mestre.`;
+                const sys = `LARA ELITE v${VERSION}. Mestre: ${this.name}. Respostas CURTAS.`;
                 try {
                     const seed = Math.floor(Math.random() * 1000000);
                     const prompt = encodeURIComponent(`[SYSTEM: ${sys}] User: ${this.h.slice(-1)[0].t}`);
                     const res = await fetch(`https://text.pollinations.ai/${prompt}?private=true&seed=${seed}`);
-                    
                     clearTimeout(this.safetyTimer);
                     let w = document.getElementById('dots');
                     if (w) w.removeAttribute('id');
@@ -436,21 +436,16 @@
                         w.innerHTML = `<div class="avatar"><img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;"></div><div class="bubble-container"><div class="bubble"></div><div class="timestamp">${UI.getTime()}</div></div>`;
                         UI.box.appendChild(w);
                     }
-                    
                     const rend = w.querySelector('.bubble');
-                    rend.innerHTML = '';
-
                     if (!res.body) {
                         const txt = await res.text();
                         rend.innerHTML = marked.parse(txt.split(/Ad 🌸|Support/i)[0].trim());
                         this.finalizeMessage(txt, w);
                         return;
                     }
-
                     const reader = res.body.getReader();
                     const decoder = new TextDecoder('utf-8');
                     let fullTxt = '';
-
                     while (true) {
                         const { done, value } = await reader.read();
                         if (done) break;
@@ -459,11 +454,7 @@
                         UI.scrollToEnd();
                     }
                     this.finalizeMessage(fullTxt, w);
-                } catch(e) { 
-                    UI.dots(false); 
-                    UI.draw('ai', "Erro de latência no Node. Tente novamente."); 
-                    this.typing = false; 
-                }
+                } catch(e) { UI.dots(false); this.typing = false; }
             },
 
             finalizeMessage(txt, bubbleElement) {
@@ -476,10 +467,6 @@
             },
 
             send() {
-                if (window.Notification && Notification.permission === "default") {
-                    Notification.requestPermission();
-                }
-
                 if (this.typing) return;
                 const i = document.getElementById('u-in'); const t = i.value.trim(); if(!t) return;
                 this.typing = true; i.value = ""; i.style.height = "auto";
@@ -488,18 +475,15 @@
                 this.safetyTimer = setTimeout(() => { if(this.typing) { this.typing = false; UI.dots(false); } }, 15000);
             },
             
-            copy(text) { navigator.clipboard.writeText(text).then(() => UI.toast("CÓPIA DE ELITE EFETUADA!")); },
-            clearChat() { if(confirm("Deseja apagar o histórico da nuvem local?")) { Storage.set('l_chat', []); location.reload(); } },
-            
+            copy(text) { navigator.clipboard.writeText(text).then(() => UI.toast("COPIADO!")); },
+            clearChat() { if(confirm("Apagar histórico?")) { Storage.set('l_chat', []); location.reload(); } },
             exportChat() {
-                let text = `=== LARA ELITE v${VERSION} LOG ===\n\n`;
-                this.h.forEach(m => { text += `[${m.r === 'user' ? 'MESTRE' : 'LARA'}]: ${m.t}\n\n`; });
+                let text = `=== LARA ELITE LOG ===\n\n`;
+                this.h.forEach(m => { text += `[${m.r.toUpperCase()}]: ${m.t}\n\n`; });
                 const blob = new Blob([text], { type: 'text/plain' });
                 const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-                a.download = `Lara_Log_${new Date().getTime()}.txt`; a.click();
-                UI.toast("LOG EXPORTADO!");
+                a.download = `Log_${new Date().getTime()}.txt`; a.click();
             },
-            
             up(e) {
                 const f = e.target.files[0]; const r = new FileReader();
                 r.onload = (ev) => { this.photo = ev.target.result; document.getElementById('preview').innerHTML = `<img src="${this.photo}" style="width:100%;height:100%;object-fit:cover;">`; };
@@ -510,55 +494,41 @@
         const UI = {
             box: document.getElementById('chat-box'),
             main: document.getElementById('chat-main'),
+            setSkin(skin) {
+                document.body.className = skin === 'gold' ? '' : `theme-${skin}`;
+                document.querySelectorAll('.skin-btn').forEach(b => b.classList.remove('active'));
+                document.getElementById(`skin-${skin}`).classList.add('active');
+                Storage.set('l_skin', skin);
+                this.toast(`TEMA ${skin.toUpperCase()} ATIVADO!`);
+            },
             togglePix(s) { document.getElementById('modal-pix').style.display = s ? 'flex' : 'none'; if(s) this.menu(false); },
             toast(m) { const t = document.getElementById('toast'); t.innerHTML = m; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); },
             getTime() { return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); },
-            
             notify(title, body) {
                 if (window.Notification && Notification.permission === "granted") {
-                    if ('serviceWorker' in navigator) {
-                        navigator.serviceWorker.getRegistration().then(function(reg) {
-                            if (reg) {
-                                reg.showNotification(title, { body: body, icon: AI_AVATAR_URL, badge: AI_AVATAR_URL });
-                            } else {
-                                new Notification(title, { body: body, icon: AI_AVATAR_URL });
-                            }
-                        }).catch(() => new Notification(title, { body: body, icon: AI_AVATAR_URL }));
-                    } else {
-                        new Notification(title, { body: body, icon: AI_AVATAR_URL });
-                    }
+                    navigator.serviceWorker.ready.then(reg => {
+                        reg.showNotification(title, { body: body, icon: AI_AVATAR_URL });
+                    });
                 }
             },
-
             scrollToEnd() { requestAnimationFrame(() => { this.main.scrollTop = this.main.scrollHeight; }); },
-
             draw(r, t) {
                 const w = document.createElement('div'); w.className = `msg ${r}`;
-                let av = '';
-                if(r === 'user') {
-                    av = Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fa-solid fa-user-secret"></i>';
-                } else {
-                    av = `<img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;">`;
-                }
-
-                w.innerHTML = `${r === 'ai' ? `<div class="avatar">${av}</div>` : ''}<div class="bubble-container"><div class="bubble">${marked.parse(t)}</div><div class="timestamp">${this.getTime()}</div></div>${r === 'user' ? `<div class="avatar" style="border-color:var(--accent)">${av}</div>` : ''}`;
+                let av = r === 'user' ? (Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fa-solid fa-user-secret"></i>') : `<img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;">`;
+                w.innerHTML = `${r === 'ai' ? `<div class="avatar">${av}</div>` : ''}<div class="bubble-container"><div class="bubble">${marked.parse(t)}</div><div class="timestamp">${this.getTime()}</div></div>${r === 'user' ? `<div class="avatar">${av}</div>` : ''}`;
                 this.box.appendChild(w); this.applyCodeUI(w); this.scrollToEnd();
             },
-
             applyCodeUI(el) {
                 el.querySelectorAll('pre code').forEach((block) => {
                     if (block.parentElement.querySelector('.code-copy')) return;
-                    const btn = document.createElement('button'); btn.className = 'code-copy';
-                    btn.innerHTML = '<i class="fa-solid fa-copy"></i>';
-                    btn.onclick = () => Core.copy(block.innerText);
-                    block.parentElement.appendChild(btn);
+                    const btn = document.createElement('button'); btn.className = 'code-copy'; btn.innerHTML = '<i class="fa-solid fa-copy"></i>';
+                    btn.onclick = () => Core.copy(block.innerText); block.parentElement.appendChild(btn);
                 });
             },
-
             dots(s) { 
                 if(s) { 
                     const d = document.createElement('div'); d.id='dots'; d.className='msg ai'; 
-                    d.innerHTML=`<div class="avatar"><img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;"></div><div class="bubble-container"><div class="bubble" style="font-weight:bold; letter-spacing:3px;">...</div></div>`; 
+                    d.innerHTML=`<div class="avatar"><img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;"></div><div class="bubble-container"><div class="bubble" style="letter-spacing:3px;">...</div></div>`; 
                     this.box.appendChild(d); 
                 } else { const d = document.getElementById('dots'); if(d) d.remove(); }
                 this.scrollToEnd();
@@ -566,24 +536,16 @@
             size(t) { t.style.height='auto'; t.style.height=t.scrollHeight+'px'; this.scrollToEnd(); },
             menu(s) { document.getElementById('menu').classList.toggle('open', s); document.getElementById('overlay').style.display = s ? 'block' : 'none'; },
             update() {
-                const img_user = Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fa-solid fa-user-secret"></i>';
-                
-                document.getElementById('p-btn-top').innerHTML = img_user; 
-                if(document.getElementById('preview')) document.getElementById('preview').innerHTML = img_user;
-                document.getElementById('menu-photo').innerHTML = img_user; 
-                
+                const img = Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fa-solid fa-user-secret"></i>';
+                document.getElementById('p-btn-top').innerHTML = img; 
+                document.getElementById('menu-photo').innerHTML = img; 
                 document.getElementById('menu-name').textContent = Core.name || 'Mestre';
             }
         };
 
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js').catch((err) => {
-                    console.warn('Lara Info: sw.js não encontrado.');
-                });
-            });
+            navigator.serviceWorker.register('./sw.js').catch(() => {});
         }
-
         window.onload = () => Core.init();
     </script>
 </body>
