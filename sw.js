@@ -1,6 +1,6 @@
 <script>
     const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
-    const VERSION = "28.2"; // Gatilho de Evolução v28.2
+    const VERSION = "28.3"; // Gatilho de Evolução v28.2
     const AI_AVATAR_URL = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
     const pipChannel = new BroadcastChannel("lara_pip_sync");
     let laraPipWindow = null;
