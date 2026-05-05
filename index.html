@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <title>Lara Elite v30.2 OMEGA SEARCH</title>
+    <title>Lara Elite v30.3 OMEGA SEARCH</title>
 
     <link rel="apple-touch-icon" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
@@ -44,7 +44,7 @@
         .chat-wrap { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; }
         .msg { display: flex; gap: 12px; width: 100%; animation: slideUp 0.3s ease; align-items: flex-end; }
         .msg.user { justify-content: flex-end; }
-        .avatar { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; flex-shrink: 0; }
+        .avatar { width: 35px; height: 35px; border-radius: 50%; border: 2px solid var(--gold); overflow: hidden; flex-shrink: 0; background: #111; }
         .bubble { padding: 12px 16px; font-size: 15px; line-height: 1.5; border-radius: 18px; backdrop-filter: blur(10px); max-width: 85%; }
         .user .bubble { background: var(--accent); color: #fff; border-bottom-right-radius: 4px; }
         .ai .bubble { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); border-bottom-left-radius: 4px; }
@@ -60,7 +60,7 @@
         #overlay.active { display: block; }
 
         .u-box { padding: 50px 20px 20px; text-align: center; }
-        .u-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 10px; overflow: hidden; }
+        .u-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 10px; overflow: hidden; background: #111; }
         
         .skin-panel button { width: 100%; padding: 12px; margin-bottom: 5px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 10px; cursor: pointer; font-size: 12px; font-weight: 800; }
         .skin-panel button.active { border-color: var(--neon); color: #fff; background: rgba(0,242,255,0.1); }
@@ -76,20 +76,20 @@
     <div id="bg-container"><div class="bg-slide active"></div><div class="bg-slide"></div></div>
     
     <div id="update-splash">
-        <h2 style="font-size:14px; font-weight:900; color:var(--neon);">SINCRO v30.2 OMEGA</h2>
+        <h2 style="font-size:14px; font-weight:900; color:var(--neon);">SINCRO v30.3 OMEGA</h2>
         <div class="progress-container"><div id="u-progress"></div></div>
     </div>
 
     <header><div class="h-wrap">
         <button onclick="UI.menu(true)" style="background:none; border:none; color:#fff; font-size:22px; cursor: pointer;"><i class="fa-solid fa-bars-staggered"></i></button>
-        <h1>Lara Elite v30.2</h1>
-        <div id="p-btn-top" style="width:34px; height:34px; border-radius:50%; border:2px solid var(--gold); overflow:hidden; cursor: pointer;" onclick="UI.menu(true)">👤</div>
+        <h1>Lara Elite v30.3</h1>
+        <div id="p-btn-top" style="width:34px; height:34px; border-radius:50%; border:2px solid var(--gold); overflow:hidden; cursor: pointer;" onclick="UI.menu(true)"></div>
     </div></header>
 
     <div id="overlay" onclick="UI.menu(false)"></div>
     
     <aside id="menu" class="sidebar">
-        <div class="u-box"><div class="u-img" id="menu-photo">👤</div><p id="menu-name" style="font-weight:900; margin-top:10px;">Mestre</p></div>
+        <div class="u-box"><div class="u-img" id="menu-photo"></div><p id="menu-name" style="font-weight:900; margin-top:10px;">Mestre</p></div>
         <div class="skin-panel" style="padding: 0 20px;">
             <button onclick="UI.setSkin('gold')" id="btn-skin-gold" class="active">Elite Gold</button>
             <button onclick="UI.setSkin('cyber')" id="btn-skin-cyber">Cyber Neon</button>
@@ -111,15 +111,18 @@
     </footer>
 
     <script>
+        // Blindagem OMEGA contra erros de Storage (Aprovado por fóruns gringos)
         const Storage = { 
-            set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} }, 
+            set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) { console.warn("Storage bloqueado."); } }, 
             get(k) { try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; } catch(e) { return null; } } 
         };
 
-        const VERSION = "30.2";
+        const VERSION = "30.3";
         const AI_AVATAR = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
         
-        // ⚡ ATUALIZAÇÃO EXTREMA: Mapping de skins para prompts cyberpunk específicos
+        // Fallback blindado para o avatar do usuário (Nunca dá erro de imagem quebrada)
+        const DEFAULT_USER_AVATAR = "https://ui-avatars.com/api/?name=Mestre&background=D4AF37&color=fff&rounded=true&bold=true";
+        
         const SkinPromptsMapping = {
             'gold': [ 'cyberpunk_city_dark_gold_highly_detailed', 'dark_gold_cyberpunk_neon_lights', 'luxurious_cyberpunk_environment_dark_gold_tones' ],
             'cyber': [ 'cyberpunk_city_neon_colors_night', 'vibrant_cyberpunk_neon_landscape', 'futuristic_city_night_sky_neon' ],
@@ -135,7 +138,35 @@
                 UI.setSkin(Storage.get('l_skin') || 'gold');
                 this.checkUpdates();
                 Visual.init();
+                
+                // ⚡ SOLUÇÃO GRINGA: Dispara notificação no Load e cria um gatilho fantasma para garantia.
+                this.autoAtivarNotificacoes();
+                document.body.addEventListener('click', () => {
+                    if ('Notification' in window && Notification.permission === 'default') {
+                        this.autoAtivarNotificacoes();
+                    }
+                }, { once: true });
             },
+
+            // ⚡ A LÓGICA DE NOTIFICAÇÃO AUTOMÁTICA BLINDADA
+            async autoAtivarNotificacoes() {
+                try {
+                    if ('Notification' in window && Notification.permission === 'default') {
+                        const p = await Notification.requestPermission();
+                        if (p === 'granted' && 'serviceWorker' in navigator) {
+                            const reg = await navigator.serviceWorker.ready;
+                            reg.showNotification("LARA OMEGA", {
+                                body: "⚡ Alertas do Sistema Ativados Automaticamente!",
+                                icon: AI_AVATAR,
+                                vibrate: [200, 100, 200]
+                            });
+                        }
+                    }
+                } catch (e) {
+                    console.log("Auto-prompt de notificação aguardando clique do usuário.");
+                }
+            },
+
             checkUpdates() {
                 if (Storage.get('l_version') !== VERSION) {
                     document.getElementById('update-splash').style.display = 'flex';
@@ -147,16 +178,14 @@
                 }
             },
             
-            // ⚡ ATUALIZAÇÃO EXTREMA: Motor de envio robusto com redundância
             async send() {
                 const i = document.getElementById('u-in');
                 let t = i.value.trim();
-                // Bloqueia envios vazios ou múltiplos envios simultâneos
                 if (!t || this.typing) return;
 
                 this.typing = true;
                 i.value = "";
-                i.style.height = "auto"; // Reseta altura do textarea
+                i.style.height = "auto"; 
                 
                 UI.draw('user', t);
                 this.h.push({t, r:'user'});
@@ -174,7 +203,6 @@
                     UI.dots(false);
                     UI.draw('ai', "Erro de conexão neural com o núcleo OMEGA, mestre. Verifique o link digital.");
                 } finally {
-                    // Protocolo de redundância: garante que o chat não fique travado
                     this.typing = false;
                 }
             },
@@ -187,46 +215,41 @@
             box: document.getElementById('chat-box'),
             main: document.getElementById('chat-main'),
             
-            // ⚡ ATUALIZAÇÃO EXTREMA: Gatilho de menu forçado
             menu(s) {
                 const m = document.getElementById('menu');
                 const o = document.getElementById('overlay');
-                // Adiciona ou remove classes diretamente
                 m.classList.toggle('open', s);
                 o.classList.toggle('active', s);
-                // Previne scroll do chat com menu aberto no iPhone
                 document.body.style.overflow = s ? 'hidden' : '';
             },
             
-            // ⚡ ATUALIZAÇÃO EXTREMA: Botões de skin com suporte a background
             setSkin(s) { 
                 document.body.className = s === 'gold' ? '' : `theme-${s}`; Storage.set('l_skin', s); 
-                this.menu(false); // Fecha menu após trocar skin
-                // update prompts mapping and trigger update
+                this.menu(false); 
                 Visual.prompts = SkinPromptsMapping[s];
                 Visual.update();
                 this.updateActiveSkinButton(s);
             },
             
-            // ⚡ ATUALIZAÇÃO EXTREMA: Marca botão de skin ativo
             updateActiveSkinButton(s) {
                 document.querySelectorAll('.skin-panel button').forEach(b => b.classList.remove('active'));
-                document.getElementById('btn-skin-'+s).classList.add('active');
+                const btn = document.getElementById('btn-skin-'+s);
+                if(btn) btn.classList.add('active');
             },
             
             size(t) { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; },
             
-            // ⚡ ATUALIZAÇÃO EXTREMA: Ícones distinctos e circulares
+            // ⚡ ÍCONES DE USUÁRIO E AI 100% OPERACIONAIS
             draw(r, t) {
                 const w = document.createElement('div');
                 w.className = `msg ${r}`;
                 let av;
-                if(r === 'ai') { // Lara bubble, distinct Lara icon
-                    av = `<img src="${AI_AVATAR}" style="width:100%;">`;
-                } else { // user bubble, distinct user icon
+                if(r === 'ai') {
+                    av = `<img src="${AI_AVATAR}" style="width:100%; height:100%; object-fit:cover;">`;
+                } else {
                     const photo = Storage.get('l_photo');
-                    const userIconSrc = photo ? photo : 'https://spicy-harlequin-pqaujlkovi.edgeone.app/ spicies_generated_user_avatar.png'; // distinct user placeholder
-                    av = `<img src="${userIconSrc}" style="width:100%;">`;
+                    const userIconSrc = photo ? photo : DEFAULT_USER_AVATAR; 
+                    av = `<img src="${userIconSrc}" style="width:100%; height:100%; object-fit:cover;">`;
                 }
                 w.innerHTML = `${r==='ai' ? `<div class="avatar">${av}</div>` : ''}<div class="bubble">${marked.parse(t)}</div>${r==='user' ? `<div class="avatar">${av}</div>` : ''}`;
                 this.box.appendChild(w);
@@ -235,7 +258,7 @@
             dots(s) {
                 if(s) {
                     const d = document.createElement('div'); d.id = 'dots'; d.className = 'msg ai';
-                    d.innerHTML = `<div class="avatar"><img src="${AI_AVATAR}" style="width:100%;"></div><div class="bubble">...</div>`;
+                    d.innerHTML = `<div class="avatar"><img src="${AI_AVATAR}" style="width:100%; height:100%; object-fit:cover;"></div><div class="bubble">...</div>`;
                     this.box.appendChild(d);
                 } else {
                     const d = document.getElementById('dots'); if(d) d.remove();
@@ -245,20 +268,18 @@
             
             updatePhoto() {
                 const p = Storage.get('l_photo');
-                if(p) {
-                    const img = `<img src="${p}" style="width:100%;height:100%;object-fit:cover;">`;
-                    document.getElementById('p-btn-top').innerHTML = img;
-                    document.getElementById('menu-photo').innerHTML = img;
-                }
+                const userIconSrc = p ? p : DEFAULT_USER_AVATAR;
+                const img = `<img src="${userIconSrc}" style="width:100%;height:100%;object-fit:cover;">`;
+                document.getElementById('p-btn-top').innerHTML = img;
+                document.getElementById('menu-photo').innerHTML = img;
             }
         };
 
         const Visual = {
             slides: document.querySelectorAll('.bg-slide'), current: 0,
             
-            // ⚡ ATUALIZAÇÃO EXTREMA: Visual com prompts do mapping de skin
             async update() {
-                // Seleciona prompt do mapping correspondente a skin ativa
+                if(!this.prompts) return;
                 const theme = this.prompts[Math.floor(Math.random() * this.prompts.length)];
                 const url = `https://image.pollinations.ai/prompt/${theme}?width=1080&height=1920&nologo=true&seed=${Math.random()}`;
                 const img = new Image();
@@ -272,18 +293,15 @@
             },
             
             init() { 
-                // Inicializa prompts correspondente a skin ativa
                 this.prompts = SkinPromptsMapping[Storage.get('l_skin') || 'gold'];
                 this.update(); setInterval(() => this.update(), 60000); 
             }
         };
 
-        // Escuta a tecla Enter para enviar mensagem
         document.getElementById('u-in').addEventListener('keydown', (e) => {
             if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); Core.send(); }
         });
         
-        // Garante que o chat respeite Dynamic Island no iPhone ao digitar
         window.addEventListener('resize', () => { UI.main.scrollTop = UI.main.scrollHeight; });
 
         window.onload = () => Core.init();
