@@ -224,18 +224,55 @@
             }
         };
 
-        // 🖼️ MOTOR VISUAL
-        const Visual = {
-            slides: document.querySelectorAll('.bg-slide'), current: 0,
-            async update() {
-                const url = `https://image.pollinations.ai/prompt/anime_cyberpunk_aesthetic_dark?width=1080&height=1920&nologo=true&seed=${Math.random()}`;
-                const next = this.slides[1 - this.current];
-                const img = new Image();
-                img.onload = () => { next.style.backgroundImage = `url(${url})`; this.slides[this.current].classList.remove('active'); next.classList.add('active'); this.current = 1 - this.current; };
-                img.src = url;
-            },
-            init() { this.update(); setInterval(() => this.update(), 60000); }
+     // 🖼️ MOTOR VISUAL OMEGA v29 — Inteligência de Transição
+const Visual = {
+    slides: document.querySelectorAll('.bg-slide'),
+    current: 0,
+    // Lista de prompts otimizada com base no DNA do projeto
+    prompts: [
+        "manga_panel_weekly_shonen_jump_style_dark_aesthetic_4k",
+        "cyberpunk_city_neon_rain_professional_photography_1080p",
+        "3d_render_cyber_girl_hologram_dark_blue_gold_lighting",
+        "polaroid_photography_blurred_background_neon_lights_high_contrast",
+        "anime_aesthetic_landscape_night_sky_starry_cinematic"
+    ],
+
+    async update() {
+        const theme = this.prompts[Math.floor(Math.random() * this.prompts.length)];
+        const seed = Math.floor(Math.random() * 999999);
+        const url = `https://image.pollinations.ai/prompt/${theme}?width=1080&height=1920&nologo=true&seed=${seed}`;
+
+        const nextIndex = 1 - this.current;
+        const nextSlide = this.slides[nextIndex];
+        const activeSlide = this.slides[this.current];
+
+        // 🧠 Pré-carregamento inteligente para evitar "pulo" visual
+        const img = new Image();
+        img.crossOrigin = "anonymous"; // Necessário para o Modo Projeção PiP
+
+        img.onload = () => {
+            nextSlide.style.backgroundImage = `url(${url})`;
+            activeSlide.classList.remove('active');
+            nextSlide.classList.add('active');
+            this.current = nextIndex;
+            console.log(`%c 🖼️ VISUAL: Background atualizado (${theme})`, "color: #D4AF37");
         };
+
+        // 🛡️ Fail-safe: Se a rede falhar, ele tenta novamente em 10 segundos
+        img.onerror = () => {
+            console.warn("⚠️ VISUAL: Falha ao carregar imagem. Tentando novamente...");
+            setTimeout(() => this.update(), 10000);
+        };
+
+        img.src = url;
+    },
+
+    init() {
+        this.update();
+        // Sincronizado com o ciclo de energia do sistema (60 segundos)
+        setInterval(() => this.update(), 60000);
+    }
+};
 
         // 🎞️ MOTOR PiP (MODO PROJEÇÃO)
         let videoPiP = null;
