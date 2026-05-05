@@ -20,7 +20,7 @@
     <link rel="icon" type="image/png" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" sizes="512x512" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
 
-    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Lara%20Elite%22%2C%22short_name%22%3A%22LaraElite%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23050811%22%2C%22theme_color%22%3A%22%2300f2ff%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fspicy-harlequin-pqaujlkovi.edgeone.app%2Fpngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fspicy-harlequin-pqaujlkovi.edgeone.app%2Fpngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+    <link rel="manifest" href="./manifest.json">
 
     <link rel="preconnect" href="https://text.pollinations.ai">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
@@ -46,14 +46,15 @@
         }
         .bg-slide.active { opacity: 1; transform: scale(1.1); } 
 
-        header { position: fixed; top: 0; left: 0; width: 100%; height: 85px; background: rgba(10, 15, 25, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(212, 175, 55, 0.2); z-index: 100; display: flex; align-items: center; justify-content: center; padding-top: 15px; }
+        /* ⚡ ATUALIZAÇÃO EXTREMA: env(safe-area-inset-top) protege o header do notch do iPhone */
+        header { position: fixed; top: 0; left: 0; width: 100%; height: calc(85px + env(safe-area-inset-top)); padding-top: calc(15px + env(safe-area-inset-top)); background: rgba(10, 15, 25, 0.85); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(212, 175, 55, 0.2); z-index: 100; display: flex; align-items: center; justify-content: center; }
         .h-wrap { width: 100%; max-width: 800px; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
         h1 { font-size: 18px; font-weight: 900; background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        /* Ponto de Alerta no Menu */
         #menu-alert-dot { position: absolute; top: -2px; right: -5px; width: 12px; height: 12px; background: #ef4444; border-radius: 50%; border: 2px solid #050811; display: none; box-shadow: 0 0 10px #ef4444; animation: pulseAlert 1s infinite alternate; }
 
-        main.chat { position: fixed; top: 85px; bottom: 90px; left: 0; width: 100%; overflow-y: auto; padding: 25px 15px; display: flex; flex-direction: column; align-items: center; z-index: 10; scroll-behavior: smooth; }
+        /* ⚡ ATUALIZAÇÃO EXTREMA: margens para proteger o chat do entalhe superior e da barra de navegação inferior do iPhone */
+        main.chat { position: fixed; top: calc(85px + env(safe-area-inset-top)); bottom: calc(90px + env(safe-area-inset-bottom)); left: 0; width: 100%; overflow-y: auto; padding: 25px 15px; display: flex; flex-direction: column; align-items: center; z-index: 10; scroll-behavior: smooth; }
         .chat-wrap { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; padding-bottom: 30px; }
         .msg { display: flex; gap: 12px; width: 100%; align-items: flex-end; animation: slideUp 0.3s ease; }
         .msg.user { justify-content: flex-end; }
@@ -62,12 +63,13 @@
         .user .bubble { background: var(--accent); color: #fff; border-bottom-right-radius: 4px; }
         .ai .bubble { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); border-bottom-left-radius: 4px; }
 
-        footer { position: fixed; bottom: 0; left: 0; width: 100%; height: 90px; background: linear-gradient(to top, #000 80%, transparent); display: flex; justify-content: center; z-index: 2000; }
+        /* ⚡ ATUALIZAÇÃO EXTREMA: env(safe-area-inset-bottom) ergue a barra de digitação para não colidir com a linha do iPhone */
+        footer { position: fixed; bottom: 0; left: 0; width: 100%; height: calc(90px + env(safe-area-inset-bottom)); padding-bottom: env(safe-area-inset-bottom); background: linear-gradient(to top, #000 80%, transparent); display: flex; justify-content: center; align-items: center; z-index: 2000; }
         .in-box { width: 92%; max-width: 800px; background: rgba(25, 30, 45, 0.98); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 8px 15px; display: flex; align-items: center; height: 55px; }
-        textarea { flex: 1; background: none; border: none; color: #fff; font-size: 15px; outline: none; resize: none; max-height: 40px; }
+        textarea { flex: 1; background: none; border: none; color: #fff; font-size: 16px; outline: none; resize: none; max-height: 40px; } /* font-size 16px no iOS evita zoom automático chato */
         .btn-send { background: var(--accent); border: none; width: 42px; height: 42px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 
-        aside.sidebar { position: fixed; top: 0; left: -100%; width: 300px; height: 100%; z-index: 3000; background: rgba(5, 8, 17, 0.98); backdrop-filter: blur(30px); transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); overflow-y: auto; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: none; }
+        aside.sidebar { position: fixed; top: 0; left: -100%; width: 300px; height: 100%; z-index: 3000; background: rgba(5, 8, 17, 0.98); backdrop-filter: blur(30px); transition: left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); overflow-y: auto; border-right: 1px solid rgba(255,255,255,0.05); box-shadow: none; padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
         .sidebar.open { left: 0; box-shadow: 10px 0 40px rgba(0,0,0,0.8); }
         
         #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 2500; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
@@ -90,7 +92,20 @@
         #u-progress { width: 0%; height: 100%; background: var(--neon); transition: 0.3s ease-out; box-shadow: 0 0 10px var(--neon); }
         .sync-text { font-size: 12px; color: var(--gold); margin-top: 10px; letter-spacing: 3px; font-weight: 900; text-transform: uppercase; }
         
-        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        /* ⚡ ATUALIZAÇÃO EXTREMA: O Pop-up ensinando a instalar no iPhone */
+        #ios-install-prompt {
+            position: fixed; bottom: calc(20px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%);
+            background: linear-gradient(145deg, rgba(15, 20, 35, 0.98), rgba(5, 8, 17, 0.98));
+            border: 2px solid var(--gold); padding: 20px; border-radius: 25px; z-index: 5000;
+            width: 90%; max-width: 380px; display: none; flex-direction: column; align-items: center; text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.9); backdrop-filter: blur(15px); animation: slideUp 0.5s ease;
+        }
+        .ios-install-title { color: var(--gold); font-size: 16px; font-weight: 900; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+        .ios-install-desc { font-size: 13px; color: #ccc; line-height: 1.5; margin-bottom: 15px; }
+        .ios-install-steps { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); font-size: 12px; color: #fff; }
+        .ios-close-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; color: #aaa; font-size: 18px; cursor: pointer; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
         @keyframes pulseLogo { from { box-shadow: 0 0 10px rgba(0, 242, 255, 0.4); transform: scale(1); } to { box-shadow: 0 0 35px rgba(0, 242, 255, 0.8); transform: scale(1.05); } }
         @keyframes pulseAlert { from { opacity: 0.5; box-shadow: 0 0 5px #ef4444; } to { opacity: 1; box-shadow: 0 0 15px #ef4444; } }
         @keyframes pulseGreen { from { box-shadow: 0 0 5px #22c55e; } to { box-shadow: 0 0 20px #22c55e; } }
@@ -99,6 +114,16 @@
 <body>
     <div id="bg-container"><div class="bg-slide active"></div><div class="bg-slide"></div></div>
     
+    <div id="ios-install-prompt">
+        <button class="ios-close-btn" onclick="Core.dismissIosPrompt()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="ios-install-title"><i class="fa-brands fa-apple"></i> INSTALAR LARA ELITE</div>
+        <div class="ios-install-desc">O iOS não permite instalação automática. Para ter a experiência PWA completa sem barras de navegação:</div>
+        <div class="ios-install-steps">
+            1. Toque em <b>Compartilhar</b> <i class="fa-solid fa-arrow-up-from-bracket" style="color:var(--accent);"></i> no seu navegador.<br><br>
+            2. Role para baixo e selecione <b>"Adicionar à Tela de Início"</b> <i class="fa-regular fa-square-plus" style="color:var(--gold);"></i>.
+        </div>
+    </div>
+
     <div id="update-splash">
         <img src="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png" class="splash-logo">
         <h2 style="font-size:18px; font-weight:900; letter-spacing: 1px; text-shadow: 0 0 10px var(--neon);">LARA ELITE v29.6</h2>
@@ -170,15 +195,35 @@
                 UI.update(); this.h.forEach(m => UI.draw(m.r, m.t));
                 UI.setSkin(Storage.get('l_skin') || 'gold');
                 this.checkUpdates();
+                this.checkIosInstallation(); // ⚡ ATUALIZAÇÃO EXTREMA: Executa verificação do iPhone
                 Visual.init();
                 prepararMotorPiP();
                 UI.setupSwipeMenu();
             },
             
-            // ⚡ MOTOR DE ATUALIZAÇÃO CORRIGIDO: Agora avisa no menu em vez de forçar a tela
+            // ⚡ ATUALIZAÇÃO EXTREMA: Lógica para detectar se é iPhone e se NÃO está instalado
+            checkIosInstallation() {
+                const isIos = () => {
+                    const userAgent = window.navigator.userAgent.toLowerCase();
+                    return /iphone|ipad|ipod/.test(userAgent);
+                };
+                // "standalone" verifica se já está rodando como App (sem o navegador em volta)
+                const isStandalone = ('standalone' in window.navigator) && (window.navigator.standalone);
+                
+                // Se for iPhone, não estiver no modo app, e o usuário ainda não fechou o aviso...
+                if (isIos() && !isStandalone && !Storage.get('l_ios_prompt_dismissed')) {
+                    document.getElementById('ios-install-prompt').style.display = 'flex';
+                }
+            },
+            
+            dismissIosPrompt() {
+                document.getElementById('ios-install-prompt').style.display = 'none';
+                Storage.set('l_ios_prompt_dismissed', true); // Não incomoda o mestre de novo
+            },
+
             checkUpdates() {
                 if (Storage.get('l_version') !== VERSION) {
-                    UI.showUpdateAlert(); // Dispara o alerta no menu
+                    UI.showUpdateAlert(); 
                     return; 
                 }
 
@@ -188,7 +233,7 @@
                             const newWorker = reg.installing;
                             newWorker.onstatechange = () => {
                                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                    UI.showUpdateAlert(); // Dispara o alerta no menu
+                                    UI.showUpdateAlert(); 
                                 }
                             };
                         };
@@ -205,174 +250,4 @@
                     p += 2; bar.style.width = p + '%';
                     if (p >= 100) {
                         clearInterval(interval); 
-                        Storage.set('l_version', VERSION);
-                        
-                        if ('serviceWorker' in navigator) {
-                            navigator.serviceWorker.getRegistrations().then(regs => {
-                                for (let reg of regs) { reg.unregister(); }
-                            }).then(() => {
-                                if(window.caches) {
-                                    caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k)))).then(() => {
-                                        window.location.href = location.origin + location.pathname + '?v=' + new Date().getTime();
-                                    });
-                                } else { window.location.href = location.origin + location.pathname + '?v=' + new Date().getTime(); }
-                            });
-                        } else { window.location.href = location.origin + location.pathname + '?v=' + new Date().getTime(); }
-                    }
-                }, 40); 
-            },
-
-            async ativarNotificacoes() {
-                const p = await Notification.requestPermission();
-                if (p === 'granted') {
-                    const reg = await navigator.serviceWorker.ready;
-                    reg.showNotification("LARA OMEGA", {
-                        body: "⚡ Alertas do Sistema Ativados!",
-                        icon: AI_AVATAR,
-                        vibrate: [200, 100, 200]
-                    });
-                    alert("Notificações no menu do Android liberadas!");
-                }
-            },
-            clearChat() {
-                if (confirm("Irmão, deseja apagar todo o histórico de conversas?")) {
-                    this.h = [];
-                    Storage.set('l_chat', []);
-                    document.getElementById('chat-box').innerHTML = '';
-                    UI.menu(false);
-                }
-            },
-            async send() {
-                if (this.typing) return;
-                const i = document.getElementById('u-in'); let t = i.value.trim(); if (!t) return;
-                this.typing = true; i.value = ""; UI.draw('user', t); this.h.push({t, r:'user'});
-                UI.dots(true);
-                try {
-                    const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(t)}?private=true&model=openai`);
-                    const txt = await res.text(); UI.dots(false);
-                    const clean = txt.replace(/Ad 🌸|Support/gi, '').trim();
-                    UI.draw('ai', clean); this.h.push({t: clean, r:'ai'});
-                    Storage.set('l_chat', this.h.slice(-20));
-                } catch (e) { UI.dots(false); }
-                this.typing = false;
-            }
-        };
-
-        // 🎨 MOTOR UI
-        const UI = {
-            box: document.getElementById('chat-box'), main: document.getElementById('chat-main'),
-            
-            // ⚡ FUNÇÃO DE ALERTA NO MENU
-            showUpdateAlert() {
-                document.getElementById('menu-alert-dot').style.display = 'block'; // Acende a bolinha vermelha no topo
-                document.getElementById('btn-update-available').style.display = 'block'; // Mostra o botão verde no menu
-            },
-
-            setSkin(s) { document.body.className = s === 'gold' ? '' : `theme-${s}`; Storage.set('l_skin', s); },
-            toggleNexus(s) { document.getElementById('donate-modal').style.display = s ? 'flex' : 'none'; this.menu(false); },
-            copyPix() { navigator.clipboard.writeText("61318165300"); alert("PIX Copiado!"); },
-            draw(r, t) {
-                const w = document.createElement('div'); w.className = `msg ${r}`;
-                const av = r === 'user' ? '👤' : `<img src="${AI_AVATAR}" style="width:100%;">`;
-                w.innerHTML = `${r==='ai' ? `<div class="avatar">${av}</div>` : ''}<div class="bubble">${marked.parse(t)}</div>${r==='user' ? `<div class="avatar">${av}</div>` : ''}`;
-                this.box.appendChild(w); this.main.scrollTop = this.main.scrollHeight;
-            },
-            dots(s) { if(s){ const d=document.createElement('div'); d.id='dots'; d.className='msg ai'; d.innerHTML=`<div class="avatar"><img src="${AI_AVATAR}" style="width:100%;"></div><div class="bubble">...</div>`; this.box.appendChild(d); } else { const d=document.getElementById('dots'); if(d) d.remove(); } this.main.scrollTop = this.main.scrollHeight; },
-            size(t) { t.style.height='auto'; t.style.height=t.scrollHeight+'px'; },
-            
-            menu(s) { 
-                const m = document.getElementById('menu');
-                const o = document.getElementById('overlay');
-                m.classList.toggle('open', s); 
-                s ? o.classList.add('active') : o.classList.remove('active');
-                document.body.style.overflow = s ? 'hidden' : ''; 
-            },
-            
-            setupSwipeMenu() {
-                let startX = 0;
-                const menuEl = document.getElementById('menu');
-                document.addEventListener('touchstart', e => { startX = e.touches[0].clientX; });
-                document.addEventListener('touchend', e => {
-                    let endX = e.changedTouches[0].clientX;
-                    if (menuEl.classList.contains('open') && startX - endX > 50) {
-                        this.menu(false);
-                    }
-                });
-            },
-
-            update() { 
-                const photo = Storage.get('l_photo');
-                if(photo) { document.getElementById('p-btn-top').innerHTML = `<img src="${photo}" style="width:100%;height:100%;object-fit:cover;">`; document.getElementById('menu-photo').innerHTML = `<img src="${photo}" style="width:100%;height:100%;object-fit:cover;">`; }
-            }
-        };
-
-        // 🖼️ MOTOR VISUAL OMEGA v29
-        const Visual = {
-            slides: document.querySelectorAll('.bg-slide'),
-            current: 0,
-            prompts: [
-                "manga_panel_dark_aesthetic_heavy_crosshatching_nanquim_ink_masterpiece_8k_character_zero_and_lara",
-                "3d_render_luxurious_mansion_swimming_pool_night_lighting_rpg_environment_8k_highly_detailed",
-                "polaroid_photography_glamorous_portrait_dramatic_flash_lighting_white_curtain_background",
-                "cyberpunk_city_neon_rain_professional_photography_unreal_engine_5_ultra_detailed",
-                "anime_aesthetic_landscape_night_sky_starry_cinematic_masterpiece_highly_detailed"
-            ],
-
-            async update() {
-                const theme = this.prompts[Math.floor(Math.random() * this.prompts.length)];
-                const seed = Math.floor(Math.random() * 999999);
-                const url = `https://image.pollinations.ai/prompt/${theme}?width=1080&height=1920&nologo=true&seed=${seed}`;
-
-                const nextIndex = 1 - this.current;
-                const nextSlide = this.slides[nextIndex];
-                const activeSlide = this.slides[this.current];
-
-                const img = new Image();
-                img.crossOrigin = "anonymous"; 
-
-                img.onload = () => {
-                    nextSlide.style.backgroundImage = `url(${url})`;
-                    activeSlide.classList.remove('active');
-                    nextSlide.classList.add('active');
-                    this.current = nextIndex;
-                };
-
-                img.onerror = () => {
-                    setTimeout(() => this.update(), 10000);
-                };
-
-                img.src = url;
-            },
-
-            init() {
-                this.update();
-                setInterval(() => this.update(), 60000);
-            }
-        };
-
-        // 🎞️ MOTOR PiP (MODO PROJEÇÃO)
-        let videoPiP = null;
-        function prepararMotorPiP() {
-            const canvas = document.createElement('canvas'); canvas.width = 400; canvas.height = 400;
-            const ctx = canvas.getContext('2d');
-            function loop() {
-                ctx.fillStyle = '#050811'; ctx.fillRect(0,0,400,400);
-                ctx.fillStyle = '#00f2ff'; ctx.font = 'bold 20px Inter'; ctx.fillText('⚡ LARA v29 OMEGA', 50, 200);
-                requestAnimationFrame(loop);
-            }
-            loop();
-            videoPiP = document.createElement('video');
-            videoPiP.srcObject = canvas.captureStream();
-            videoPiP.muted = true; videoPiP.play();
-        }
-        async function ativarProjeçãoLara() {
-            try { 
-                if (videoPiP) await videoPiP.requestPictureInPicture(); 
-                UI.menu(false);
-            } catch(e) { alert("PiP não suportado neste navegador."); }
-        }
-
-        window.onload = () => Core.init();
-    </script>
-</body>
-</html>
+                        Storage.s
