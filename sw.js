@@ -1,5 +1,5 @@
 // ==============================================================================
-// 🛰️ LARA ELITE OMEGA — SERVICE WORKER PROFISSIONAL v30.2 
+// 🛰️ LARA ELITE OMEGA — SERVICE WORKER PROFISSIONAL v30.3 
 // ==============================================================================
 
 const CACHE_NAME = 'lara-omega-v29';
