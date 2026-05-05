@@ -11,7 +11,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     
-    <title>Lara Elite v30.1 OMEGA</title>
+    <title>Lara Elite v30.2 OMEGA SEARCH</title>
 
     <link rel="apple-touch-icon" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
@@ -40,7 +40,7 @@
         .h-wrap { width: 100%; max-width: 800px; display: flex; justify-content: space-between; align-items: center; position: relative; }
         h1 { font-size: 18px; font-weight: 900; background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        main.chat { position: fixed; top: calc(65px + env(safe-area-inset-top, 0px)); bottom: calc(80px + env(safe-area-inset-bottom, 0px)); left: 0; width: 100%; overflow-y: auto; padding: 20px 15px; display: flex; flex-direction: column; align-items: center; z-index: 10; }
+        main.chat { position: fixed; top: calc(65px + env(safe-area-inset-top, 0px)); bottom: calc(80px + env(safe-area-inset-bottom, 0px)); left: 0; width: 100%; overflow-y: auto; padding: 20px 15px; display: flex; flex-direction: column; align-items: center; z-index: 10; scroll-behavior: smooth; }
         .chat-wrap { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; }
         .msg { display: flex; gap: 12px; width: 100%; animation: slideUp 0.3s ease; align-items: flex-end; }
         .msg.user { justify-content: flex-end; }
@@ -62,7 +62,8 @@
         .u-box { padding: 50px 20px 20px; text-align: center; }
         .u-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 10px; overflow: hidden; }
         
-        .skin-btn { width: 100%; padding: 12px; margin-bottom: 5px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 10px; cursor: pointer; font-size: 12px; font-weight: 800; }
+        .skin-panel button { width: 100%; padding: 12px; margin-bottom: 5px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 10px; cursor: pointer; font-size: 12px; font-weight: 800; }
+        .skin-panel button.active { border-color: var(--neon); color: #fff; background: rgba(0,242,255,0.1); }
         
         #update-splash { position: fixed; inset: 0; background: #050811; z-index: 99999; display: none; flex-direction: column; align-items: center; justify-content: center; }
         .progress-container { width: 200px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 20px; overflow: hidden; }
@@ -75,13 +76,13 @@
     <div id="bg-container"><div class="bg-slide active"></div><div class="bg-slide"></div></div>
     
     <div id="update-splash">
-        <h2 style="font-size:14px; font-weight:900; color:var(--neon);">SINCRO v30.1 OMEGA</h2>
+        <h2 style="font-size:14px; font-weight:900; color:var(--neon);">SINCRO v30.2 OMEGA</h2>
         <div class="progress-container"><div id="u-progress"></div></div>
     </div>
 
     <header><div class="h-wrap">
         <button onclick="UI.menu(true)" style="background:none; border:none; color:#fff; font-size:22px; cursor: pointer;"><i class="fa-solid fa-bars-staggered"></i></button>
-        <h1>Lara Elite v30.1</h1>
+        <h1>Lara Elite v30.2</h1>
         <div id="p-btn-top" style="width:34px; height:34px; border-radius:50%; border:2px solid var(--gold); overflow:hidden; cursor: pointer;" onclick="UI.menu(true)">👤</div>
     </div></header>
 
@@ -89,13 +90,15 @@
     
     <aside id="menu" class="sidebar">
         <div class="u-box"><div class="u-img" id="menu-photo">👤</div><p id="menu-name" style="font-weight:900; margin-top:10px;">Mestre</p></div>
-        <div style="padding: 20px;">
-            <button onclick="UI.setSkin('gold')" class="skin-btn">Elite Gold</button>
-            <button onclick="UI.setSkin('cyber')" class="skin-btn">Cyber Neon</button>
-            <button onclick="UI.setSkin('stealth')" class="skin-btn">Stealth</button>
-            <hr style="opacity:0.1; margin: 15px 0;">
-            <button onclick="Core.clearChat()" style="background:rgba(239,68,68,0.1); border-color:#ef4444;" class="skin-btn">LIMPAR CHAT</button>
+        <div class="skin-panel" style="padding: 0 20px;">
+            <button onclick="UI.setSkin('gold')" id="btn-skin-gold" class="active">Elite Gold</button>
+            <button onclick="UI.setSkin('cyber')" id="btn-skin-cyber">Cyber Neon</button>
+            <button onclick="UI.setSkin('stealth')" id="btn-skin-stealth">Stealth</button>
         </div>
+        <nav style="padding:20px; display:flex; flex-direction:column; gap:10px;">
+            <hr style="opacity:0.1; margin: 5px 0;">
+            <button onclick="Core.clearChat()" style="width:100%; padding:12px; border-radius:10px; background:rgba(239,68,68,0.1); border:1px solid #ef4444; color:#ef4444; font-weight:bold; cursor: pointer;"><i class="fa-solid fa-trash"></i> LIMPAR CHAT</button>
+        </nav>
     </aside>
 
     <main class="chat" id="chat-main"><div class="chat-wrap" id="chat-box"></div></main>
@@ -113,15 +116,22 @@
             get(k) { try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; } catch(e) { return null; } } 
         };
 
-        const VERSION = "30.1";
+        const VERSION = "30.2";
         const AI_AVATAR = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
+        
+        // ⚡ ATUALIZAÇÃO EXTREMA: Mapping de skins para prompts cyberpunk específicos
+        const SkinPromptsMapping = {
+            'gold': [ 'cyberpunk_city_dark_gold_highly_detailed', 'dark_gold_cyberpunk_neon_lights', 'luxurious_cyberpunk_environment_dark_gold_tones' ],
+            'cyber': [ 'cyberpunk_city_neon_colors_night', 'vibrant_cyberpunk_neon_landscape', 'futuristic_city_night_sky_neon' ],
+            'stealth': [ 'dark_cyberpunk_city_night', 'nighttime_futuristic_landscape_stealth', 'dark_urban_cyberpunk_night' ]
+        };
 
         const Core = {
             h: [], typing: false,
             init() {
                 this.h = Storage.get('l_chat') || [];
                 this.h.forEach(m => UI.draw(m.r, m.t));
-                UI.update();
+                UI.updatePhoto();
                 UI.setSkin(Storage.get('l_skin') || 'gold');
                 this.checkUpdates();
                 Visual.init();
@@ -136,14 +146,17 @@
                     }, 30);
                 }
             },
+            
+            // ⚡ ATUALIZAÇÃO EXTREMA: Motor de envio robusto com redundância
             async send() {
                 const i = document.getElementById('u-in');
                 let t = i.value.trim();
+                // Bloqueia envios vazios ou múltiplos envios simultâneos
                 if (!t || this.typing) return;
 
                 this.typing = true;
                 i.value = "";
-                i.style.height = "auto";
+                i.style.height = "auto"; // Reseta altura do textarea
                 
                 UI.draw('user', t);
                 this.h.push({t, r:'user'});
@@ -159,29 +172,62 @@
                     Storage.set('l_chat', this.h.slice(-20));
                 } catch (e) {
                     UI.dots(false);
-                    UI.draw('ai', "Erro de conexão, mestre.");
+                    UI.draw('ai', "Erro de conexão neural com o núcleo OMEGA, mestre. Verifique o link digital.");
                 } finally {
+                    // Protocolo de redundância: garante que o chat não fique travado
                     this.typing = false;
                 }
             },
             clearChat() {
-                if(confirm("Apagar histórico?")) { this.h = []; Storage.set('l_chat', []); document.getElementById('chat-box').innerHTML = ''; UI.menu(false); }
+                if(confirm("Apagar histórico neural?")) { this.h = []; Storage.set('l_chat', []); document.getElementById('chat-box').innerHTML = ''; UI.menu(false); }
             }
         };
 
         const UI = {
             box: document.getElementById('chat-box'),
             main: document.getElementById('chat-main'),
+            
+            // ⚡ ATUALIZAÇÃO EXTREMA: Gatilho de menu forçado
             menu(s) {
-                document.getElementById('menu').classList.toggle('open', s);
-                document.getElementById('overlay').classList.toggle('active', s);
+                const m = document.getElementById('menu');
+                const o = document.getElementById('overlay');
+                // Adiciona ou remove classes diretamente
+                m.classList.toggle('open', s);
+                o.classList.toggle('active', s);
+                // Previne scroll do chat com menu aberto no iPhone
+                document.body.style.overflow = s ? 'hidden' : '';
             },
-            setSkin(s) { document.body.className = s === 'gold' ? '' : `theme-${s}`; Storage.set('l_skin', s); this.menu(false); },
+            
+            // ⚡ ATUALIZAÇÃO EXTREMA: Botões de skin com suporte a background
+            setSkin(s) { 
+                document.body.className = s === 'gold' ? '' : `theme-${s}`; Storage.set('l_skin', s); 
+                this.menu(false); // Fecha menu após trocar skin
+                // update prompts mapping and trigger update
+                Visual.prompts = SkinPromptsMapping[s];
+                Visual.update();
+                this.updateActiveSkinButton(s);
+            },
+            
+            // ⚡ ATUALIZAÇÃO EXTREMA: Marca botão de skin ativo
+            updateActiveSkinButton(s) {
+                document.querySelectorAll('.skin-panel button').forEach(b => b.classList.remove('active'));
+                document.getElementById('btn-skin-'+s).classList.add('active');
+            },
+            
             size(t) { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; },
+            
+            // ⚡ ATUALIZAÇÃO EXTREMA: Ícones distinctos e circulares
             draw(r, t) {
                 const w = document.createElement('div');
                 w.className = `msg ${r}`;
-                const av = r === 'user' ? '👤' : `<img src="${AI_AVATAR}" style="width:100%;">`;
+                let av;
+                if(r === 'ai') { // Lara bubble, distinct Lara icon
+                    av = `<img src="${AI_AVATAR}" style="width:100%;">`;
+                } else { // user bubble, distinct user icon
+                    const photo = Storage.get('l_photo');
+                    const userIconSrc = photo ? photo : 'https://spicy-harlequin-pqaujlkovi.edgeone.app/ spicies_generated_user_avatar.png'; // distinct user placeholder
+                    av = `<img src="${userIconSrc}" style="width:100%;">`;
+                }
                 w.innerHTML = `${r==='ai' ? `<div class="avatar">${av}</div>` : ''}<div class="bubble">${marked.parse(t)}</div>${r==='user' ? `<div class="avatar">${av}</div>` : ''}`;
                 this.box.appendChild(w);
                 this.main.scrollTop = this.main.scrollHeight;
@@ -196,7 +242,8 @@
                 }
                 this.main.scrollTop = this.main.scrollHeight;
             },
-            update() {
+            
+            updatePhoto() {
                 const p = Storage.get('l_photo');
                 if(p) {
                     const img = `<img src="${p}" style="width:100%;height:100%;object-fit:cover;">`;
@@ -208,8 +255,12 @@
 
         const Visual = {
             slides: document.querySelectorAll('.bg-slide'), current: 0,
+            
+            // ⚡ ATUALIZAÇÃO EXTREMA: Visual com prompts do mapping de skin
             async update() {
-                const url = `https://image.pollinations.ai/prompt/cyberpunk_city_dark_gold?width=1080&height=1920&nologo=true&seed=${Math.random()}`;
+                // Seleciona prompt do mapping correspondente a skin ativa
+                const theme = this.prompts[Math.floor(Math.random() * this.prompts.length)];
+                const url = `https://image.pollinations.ai/prompt/${theme}?width=1080&height=1920&nologo=true&seed=${Math.random()}`;
                 const img = new Image();
                 img.onload = () => {
                     this.slides[1-this.current].style.backgroundImage = `url(${url})`;
@@ -219,15 +270,23 @@
                 };
                 img.src = url;
             },
-            init() { this.update(); setInterval(() => this.update(), 60000); }
+            
+            init() { 
+                // Inicializa prompts correspondente a skin ativa
+                this.prompts = SkinPromptsMapping[Storage.get('l_skin') || 'gold'];
+                this.update(); setInterval(() => this.update(), 60000); 
+            }
         };
 
+        // Escuta a tecla Enter para enviar mensagem
         document.getElementById('u-in').addEventListener('keydown', (e) => {
             if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); Core.send(); }
         });
+        
+        // Garante que o chat respeite Dynamic Island no iPhone ao digitar
+        window.addEventListener('resize', () => { UI.main.scrollTop = UI.main.scrollHeight; });
 
         window.onload = () => Core.init();
     </script>
 </body>
 </html>
-
