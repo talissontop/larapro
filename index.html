@@ -9,6 +9,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Lara Elite">
+    <meta name="application-name" content="Lara Elite">
+    <meta name="msapplication-TileColor" content="#050811">
     <link rel="manifest" href="manifest.json">
     
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -93,8 +95,8 @@
             <h3 style="font-size: 11px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;"><i class="fa-solid fa-microchip"></i> Novidades v31.0</h3>
             <ul style="list-style: none; font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.6;">
                 <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Protocolo de Instalação Standalone.</li>
-                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Upload de Foto de Perfil corrigido.</li>
-                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Fechamento de Menu via Overlay.</li>
+                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Upload de Foto de Perfil (Local Storage).</li>
+                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Fechamento Dinâmico via Overlay.</li>
             </ul>
         </div>
 
@@ -161,7 +163,7 @@
                     setTimeout(() => {
                         UI.showUpdateToast();
                         this.sendSystemNotification();
-                        UI.draw('ai', `**Upgrade v${VERSION} Finalizado.** Sistema embutido sincronizado com sucesso no Android!`);
+                        UI.draw('ai', `**Upgrade v${VERSION} Finalizado.** O cockpit Standalone foi sincronizado com sucesso!`);
                         Storage.set('show_update_alert', false); 
                     }, 1500); 
                 }
@@ -213,7 +215,7 @@
                 document.getElementById('p-btn-top').innerHTML = img; 
                 document.getElementById('menu-photo').innerHTML = img; 
             },
-            // FUNÇÃO PARA TROCAR A FOTO
+            // FUNÇÃO PARA TROCAR A FOTO DE PERFIL
             changePhoto() {
                 const input = document.createElement('input');
                 input.type = 'file';
