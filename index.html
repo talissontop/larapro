@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#050811">
     
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="manifest.json">
+    
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     
-    <title>Lara Elite v30.9 OMEGA</title>
+    <title>Lara Elite v31.0 OMEGA</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
@@ -57,11 +62,11 @@
 </head>
 <body>
     <div id="bg-container"><div class="bg-slide active"></div><div class="bg-slide"></div></div>
-    <div id="update-toast"><i class="fa-solid fa-bolt-lightning"></i> Sincronia v30.9 OMEGA</div>
+    <div id="update-toast"><i class="fa-solid fa-bolt-lightning"></i> Sincronia v31.0 OMEGA</div>
 
     <header><div class="h-wrap">
         <button onclick="UI.menu(true)" style="background:none; border:none; color:#fff; font-size:22px; cursor: pointer;"><i class="fa-solid fa-bars-staggered"></i></button>
-        <h1>Lara Elite v30.9</h1>
+        <h1>Lara Elite v31.0</h1>
         <div id="p-btn-top" style="width:34px; height:34px; border-radius:50%; border:2px solid var(--gold); overflow:hidden; cursor: pointer;" onclick="UI.menu(true)"></div>
     </div></header>
 
@@ -79,11 +84,11 @@
         </div>
 
         <div style="margin: 20px; padding: 15px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px;">
-            <h3 style="font-size: 11px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;"><i class="fa-solid fa-microchip"></i> Novidades v30.9</h3>
+            <h3 style="font-size: 11px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;"><i class="fa-solid fa-microchip"></i> Novidades v31.0</h3>
             <ul style="list-style: none; font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.6;">
-                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Log de Sistema integrado ao Menu.</li>
-                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Interface do Cockpit otimizada.</li>
-                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Protocolo Anti-Cache Permanente.</li>
+                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Protocolo de Instalação Embutida (PWA).</li>
+                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Notificação de Sobrevivência Blindada.</li>
+                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Sincronia de Alta Performance Android.</li>
             </ul>
         </div>
 
@@ -102,8 +107,7 @@
 
     <script>
         const Storage = { set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} }, get(k) { try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; } catch(e) { return null; } } };
-        // LINHA 105 ATUALIZADA PARA v30.9
-        const VERSION = "30.9";
+        const VERSION = "31.0";
         const AI_AVATAR = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
         const DEFAULT_USER_AVATAR = "https://ui-avatars.com/api/?name=Mestre&background=D4AF37&color=fff&rounded=true&bold=true";
         const SkinPromptsMapping = { 'gold': [ 'cyberpunk_city_dark_gold_highly_detailed' ], 'cyber': [ 'cyberpunk_city_neon_colors_night' ], 'stealth': [ 'dark_cyberpunk_city_night' ] };
@@ -116,7 +120,7 @@
                 UI.updatePhoto(); 
                 UI.setSkin(Storage.get('l_skin') || 'gold'); 
                 Visual.init(); 
-                // ATRASO DE 2 SEGUNDOS PARA CHECAR ATUALIZAÇÕES
+                // ATRASO PARA GARANTIR LEITURA DO LEMBRETE
                 setTimeout(() => this.checkUpdates(), 2000); 
                 this.registerSW();
             },
@@ -137,30 +141,28 @@
                 }
             },
 
-            // LÓGICA BLINDADA DE ATUALIZAÇÃO
             checkUpdates() {
                 const oldV = Storage.get('l_version');
                 
-                // 1. Se a versão mudou, marca o lembrete e deixa o reload do SW acontecer
+                // 1. Se mudou, salva e marca pra mostrar DEPOIS do reload
                 if (oldV && oldV !== VERSION) {
                     Storage.set('l_version', VERSION);
                     Storage.set('show_update_alert', true); 
                     return; 
                 }
 
-                // 2. Se for a primeira instalação, apenas registra
                 if (!oldV) {
                     Storage.set('l_version', VERSION);
                     return;
                 }
 
-                // 3. O PULO DO GATO: Se o app carregou e houver lembrete, dispara a glória!
+                // 2. Se o app já reiniciou e tem o lembrete, agora sim mostra!
                 if (Storage.get('show_update_alert')) {
                     setTimeout(() => {
                         UI.showUpdateToast();
                         this.sendSystemNotification();
-                        UI.draw('ai', `**Upgrade v${VERSION} Finalizado.** O cockpit foi reiniciado e sincronizado com sucesso no Android!`);
-                        Storage.set('show_update_alert', false); // Limpa o lembrete
+                        UI.draw('ai', `**Upgrade v${VERSION} Finalizado.** Sistema embutido sincronizado com sucesso!`);
+                        Storage.set('show_update_alert', false); 
                     }, 1500); 
                 }
             },
