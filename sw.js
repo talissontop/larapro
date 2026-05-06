@@ -1,8 +1,8 @@
 // ==============================================================================
-// 🛰️ LARA ELITE OMEGA — SERVICE WORKER v30.8 BUSTER
+// 🛰️ LARA ELITE OMEGA — SERVICE WORKER v30.9 BUSTER
 // ==============================================================================
 
-const CACHE_NAME = 'lara-omega-v30.8';
+const CACHE_NAME = 'lara-omega-v30.9';
 const APP_SHELL = ['./', './index.html'];
 
 self.addEventListener('install', (event) => {
@@ -16,7 +16,7 @@ self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then(keys =>
             Promise.all(keys.map(key => {
-                // EXTERMÍNIO: Se não for a 30.8, deleta sem piedade
+                // EXTERMÍNIO: Se não for a 30.9, deleta sem piedade
                 if (key !== CACHE_NAME) {
                     return caches.delete(key);
                 }
