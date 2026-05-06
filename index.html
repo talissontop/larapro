@@ -51,7 +51,11 @@
         footer { position: fixed; bottom: 0; left: 0; width: 100%; padding: 10px 15px calc(15px + env(safe-area-inset-bottom, 0px)); background: #000; z-index: 2000; }
         .in-box { width: 100%; max-width: 800px; margin: 0 auto; background: rgba(25, 30, 45, 0.98); border: 1px solid rgba(255,255,255,0.1); border-radius: 25px; padding: 5px 10px; display: flex; align-items: center; }
         textarea { flex: 1; background: none; border: none; color: #fff; font-size: 16px; outline: none; resize: none; max-height: 100px; padding: 10px; }
-        .btn-send { background: var(--accent); border: none; width: 40px; height: 40px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+        
+        /* CORREÇÃO DO BOTÃO DE ENVIAR: flex-shrink: 0 evita que ele fique oval */
+        .btn-send { background: var(--accent); border: none; width: 40px; height: 40px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background 0.2s; }
+        .btn-send:active { filter: brightness(1.2); }
+        
         aside.sidebar { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; z-index: 3000; background: rgba(5, 8, 17, 0.98); backdrop-filter: blur(30px); transition: 0.4s; border-right: 1px solid rgba(255,255,255,0.1); }
         .sidebar.open { left: 0; }
         #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2500; display: none; }
@@ -110,7 +114,7 @@
     <main class="chat" id="chat-main"><div class="chat-wrap" id="chat-box"></div></main>
     <footer><div class="in-box">
         <textarea id="u-in" placeholder="Comando mestre..." oninput="UI.size(this)"></textarea>
-        <button class="btn-send" onclick="Core.send()"><i class="fa-solid fa-paper-plane"></i></button>
+        <button class="btn-send" onclick="Core.send()"><i class="fa-solid fa-paper-plane" style="transform: translateX(-1px) translateY(1px);"></i></button>
     </div></footer>
 
     <script>
@@ -128,7 +132,6 @@
                 UI.updatePhoto(); 
                 UI.setSkin(Storage.get('l_skin') || 'gold'); 
                 Visual.init(); 
-                // ATRASO DE 2 SEGUNDOS PARA CHECAR ATUALIZAÇÕES (PROTOCOLO SOBREVIVÊNCIA)
                 setTimeout(() => this.checkUpdates(), 2000); 
                 this.registerSW();
             },
@@ -164,7 +167,7 @@
                     setTimeout(() => {
                         UI.showUpdateToast();
                         this.sendSystemNotification();
-                        UI.draw('ai', `**Upgrade v${VERSION} Finalizado.** O cockpit foi reiniciado e sincronizado com sucesso!`);
+                        UI.draw('ai', `**Upgrade v${VERSION} Finalizado.** O cockpit Standalone foi sincronizado com sucesso!`);
                         Storage.set('show_update_alert', false); 
                     }, 1500); 
                 }
@@ -216,7 +219,6 @@
                 document.getElementById('p-btn-top').innerHTML = img; 
                 document.getElementById('menu-photo').innerHTML = img; 
             },
-            // FUNÇÃO PARA TROCAR A FOTO DE PERFIL (UPLOAD LOCAL)
             changePhoto() {
                 const input = document.createElement('input');
                 input.type = 'file';
@@ -239,6 +241,15 @@
         const Visual = { slides: document.querySelectorAll('.bg-slide'), current: 0, async update() { this.prompts = SkinPromptsMapping[Storage.get('l_skin') || 'gold']; if(!this.prompts) return; const theme = this.prompts[Math.floor(Math.random() * this.prompts.length)]; const url = `https://image.pollinations.ai/prompt/${theme}?width=1080&height=1920&nologo=true&seed=${Math.random()}`; const img = new Image(); img.onload = () => { this.slides[1-this.current].style.backgroundImage = `url(${url})`; this.slides[this.current].classList.remove('active'); this.slides[1-this.current].classList.add('active'); this.current = 1 - this.current; }; img.src = url; }, init() { this.update(); setInterval(() => this.update(), 60000); } };
         
         document.getElementById('u-in').addEventListener('keydown', (e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); Core.send(); } });
+        
+        // GATILHO DE INSTALAÇÃO NATIVA (APK-LIKE)
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('PWA pronto para instalação nativa.');
+        });
+
         window.onload = () => Core.init();
     </script>
 </body>
