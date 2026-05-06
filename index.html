@@ -11,7 +11,8 @@
     <meta name="apple-mobile-web-app-title" content="Lara Elite">
     <meta name="application-name" content="Lara Elite">
     <meta name="msapplication-TileColor" content="#050811">
-    <link rel="manifest" href="manifest.json">
+    
+    <link rel="manifest" href="./manifest.json" crossorigin="use-credentials">
     
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
@@ -140,7 +141,8 @@
             registerSW() {
                 if ('serviceWorker' in navigator) {
                     const swUrl = `./sw.js?v=${Date.now()}`;
-                    navigator.serviceWorker.register(swUrl).then(reg => {
+                    // TRAVA DE ESCOPO: Obriga o Chrome a tratar isso como a base do aplicativo
+                    navigator.serviceWorker.register(swUrl, { scope: './' }).then(reg => {
                         reg.onupdatefound = () => {
                             const newWorker = reg.installing;
                             newWorker.onstatechange = () => {
@@ -248,13 +250,11 @@
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            // Libera o botão brilhante no menu para instalar o APK!
             const btnInstall = document.getElementById('btn-install');
             if (btnInstall) btnInstall.style.display = 'block';
             console.log('PWA validado. Botão de instalação nativa liberado no menu.');
         });
 
-        // A FUNÇÃO QUE ABRE A TELA DE INSTALAÇÃO DO SISTEMA
         function triggerInstall() {
             if (deferredPrompt) {
                 deferredPrompt.prompt();
@@ -264,7 +264,7 @@
                     }
                     deferredPrompt = null;
                     document.getElementById('btn-install').style.display = 'none';
-                    UI.menu(false); // Fecha o menu depois que clicar
+                    UI.menu(false); 
                 });
             }
         }
