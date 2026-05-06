@@ -52,7 +52,6 @@
         .in-box { width: 100%; max-width: 800px; margin: 0 auto; background: rgba(25, 30, 45, 0.98); border: 1px solid rgba(255,255,255,0.1); border-radius: 25px; padding: 5px 10px; display: flex; align-items: center; }
         textarea { flex: 1; background: none; border: none; color: #fff; font-size: 16px; outline: none; resize: none; max-height: 100px; padding: 10px; }
         
-        /* CORREÇÃO DO BOTÃO DE ENVIAR: flex-shrink: 0 evita que ele fique oval */
         .btn-send { background: var(--accent); border: none; width: 40px; height: 40px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background 0.2s; }
         .btn-send:active { filter: brightness(1.2); }
         
@@ -105,6 +104,8 @@
         </div>
 
         <nav style="padding:20px; display:flex; flex-direction:column; gap:10px;">
+            <button id="btn-install" onclick="triggerInstall()" style="display:none; width:100%; padding:12px; border-radius:10px; background:rgba(0,242,255,0.1); border:1px solid var(--neon); color:var(--neon); font-weight:bold; cursor: pointer; margin-bottom: 5px;"><i class="fa-solid fa-download"></i> INSTALAR APP NATIVO</button>
+            
             <hr style="opacity:0.1; margin: 5px 0;">
             <button onclick="Core.clearChat()" style="width:100%; padding:12px; border-radius:10px; background:rgba(239,68,68,0.1); border:1px solid #ef4444; color:#ef4444; font-weight:bold; cursor: pointer;"><i class="fa-solid fa-trash"></i> LIMPAR CHAT</button>
         </nav>
@@ -242,13 +243,31 @@
         
         document.getElementById('u-in').addEventListener('keydown', (e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); Core.send(); } });
         
-        // GATILHO DE INSTALAÇÃO NATIVA (APK-LIKE)
+        // GATILHO EXTREMO: CAPTURA A INSTALAÇÃO E CRIA O BOTÃO
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            console.log('PWA pronto para instalação nativa.');
+            // Libera o botão brilhante no menu para instalar o APK!
+            const btnInstall = document.getElementById('btn-install');
+            if (btnInstall) btnInstall.style.display = 'block';
+            console.log('PWA validado. Botão de instalação nativa liberado no menu.');
         });
+
+        // A FUNÇÃO QUE ABRE A TELA DE INSTALAÇÃO DO SISTEMA
+        function triggerInstall() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('O Mestre aceitou a instalação nativa!');
+                    }
+                    deferredPrompt = null;
+                    document.getElementById('btn-install').style.display = 'none';
+                    UI.menu(false); // Fecha o menu depois que clicar
+                });
+            }
+        }
 
         window.onload = () => Core.init();
     </script>
