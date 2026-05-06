@@ -8,6 +8,7 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Lara Elite">
     <link rel="manifest" href="manifest.json">
     
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -54,7 +55,9 @@
         #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2500; display: none; }
         #overlay.active { display: block; }
         .u-box { padding: 50px 20px 20px; text-align: center; }
-        .u-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 10px; overflow: hidden; background: #111; }
+        .u-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 10px; overflow: hidden; background: #111; cursor: pointer; position: relative; }
+        .u-img::after { content: '\f030'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; inset: 0; background: rgba(0,0,0,0.4); display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; }
+        .u-img:hover::after { opacity: 1; }
         .skin-panel button { width: 100%; padding: 12px; margin-bottom: 5px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 10px; cursor: pointer; font-size: 12px; font-weight: 800; }
         .skin-panel button.active { border-color: var(--neon); color: #fff; background: rgba(0,242,255,0.1); }
         @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
@@ -70,10 +73,13 @@
         <div id="p-btn-top" style="width:34px; height:34px; border-radius:50%; border:2px solid var(--gold); overflow:hidden; cursor: pointer;" onclick="UI.menu(true)"></div>
     </div></header>
 
+    <div id="overlay" onclick="UI.menu(false)"></div>
+
     <aside id="menu" class="sidebar">
         <div class="u-box">
-            <div class="u-img" id="menu-photo"></div>
+            <div class="u-img" id="menu-photo" onclick="UI.changePhoto()"></div>
             <p id="menu-name" style="font-weight:900; margin-top:10px;">Mestre</p>
+            <p style="font-size: 9px; color: var(--gold); margin-top: 4px; opacity: 0.7;">Toque na foto para alterar</p>
         </div>
 
         <div class="skin-panel" style="padding: 0 20px;">
@@ -86,9 +92,9 @@
         <div style="margin: 20px; padding: 15px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px;">
             <h3 style="font-size: 11px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;"><i class="fa-solid fa-microchip"></i> Novidades v31.0</h3>
             <ul style="list-style: none; font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.6;">
-                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Protocolo de Instalação Embutida (PWA).</li>
-                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Notificação de Sobrevivência Blindada.</li>
-                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Sincronia de Alta Performance Android.</li>
+                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Protocolo de Instalação Standalone.</li>
+                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Upload de Foto de Perfil corrigido.</li>
+                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Fechamento de Menu via Overlay.</li>
             </ul>
         </div>
 
@@ -120,7 +126,6 @@
                 UI.updatePhoto(); 
                 UI.setSkin(Storage.get('l_skin') || 'gold'); 
                 Visual.init(); 
-                // ATRASO PARA GARANTIR LEITURA DO LEMBRETE
                 setTimeout(() => this.checkUpdates(), 2000); 
                 this.registerSW();
             },
@@ -143,25 +148,20 @@
 
             checkUpdates() {
                 const oldV = Storage.get('l_version');
-                
-                // 1. Se mudou, salva e marca pra mostrar DEPOIS do reload
                 if (oldV && oldV !== VERSION) {
                     Storage.set('l_version', VERSION);
                     Storage.set('show_update_alert', true); 
                     return; 
                 }
-
                 if (!oldV) {
                     Storage.set('l_version', VERSION);
                     return;
                 }
-
-                // 2. Se o app já reiniciou e tem o lembrete, agora sim mostra!
                 if (Storage.get('show_update_alert')) {
                     setTimeout(() => {
                         UI.showUpdateToast();
                         this.sendSystemNotification();
-                        UI.draw('ai', `**Upgrade v${VERSION} Finalizado.** Sistema embutido sincronizado com sucesso!`);
+                        UI.draw('ai', `**Upgrade v${VERSION} Finalizado.** Sistema embutido sincronizado com sucesso no Android!`);
                         Storage.set('show_update_alert', false); 
                     }, 1500); 
                 }
@@ -197,16 +197,43 @@
                 t.classList.add('show');
                 setTimeout(() => t.classList.remove('show'), 5000);
             },
-            menu(s) { document.getElementById('menu').classList.toggle('open', s); document.getElementById('overlay').classList.toggle('active', s); document.body.style.overflow = s ? 'hidden' : ''; },
-            setSkin(s) { document.body.className = s === 'gold' ? '' : `theme-${s}`; Storage.set('l_skin', s); this.menu(false); Visual.prompts = SkinPromptsMapping[s]; Visual.update(); this.updateActiveSkinButton(s); },
+            menu(s) { 
+                document.getElementById('menu').classList.toggle('open', s); 
+                document.getElementById('overlay').classList.toggle('active', s); 
+                document.body.style.overflow = s ? 'hidden' : ''; 
+            },
+            setSkin(s) { document.body.className = s === 'gold' ? '' : `theme-${s}`; Storage.set('l_skin', s); this.menu(false); Visual.update(); this.updateActiveSkinButton(s); },
             updateActiveSkinButton(s) { document.querySelectorAll('.skin-panel button').forEach(b => b.classList.remove('active')); const btn = document.getElementById('btn-skin-'+s); if(btn) btn.classList.add('active'); },
             size(t) { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; },
             draw(r, t) { const w = document.createElement('div'); w.className = `msg ${r}`; let av = r === 'ai' ? `<img src="${AI_AVATAR}" style="width:100%; height:100%; object-fit:cover;">` : `<img src="${Storage.get('l_photo') || DEFAULT_USER_AVATAR}" style="width:100%; height:100%; object-fit:cover;">`; w.innerHTML = `${r==='ai' ? `<div class="avatar">${av}</div>` : ''}<div class="bubble">${marked.parse(t)}</div>${r==='user' ? `<div class="avatar">${av}</div>` : ''}`; this.box.appendChild(w); this.main.scrollTop = this.main.scrollHeight; },
             dots(s) { if(s) { const d = document.createElement('div'); d.id = 'dots'; d.className = 'msg ai'; d.innerHTML = `<div class="avatar"><img src="${AI_AVATAR}" style="width:100%; height:100%; object-fit:cover;"></div><div class="bubble">...</div>`; this.box.appendChild(d); } else { const d = document.getElementById('dots'); if(d) d.remove(); } this.main.scrollTop = this.main.scrollHeight; },
-            updatePhoto() { const p = Storage.get('l_photo') || DEFAULT_USER_AVATAR; const img = `<img src="${p}" style="width:100%;height:100%;object-fit:cover;">`; document.getElementById('p-btn-top').innerHTML = img; document.getElementById('menu-photo').innerHTML = img; }
+            updatePhoto() { 
+                const p = Storage.get('l_photo') || DEFAULT_USER_AVATAR; 
+                const img = `<img src="${p}" style="width:100%;height:100%;object-fit:cover;">`; 
+                document.getElementById('p-btn-top').innerHTML = img; 
+                document.getElementById('menu-photo').innerHTML = img; 
+            },
+            // FUNÇÃO PARA TROCAR A FOTO
+            changePhoto() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = e => {
+                    const file = e.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                            Storage.set('l_photo', reader.result);
+                            this.updatePhoto();
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                };
+                input.click();
+            }
         };
 
-        const Visual = { slides: document.querySelectorAll('.bg-slide'), current: 0, async update() { if(!this.prompts) return; const theme = this.prompts[Math.floor(Math.random() * this.prompts.length)]; const url = `https://image.pollinations.ai/prompt/${theme}?width=1080&height=1920&nologo=true&seed=${Math.random()}`; const img = new Image(); img.onload = () => { this.slides[1-this.current].style.backgroundImage = `url(${url})`; this.slides[this.current].classList.remove('active'); this.slides[1-this.current].classList.add('active'); this.current = 1 - this.current; }; img.src = url; }, init() { this.prompts = SkinPromptsMapping[Storage.get('l_skin') || 'gold']; this.update(); setInterval(() => this.update(), 60000); } };
+        const Visual = { slides: document.querySelectorAll('.bg-slide'), current: 0, async update() { this.prompts = SkinPromptsMapping[Storage.get('l_skin') || 'gold']; if(!this.prompts) return; const theme = this.prompts[Math.floor(Math.random() * this.prompts.length)]; const url = `https://image.pollinations.ai/prompt/${theme}?width=1080&height=1920&nologo=true&seed=${Math.random()}`; const img = new Image(); img.onload = () => { this.slides[1-this.current].style.backgroundImage = `url(${url})`; this.slides[this.current].classList.remove('active'); this.slides[1-this.current].classList.add('active'); this.current = 1 - this.current; }; img.src = url; }, init() { this.update(); setInterval(() => this.update(), 60000); } };
         
         document.getElementById('u-in').addEventListener('keydown', (e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); Core.send(); } });
         window.onload = () => Core.init();
