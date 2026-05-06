@@ -6,7 +6,10 @@
   "start_url": "/larapro/",
   "scope": "/larapro/",
   "display": "standalone",
-  "display_override": ["standalone", "minimal-ui"],
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
   "orientation": "portrait",
   "background_color": "#050811",
   "theme_color": "#050811",
