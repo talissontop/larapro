@@ -12,16 +12,15 @@
     <meta name="application-name" content="Lara Elite">
     <meta name="msapplication-TileColor" content="#050811">
     
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="/larapro/manifest.json?v=omega">
+    <link rel="apple-touch-icon" sizes="180x180" href="/larapro/icone.png?v=omega">
+    <link rel="icon" type="image/png" href="/larapro/icone.png?v=omega">
     
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     
     <title>Lara Elite v31.0 OMEGA</title>
-
-    <link rel="apple-touch-icon" sizes="180x180" href="icone.png">
-    <link rel="icon" type="image/png" href="icone.png">
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -52,10 +51,8 @@
         footer { position: fixed; bottom: 0; left: 0; width: 100%; padding: 10px 15px calc(15px + env(safe-area-inset-bottom, 0px)); background: #000; z-index: 2000; }
         .in-box { width: 100%; max-width: 800px; margin: 0 auto; background: rgba(25, 30, 45, 0.98); border: 1px solid rgba(255,255,255,0.1); border-radius: 25px; padding: 5px 10px; display: flex; align-items: center; }
         textarea { flex: 1; background: none; border: none; color: #fff; font-size: 16px; outline: none; resize: none; max-height: 100px; padding: 10px; }
-        
         .btn-send { background: var(--accent); border: none; width: 40px; height: 40px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: background 0.2s; }
         .btn-send:active { filter: brightness(1.2); }
-        
         aside.sidebar { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; z-index: 3000; background: rgba(5, 8, 17, 0.98); backdrop-filter: blur(30px); transition: 0.4s; border-right: 1px solid rgba(255,255,255,0.1); }
         .sidebar.open { left: 0; }
         #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2500; display: none; }
@@ -105,13 +102,12 @@
         </div>
 
         <nav style="padding:20px; display:flex; flex-direction:column; gap:10px;">
-            <button id="btn-install" onclick="triggerInstall()" style="display:none; width:100%; padding:12px; border-radius:10px; background:rgba(0,242,255,0.1); border:1px solid var(--neon); color:var(--neon); font-weight:bold; cursor: margin-bottom: 5px;"><i class="fa-solid fa-download"></i> INSTALAR APP NATIVO</button>
+            <button id="btn-install" onclick="triggerInstall()" style="display:none; width:100%; padding:12px; border-radius:10px; background:rgba(0,242,255,0.1); border:1px solid var(--neon); color:var(--neon); font-weight:bold; cursor: pointer; margin-bottom: 5px;"><i class="fa-solid fa-download"></i> INSTALAR APP NATIVO</button>
             
             <hr style="opacity:0.1; margin: 5px 0;">
             <button onclick="Core.clearChat()" style="width:100%; padding:12px; border-radius:10px; background:rgba(239,68,68,0.1); border:1px solid #ef4444; color:#ef4444; font-weight:bold; cursor: pointer;"><i class="fa-solid fa-trash"></i> LIMPAR CHAT</button>
         </nav>
     </aside>
-
 
     <main class="chat" id="chat-main"><div class="chat-wrap" id="chat-box"></div></main>
     <footer><div class="in-box">
@@ -122,6 +118,7 @@
     <script>
         const Storage = { set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} }, get(k) { try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; } catch(e) { return null; } } };
         const VERSION = "31.0";
+        // Mantendo os seus links externos de IA apenas para visualização dentro do app (isso não afeta a instalação)
         const AI_AVATAR = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
         const DEFAULT_USER_AVATAR = "https://ui-avatars.com/api/?name=Mestre&background=D4AF37&color=fff&rounded=true&bold=true";
         const SkinPromptsMapping = { 'gold': [ 'cyberpunk_city_dark_gold_highly_detailed' ], 'cyber': [ 'cyberpunk_city_neon_colors_night' ], 'stealth': [ 'dark_cyberpunk_city_night' ] };
@@ -140,9 +137,9 @@
             
             registerSW() {
                 if ('serviceWorker' in navigator) {
-                    const swUrl = `./sw.js?v=${Date.now()}`;
-                    // TRAVA DE ESCOPO: Obriga o Chrome a tratar isso como a base do aplicativo
-                    navigator.serviceWorker.register(swUrl, { scope: './' }).then(reg => {
+                    const swUrl = `/larapro/sw.js?v=${Date.now()}`;
+                    // TRAVA DE ESCOPO ABSOLUTA
+                    navigator.serviceWorker.register(swUrl, { scope: '/larapro/' }).then(reg => {
                         reg.onupdatefound = () => {
                             const newWorker = reg.installing;
                             newWorker.onstatechange = () => {
@@ -245,7 +242,6 @@
         
         document.getElementById('u-in').addEventListener('keydown', (e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); Core.send(); } });
         
-        // GATILHO EXTREMO: CAPTURA A INSTALAÇÃO E CRIA O BOTÃO
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
