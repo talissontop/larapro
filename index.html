@@ -9,7 +9,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     
-    <title>Lara Elite v30.7 OMEGA</title>
+    <title>Lara Elite v30.8 OMEGA</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
     <link rel="icon" type="image/png" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
@@ -61,23 +61,38 @@
 
     <header><div class="h-wrap">
         <button onclick="UI.menu(true)" style="background:none; border:none; color:#fff; font-size:22px; cursor: pointer;"><i class="fa-solid fa-bars-staggered"></i></button>
-        <h1>Lara Elite v30.7</h1>
+        <h1>Lara Elite v30.8</h1>
         <div id="p-btn-top" style="width:34px; height:34px; border-radius:50%; border:2px solid var(--gold); overflow:hidden; cursor: pointer;" onclick="UI.menu(true)"></div>
     </div></header>
 
-    <div id="overlay" onclick="UI.menu(false)"></div>
     <aside id="menu" class="sidebar">
-        <div class="u-box"><div class="u-img" id="menu-photo"></div><p id="menu-name" style="font-weight:900; margin-top:10px;">Mestre</p></div>
+        <div class="u-box">
+            <div class="u-img" id="menu-photo"></div>
+            <p id="menu-name" style="font-weight:900; margin-top:10px;">Mestre</p>
+        </div>
+
         <div class="skin-panel" style="padding: 0 20px;">
+            <p style="font-size: 10px; color: rgba(255,255,255,0.4); margin-bottom: 8px; font-weight: 800;">NÚCLEO ELITE</p>
             <button onclick="UI.setSkin('gold')" id="btn-skin-gold" class="active">Elite Gold</button>
             <button onclick="UI.setSkin('cyber')" id="btn-skin-cyber">Cyber Neon</button>
             <button onclick="UI.setSkin('stealth')" id="btn-skin-stealth">Stealth</button>
         </div>
+
+        <div style="margin: 20px; padding: 15px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 12px;">
+            <h3 style="font-size: 11px; color: var(--gold); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;"><i class="fa-solid fa-microchip"></i> Novidades v30.8</h3>
+            <ul style="list-style: none; font-size: 11px; color: rgba(255,255,255,0.7); line-height: 1.6;">
+                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Log de Sistema integrado ao Menu.</li>
+                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Interface do Cockpit otimizada.</li>
+                <li><i class="fa-solid fa-check" style="color:var(--neon); font-size:9px;"></i> Protocolo Anti-Cache Permanente.</li>
+            </ul>
+        </div>
+
         <nav style="padding:20px; display:flex; flex-direction:column; gap:10px;">
             <hr style="opacity:0.1; margin: 5px 0;">
             <button onclick="Core.clearChat()" style="width:100%; padding:12px; border-radius:10px; background:rgba(239,68,68,0.1); border:1px solid #ef4444; color:#ef4444; font-weight:bold; cursor: pointer;"><i class="fa-solid fa-trash"></i> LIMPAR CHAT</button>
         </nav>
     </aside>
+
 
     <main class="chat" id="chat-main"><div class="chat-wrap" id="chat-box"></div></main>
     <footer><div class="in-box">
@@ -87,7 +102,7 @@
 
     <script>
         const Storage = { set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} }, get(k) { try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; } catch(e) { return null; } } };
-        const VERSION = "30.7";
+        const VERSION = "30.8";
         const AI_AVATAR = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
         const DEFAULT_USER_AVATAR = "https://ui-avatars.com/api/?name=Mestre&background=D4AF37&color=fff&rounded=true&bold=true";
         const SkinPromptsMapping = { 'gold': [ 'cyberpunk_city_dark_gold_highly_detailed' ], 'cyber': [ 'cyberpunk_city_neon_colors_night' ], 'stealth': [ 'dark_cyberpunk_city_night' ] };
