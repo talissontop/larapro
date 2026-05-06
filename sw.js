@@ -1,17 +1,19 @@
 // ==============================================================================
-// 🛰️ LARA ELITE OMEGA — SERVICE WORKER PROFISSIONAL v30.4 
+// 🛰️ LARA ELITE OMEGA — SERVICE WORKER PROFISSIONAL v30.5
 // ==============================================================================
 
-const CACHE_NAME = 'lara-omega-v29';
+// ⚡ MUDANÇA CRUCIAL: O nome do cache agora reflete a v30.5
+const CACHE_NAME = 'lara-omega-v30.5';
 const APP_SHELL = [
     './',
     './index.html'
 ];
 
 // ============================
-// 🧠 INSTALL — Cache seguro
+// 🧠 INSTALL — Força a entrada
 // ============================
 self.addEventListener('install', (event) => {
+    // skipWaiting faz com que o novo SW assuma o controle na hora, sem esperar fechar o app
     self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL))
@@ -19,14 +21,15 @@ self.addEventListener('install', (event) => {
 });
 
 // ============================
-// 🧠 ACTIVATE — Purga total do passado
+// 🧠 ACTIVATE — Purga total do passado (Silent Purge)
 // ============================
 self.addEventListener('activate', (event) => {
     event.waitUntil(
         caches.keys().then(keys =>
             Promise.all(keys.map(key => {
+                // Se o cache antigo não for o v30.5, ele é DELETADO agora
                 if (key !== CACHE_NAME) {
-                    console.log('%c 🧹 PURGA: Eliminando cache antigo: ' + key, 'color:#ff4444');
+                    console.log('%c 🧹 OMEGA PURGE: Limpando rastro antigo: ' + key, 'color:#00f2ff');
                     return caches.delete(key);
                 }
             }))
@@ -35,58 +38,38 @@ self.addEventListener('activate', (event) => {
 });
 
 // ============================
-// 🧠 FETCH — Stale While Revalidate
+// 🧠 FETCH — Network First (Prioriza o Novo)
 // ============================
 self.addEventListener('fetch', (event) => {
     const req = event.request;
 
-    // Ignora APIs externas dinâmicas para busca real em 2026
-    if (req.url.includes('pollinations.ai')) return;
+    // Ignora APIs de imagem e IA para não encher o cache de lixo
+    if (req.url.includes('pollinations.ai') || req.url.includes('text.pollinations.ai')) return;
 
     event.respondWith(
-        caches.match(req).then(cached => {
-            const networkFetch = fetch(req).then(response => {
-                // Só salva se a resposta for válida e do seu domínio
-                if (response && response.status === 200 && response.type === 'basic') {
-                    const clone = response.clone();
-                    caches.open(CACHE_NAME).then(cache => cache.put(req, clone));
-                }
-                return response;
-            }).catch(() => cached);
-
-            return cached || networkFetch;
-        })
+        // Estratégia Network First: Tenta buscar na internet o novo código primeiro.
+        // Se a internet falhar (offline), ele usa o que está no cache.
+        fetch(req).then(response => {
+            if (response && response.status === 200) {
+                const clone = response.clone();
+                caches.open(CACHE_NAME).then(cache => cache.put(req, clone));
+            }
+            return response;
+        }).catch(() => caches.match(req))
     );
 });
 
 // ============================
-// 🧠 NOTIFICATION CLICK — Controle de Instância
+// 🧠 NOTIFICAÇÕES — Sincronia
 // ============================
 self.addEventListener('notificationclick', (event) => {
     event.notification.close();
-
     event.waitUntil(
         clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clientsArr => {
-            // Suporte para botões de ação (Actions)
-            if (event.action === 'PURGE') {
-                for (const client of clientsArr) {
-                    client.postMessage({ type: 'ACTION_TRIGGERED', action: 'PURGE' });
-                }
-                return;
-            }
-
-            // Foca na aba aberta ou abre nova
             for (const client of clientsArr) {
                 if ('focus' in client) return client.focus();
             }
             if (clients.openWindow) return clients.openWindow('./');
         })
     );
-});
-
-// ============================
-// 🧠 MENSAGENS — Sincronia de DNA
-// ============================
-self.addEventListener('message', (event) => {
-    if (event.data?.type === 'SKIP_WAITING') self.skipWaiting();
 });
