@@ -15,30 +15,30 @@
   "theme_color": "#050811",
   "icons": [
     {
-      "src": "/larapro/icons/192.png",
+      "src": "https://clumsy-black-ptunuck9h3.edgeone.app/images%20(1).jpeg",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/jpeg",
       "purpose": "any"
     },
     {
-      "src": "/larapro/icons/512.png",
+      "src": "https://clumsy-black-ptunuck9h3.edgeone.app/images%20(1).jpeg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/jpeg",
       "purpose": "maskable"
     }
   ],
   "screenshots": [
     {
-      "src": "/larapro/icons/512.png",
+      "src": "https://clumsy-black-ptunuck9h3.edgeone.app/images%20(1).jpeg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/jpeg",
       "form_factor": "narrow",
       "label": "Interface Mobile OMEGA"
     },
     {
-      "src": "/larapro/icons/512.png",
+      "src": "https://clumsy-black-ptunuck9h3.edgeone.app/images%20(1).jpeg",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/jpeg",
       "form_factor": "wide",
       "label": "Interface PC"
     }
