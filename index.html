@@ -115,21 +115,18 @@
                 UI.updatePhoto(); 
                 UI.setSkin(Storage.get('l_skin') || 'gold'); 
                 Visual.init(); 
-                this.checkUpdates();
+                setTimeout(() => this.checkUpdates(), 2000); 
                 this.registerSW();
             },
             
-            // ⚡ REGISTRO COM CACHE BUSTER (Fórum Gringo)
             registerSW() {
                 if ('serviceWorker' in navigator) {
-                    // Adiciona um timestamp na URL do sw.js para forçar o navegador a baixar o novo
                     const swUrl = `./sw.js?v=${Date.now()}`;
                     navigator.serviceWorker.register(swUrl).then(reg => {
                         reg.onupdatefound = () => {
                             const newWorker = reg.installing;
                             newWorker.onstatechange = () => {
                                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                    // Novo SW instalado, recarrega a página para ativar
                                     window.location.reload();
                                 }
                             };
@@ -141,12 +138,12 @@
             checkUpdates() {
                 const oldV = Storage.get('l_version');
                 if (oldV !== VERSION) {
-                    Storage.set('l_version', VERSION);
                     UI.showUpdateToast();
                     this.sendSystemNotification();
                     setTimeout(() => {
-                        UI.draw('ai', `**Upgrade v${VERSION} Finalizado.** Cache Buster ativado. Sistema purgado e sincronizado com o GitHub.`);
-                    }, 1500);
+                        Storage.set('l_version', VERSION);
+                        UI.draw('ai', `**Upgrade v${VERSION} Finalizado.** O sistema foi purgado e sincronizado com sucesso no Cockpit.`);
+                    }, 3000);
                 }
             },
 
