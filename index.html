@@ -1,10 +1,9 @@
-DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#050811">
-    
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     
     <meta name="mobile-web-app-capable" content="yes">
@@ -28,22 +27,17 @@ DOCTYPE html>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
-        
         :root { --accent: #2563eb; --gold: #D4AF37; --bg: #050811; --card-bg: rgba(15, 20, 35, 0.9); --neon: #00f2ff; }
         body.theme-cyber { --accent: #c026d3; --gold: #22d3ee; --bg: #020617; --card-bg: rgba(30, 0, 60, 0.7); --neon: #f0abfc; }
         body.theme-stealth { --accent: #334155; --gold: #94a3b8; --bg: #0f172a; --card-bg: rgba(15, 23, 42, 0.95); --neon: #cbd5e1; }
-
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
         html, body { background: #000; color: #fff; height: 100%; width: 100%; overflow: hidden; position: fixed; inset: 0; }
-        
         #bg-container { position: fixed; inset: 0; z-index: -2; background: radial-gradient(circle at center, #0a0f1e 0%, #000 100%); }
         .bg-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s ease-in-out; }
         .bg-slide.active { opacity: 1; } 
-
         header { position: fixed; top: 0; left: 0; width: 100%; padding: calc(15px + env(safe-area-inset-top, 0px)) 20px 15px; background: rgba(10, 15, 25, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(212, 175, 55, 0.2); z-index: 100; display: flex; justify-content: center; }
         .h-wrap { width: 100%; max-width: 800px; display: flex; justify-content: space-between; align-items: center; position: relative; }
         h1 { font-size: 18px; font-weight: 900; background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
         main.chat { position: fixed; top: calc(65px + env(safe-area-inset-top, 0px)); bottom: calc(80px + env(safe-area-inset-bottom, 0px)); left: 0; width: 100%; overflow-y: auto; padding: 20px 15px; display: flex; flex-direction: column; align-items: center; z-index: 10; scroll-behavior: smooth; }
         .chat-wrap { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; }
         .msg { display: flex; gap: 12px; width: 100%; animation: slideUp 0.3s ease; align-items: flex-end; }
@@ -52,46 +46,33 @@ DOCTYPE html>
         .bubble { padding: 12px 16px; font-size: 15px; line-height: 1.5; border-radius: 18px; backdrop-filter: blur(10px); max-width: 85%; }
         .user .bubble { background: var(--accent); color: #fff; border-bottom-right-radius: 4px; }
         .ai .bubble { background: var(--card-bg); border: 1px solid rgba(255,255,255,0.1); border-bottom-left-radius: 4px; }
-
         footer { position: fixed; bottom: 0; left: 0; width: 100%; padding: 10px 15px calc(15px + env(safe-area-inset-bottom, 0px)); background: #000; z-index: 2000; }
         .in-box { width: 100%; max-width: 800px; margin: 0 auto; background: rgba(25, 30, 45, 0.98); border: 1px solid rgba(255,255,255,0.1); border-radius: 25px; padding: 5px 10px; display: flex; align-items: center; }
         textarea { flex: 1; background: none; border: none; color: #fff; font-size: 16px; outline: none; resize: none; max-height: 100px; padding: 10px; }
         .btn-send { background: var(--accent); border: none; width: 40px; height: 40px; border-radius: 50%; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-
         aside.sidebar { position: fixed; top: 0; left: -100%; width: 280px; height: 100%; z-index: 3000; background: rgba(5, 8, 17, 0.98); backdrop-filter: blur(30px); transition: 0.4s; border-right: 1px solid rgba(255,255,255,0.1); }
         .sidebar.open { left: 0; }
         #overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 2500; display: none; }
         #overlay.active { display: block; }
-
         .u-box { padding: 50px 20px 20px; text-align: center; }
         .u-img { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 10px; overflow: hidden; background: #111; }
-        
         .skin-panel button { width: 100%; padding: 12px; margin-bottom: 5px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; border-radius: 10px; cursor: pointer; font-size: 12px; font-weight: 800; }
         .skin-panel button.active { border-color: var(--neon); color: #fff; background: rgba(0,242,255,0.1); }
-        
         #update-splash { position: fixed; inset: 0; background: #050811; z-index: 99999; display: none; flex-direction: column; align-items: center; justify-content: center; }
         .progress-container { width: 200px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 20px; overflow: hidden; }
         #u-progress { width: 0%; height: 100%; background: var(--neon); transition: 0.3s; }
-
         @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
     <div id="bg-container"><div class="bg-slide active"></div><div class="bg-slide"></div></div>
-    
-    <div id="update-splash">
-        <h2 style="font-size:14px; font-weight:900; color:var(--neon);">SINCRO v30.4 OMEGA</h2>
-        <div class="progress-container"><div id="u-progress"></div></div>
-    </div>
-
+    <div id="update-splash"><h2 style="font-size:14px; font-weight:900; color:var(--neon);">SINCRO v30.4 OMEGA</h2><div class="progress-container"><div id="u-progress"></div></div></div>
     <header><div class="h-wrap">
         <button onclick="UI.menu(true)" style="background:none; border:none; color:#fff; font-size:22px; cursor: pointer;"><i class="fa-solid fa-bars-staggered"></i></button>
         <h1>Lara Elite v30.4</h1>
         <div id="p-btn-top" style="width:34px; height:34px; border-radius:50%; border:2px solid var(--gold); overflow:hidden; cursor: pointer;" onclick="UI.menu(true)"></div>
     </div></header>
-
     <div id="overlay" onclick="UI.menu(false)"></div>
-    
     <aside id="menu" class="sidebar">
         <div class="u-box"><div class="u-img" id="menu-photo"></div><p id="menu-name" style="font-weight:900; margin-top:10px;">Mestre</p></div>
         <div class="skin-panel" style="padding: 0 20px;">
@@ -104,210 +85,38 @@ DOCTYPE html>
             <button onclick="Core.clearChat()" style="width:100%; padding:12px; border-radius:10px; background:rgba(239,68,68,0.1); border:1px solid #ef4444; color:#ef4444; font-weight:bold; cursor: pointer;"><i class="fa-solid fa-trash"></i> LIMPAR CHAT</button>
         </nav>
     </aside>
-
     <main class="chat" id="chat-main"><div class="chat-wrap" id="chat-box"></div></main>
-    
-    <footer>
-        <div class="in-box">
-            <textarea id="u-in" placeholder="Comando mestre..." oninput="UI.size(this)"></textarea>
-            <button class="btn-send" onclick="Core.send()"><i class="fa-solid fa-paper-plane"></i></button>
-        </div>
-    </footer>
-
+    <footer><div class="in-box">
+        <textarea id="u-in" placeholder="Comando mestre..." oninput="UI.size(this)"></textarea>
+        <button class="btn-send" onclick="Core.send()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div></footer>
     <script>
-        // Blindagem OMEGA contra erros de Storage (Aprovado por fóruns gringos)
-        const Storage = { 
-            set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) { console.warn("Storage bloqueado."); } }, 
-            get(k) { try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; } catch(e) { return null; } } 
-        };
-
+        const Storage = { set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch(e) {} }, get(k) { try { const r = localStorage.getItem(k); return r ? JSON.parse(r) : null; } catch(e) { return null; } } };
         const VERSION = "30.4";
         const AI_AVATAR = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
-        
-        // Fallback blindado para o avatar do usuário (Nunca dá erro de imagem quebrada)
         const DEFAULT_USER_AVATAR = "https://ui-avatars.com/api/?name=Mestre&background=D4AF37&color=fff&rounded=true&bold=true";
-        
-        const SkinPromptsMapping = {
-            'gold': [ 'cyberpunk_city_dark_gold_highly_detailed', 'dark_gold_cyberpunk_neon_lights', 'luxurious_cyberpunk_environment_dark_gold_tones' ],
-            'cyber': [ 'cyberpunk_city_neon_colors_night', 'vibrant_cyberpunk_neon_landscape', 'futuristic_city_night_sky_neon' ],
-            'stealth': [ 'dark_cyberpunk_city_night', 'nighttime_futuristic_landscape_stealth', 'dark_urban_cyberpunk_night' ]
-        };
-
+        const SkinPromptsMapping = { 'gold': [ 'cyberpunk_city_dark_gold_highly_detailed' ], 'cyber': [ 'cyberpunk_city_neon_colors_night' ], 'stealth': [ 'dark_cyberpunk_city_night' ] };
         const Core = {
             h: [], typing: false,
-            init() {
-                this.h = Storage.get('l_chat') || [];
-                this.h.forEach(m => UI.draw(m.r, m.t));
-                UI.updatePhoto();
-                UI.setSkin(Storage.get('l_skin') || 'gold');
-                this.checkUpdates();
-                Visual.init();
-                
-                // ⚡ SOLUÇÃO GRINGA: Dispara notificação no Load e cria um gatilho fantasma para garantia.
-                this.autoAtivarNotificacoes();
-                document.body.addEventListener('click', () => {
-                    if ('Notification' in window && Notification.permission === 'default') {
-                        this.autoAtivarNotificacoes();
-                    }
-                }, { once: true });
-            },
-
-            // ⚡ A LÓGICA DE NOTIFICAÇÃO AUTOMÁTICA BLINDADA
-            async autoAtivarNotificacoes() {
-                try {
-                    if ('Notification' in window && Notification.permission === 'default') {
-                        const p = await Notification.requestPermission();
-                        if (p === 'granted' && 'serviceWorker' in navigator) {
-                            const reg = await navigator.serviceWorker.ready;
-                            reg.showNotification("LARA OMEGA", {
-                                body: "⚡ Alertas do Sistema Ativados Automaticamente!",
-                                icon: AI_AVATAR,
-                                vibrate: [200, 100, 200]
-                            });
-                        }
-                    }
-                } catch (e) {
-                    console.log("Auto-prompt de notificação aguardando clique do usuário.");
-                }
-            },
-
-            checkUpdates() {
-                if (Storage.get('l_version') !== VERSION) {
-                    document.getElementById('update-splash').style.display = 'flex';
-                    let p = 0;
-                    const int = setInterval(() => {
-                        p += 5; document.getElementById('u-progress').style.width = p + '%';
-                        if(p>=100){ clearInterval(int); Storage.set('l_version', VERSION); document.getElementById('update-splash').style.display='none'; }
-                    }, 30);
-                }
-            },
-            
-            async send() {
-                const i = document.getElementById('u-in');
-                let t = i.value.trim();
-                if (!t || this.typing) return;
-
-                this.typing = true;
-                i.value = "";
-                i.style.height = "auto"; 
-                
-                UI.draw('user', t);
-                this.h.push({t, r:'user'});
-                UI.dots(true);
-
-                try {
-                    const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(t)}?private=true&model=openai`);
-                    const txt = await res.text();
-                    UI.dots(false);
-                    const clean = txt.replace(/Ad 🌸|Support/gi, '').trim();
-                    UI.draw('ai', clean);
-                    this.h.push({t: clean, r:'ai'});
-                    Storage.set('l_chat', this.h.slice(-20));
-                } catch (e) {
-                    UI.dots(false);
-                    UI.draw('ai', "Erro de conexão neural com o núcleo OMEGA, mestre. Verifique o link digital.");
-                } finally {
-                    this.typing = false;
-                }
-            },
-            clearChat() {
-                if(confirm("Apagar histórico neural?")) { this.h = []; Storage.set('l_chat', []); document.getElementById('chat-box').innerHTML = ''; UI.menu(false); }
-            }
+            init() { this.h = Storage.get('l_chat') || []; this.h.forEach(m => UI.draw(m.r, m.t)); UI.updatePhoto(); UI.setSkin(Storage.get('l_skin') || 'gold'); this.checkUpdates(); Visual.init(); this.autoAtivarNotificacoes(); document.body.addEventListener('click', () => { if ('Notification' in window && Notification.permission === 'default') this.autoAtivarNotificacoes(); }, { once: true }); },
+            async autoAtivarNotificacoes() { try { if ('Notification' in window && Notification.permission === 'default') { const p = await Notification.requestPermission(); if (p === 'granted' && 'serviceWorker' in navigator) { const reg = await navigator.serviceWorker.ready; reg.showNotification("LARA OMEGA", { body: "⚡ Alertas v30.4 Ativados!", icon: AI_AVATAR }); } } } catch (e) {} },
+            checkUpdates() { if (Storage.get('l_version') !== VERSION) { document.getElementById('update-splash').style.display = 'flex'; let p = 0; const int = setInterval(() => { p += 5; document.getElementById('u-progress').style.width = p + '%'; if(p>=100){ clearInterval(int); Storage.set('l_version', VERSION); document.getElementById('update-splash').style.display='none'; } }, 30); } },
+            async send() { const i = document.getElementById('u-in'); let t = i.value.trim(); if (!t || this.typing) return; this.typing = true; i.value = ""; i.style.height = "auto"; UI.draw('user', t); this.h.push({t, r:'user'}); UI.dots(true); try { const res = await fetch(`https://text.pollinations.ai/${encodeURIComponent(t)}?private=true&model=openai`); const txt = await res.text(); UI.dots(false); const clean = txt.replace(/Ad 🌸|Support/gi, '').trim(); UI.draw('ai', clean); this.h.push({t: clean, r:'ai'}); Storage.set('l_chat', this.h.slice(-20)); } catch (e) { UI.dots(false); } finally { this.typing = false; } },
+            clearChat() { if(confirm("Apagar histórico neural?")) { this.h = []; Storage.set('l_chat', []); document.getElementById('chat-box').innerHTML = ''; UI.menu(false); } }
         };
-
         const UI = {
-            box: document.getElementById('chat-box'),
-            main: document.getElementById('chat-main'),
-            
-            menu(s) {
-                const m = document.getElementById('menu');
-                const o = document.getElementById('overlay');
-                m.classList.toggle('open', s);
-                o.classList.toggle('active', s);
-                document.body.style.overflow = s ? 'hidden' : '';
-            },
-            
-            setSkin(s) { 
-                document.body.className = s === 'gold' ? '' : `theme-${s}`; Storage.set('l_skin', s); 
-                this.menu(false); 
-                Visual.prompts = SkinPromptsMapping[s];
-                Visual.update();
-                this.updateActiveSkinButton(s);
-            },
-            
-            updateActiveSkinButton(s) {
-                document.querySelectorAll('.skin-panel button').forEach(b => b.classList.remove('active'));
-                const btn = document.getElementById('btn-skin-'+s);
-                if(btn) btn.classList.add('active');
-            },
-            
+            box: document.getElementById('chat-box'), main: document.getElementById('chat-main'),
+            menu(s) { document.getElementById('menu').classList.toggle('open', s); document.getElementById('overlay').classList.toggle('active', s); document.body.style.overflow = s ? 'hidden' : ''; },
+            setSkin(s) { document.body.className = s === 'gold' ? '' : `theme-${s}`; Storage.set('l_skin', s); this.menu(false); Visual.prompts = SkinPromptsMapping[s]; Visual.update(); this.updateActiveSkinButton(s); },
+            updateActiveSkinButton(s) { document.querySelectorAll('.skin-panel button').forEach(b => b.classList.remove('active')); const btn = document.getElementById('btn-skin-'+s); if(btn) btn.classList.add('active'); },
             size(t) { t.style.height = 'auto'; t.style.height = t.scrollHeight + 'px'; },
-            
-            // ⚡ ÍCONES DE USUÁRIO E AI 100% OPERACIONAIS
-            draw(r, t) {
-                const w = document.createElement('div');
-                w.className = `msg ${r}`;
-                let av;
-                if(r === 'ai') {
-                    av = `<img src="${AI_AVATAR}" style="width:100%; height:100%; object-fit:cover;">`;
-                } else {
-                    const photo = Storage.get('l_photo');
-                    const userIconSrc = photo ? photo : DEFAULT_USER_AVATAR; 
-                    av = `<img src="${userIconSrc}" style="width:100%; height:100%; object-fit:cover;">`;
-                }
-                w.innerHTML = `${r==='ai' ? `<div class="avatar">${av}</div>` : ''}<div class="bubble">${marked.parse(t)}</div>${r==='user' ? `<div class="avatar">${av}</div>` : ''}`;
-                this.box.appendChild(w);
-                this.main.scrollTop = this.main.scrollHeight;
-            },
-            dots(s) {
-                if(s) {
-                    const d = document.createElement('div'); d.id = 'dots'; d.className = 'msg ai';
-                    d.innerHTML = `<div class="avatar"><img src="${AI_AVATAR}" style="width:100%; height:100%; object-fit:cover;"></div><div class="bubble">...</div>`;
-                    this.box.appendChild(d);
-                } else {
-                    const d = document.getElementById('dots'); if(d) d.remove();
-                }
-                this.main.scrollTop = this.main.scrollHeight;
-            },
-            
-            updatePhoto() {
-                const p = Storage.get('l_photo');
-                const userIconSrc = p ? p : DEFAULT_USER_AVATAR;
-                const img = `<img src="${userIconSrc}" style="width:100%;height:100%;object-fit:cover;">`;
-                document.getElementById('p-btn-top').innerHTML = img;
-                document.getElementById('menu-photo').innerHTML = img;
-            }
+            draw(r, t) { const w = document.createElement('div'); w.className = `msg ${r}`; let av = r === 'ai' ? `<img src="${AI_AVATAR}" style="width:100%; height:100%; object-fit:cover;">` : `<img src="${Storage.get('l_photo') || DEFAULT_USER_AVATAR}" style="width:100%; height:100%; object-fit:cover;">`; w.innerHTML = `${r==='ai' ? `<div class="avatar">${av}</div>` : ''}<div class="bubble">${marked.parse(t)}</div>${r==='user' ? `<div class="avatar">${av}</div>` : ''}`; this.box.appendChild(w); this.main.scrollTop = this.main.scrollHeight; },
+            dots(s) { if(s) { const d = document.createElement('div'); d.id = 'dots'; d.className = 'msg ai'; d.innerHTML = `<div class="avatar"><img src="${AI_AVATAR}" style="width:100%; height:100%; object-fit:cover;"></div><div class="bubble">...</div>`; this.box.appendChild(d); } else { const d = document.getElementById('dots'); if(d) d.remove(); } this.main.scrollTop = this.main.scrollHeight; },
+            updatePhoto() { const p = Storage.get('l_photo') || DEFAULT_USER_AVATAR; const img = `<img src="${p}" style="width:100%;height:100%;object-fit:cover;">`; document.getElementById('p-btn-top').innerHTML = img; document.getElementById('menu-photo').innerHTML = img; }
         };
-
-        const Visual = {
-            slides: document.querySelectorAll('.bg-slide'), current: 0,
-            
-            async update() {
-                if(!this.prompts) return;
-                const theme = this.prompts[Math.floor(Math.random() * this.prompts.length)];
-                const url = `https://image.pollinations.ai/prompt/${theme}?width=1080&height=1920&nologo=true&seed=${Math.random()}`;
-                const img = new Image();
-                img.onload = () => {
-                    this.slides[1-this.current].style.backgroundImage = `url(${url})`;
-                    this.slides[this.current].classList.remove('active');
-                    this.slides[1-this.current].classList.add('active');
-                    this.current = 1 - this.current;
-                };
-                img.src = url;
-            },
-            
-            init() { 
-                this.prompts = SkinPromptsMapping[Storage.get('l_skin') || 'gold'];
-                this.update(); setInterval(() => this.update(), 60000); 
-            }
-        };
-
-        document.getElementById('u-in').addEventListener('keydown', (e) => {
-            if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); Core.send(); }
-        });
-        
+        const Visual = { slides: document.querySelectorAll('.bg-slide'), current: 0, async update() { if(!this.prompts) return; const theme = this.prompts[Math.floor(Math.random() * this.prompts.length)]; const url = `https://image.pollinations.ai/prompt/${theme}?width=1080&height=1920&nologo=true&seed=${Math.random()}`; const img = new Image(); img.onload = () => { this.slides[1-this.current].style.backgroundImage = `url(${url})`; this.slides[this.current].classList.remove('active'); this.slides[1-this.current].classList.add('active'); this.current = 1 - this.current; }; img.src = url; }, init() { this.prompts = SkinPromptsMapping[Storage.get('l_skin') || 'gold']; this.update(); setInterval(() => this.update(), 60000); } };
+        document.getElementById('u-in').addEventListener('keydown', (e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); Core.send(); } });
         window.addEventListener('resize', () => { UI.main.scrollTop = UI.main.scrollHeight; });
-
         window.onload = () => Core.init();
     </script>
 </body>
