@@ -1,23 +1,20 @@
 {
-  "id": "/larapro/",
-  "name": "Lara Elite v31.0",
+  "name": "Lara Elite v31.0 OMEGA",
   "short_name": "Lara Elite",
-  "description": "Cockpit de Comando OMEGA",
-  "start_url": "/larapro/index.html",
-  "scope": "/larapro/",
+  "description": "Cockpit OMEGA",
+  "start_url": ".",
   "display": "standalone",
-  "orientation": "portrait",
   "background_color": "#050811",
   "theme_color": "#050811",
   "icons": [
     {
-      "src": "https://ui-avatars.com/api/?name=Lara+Elite&background=050811&color=D4AF37&size=192",
+      "src": "icone.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "https://ui-avatars.com/api/?name=Lara+Elite&background=050811&color=D4AF37&size=512",
+      "src": "icone.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
