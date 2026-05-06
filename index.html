@@ -20,8 +20,8 @@
     
     <title>Lara Elite v31.0 OMEGA</title>
 
-    <link rel="apple-touch-icon" sizes="180x180" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
-    <link rel="icon" type="image/png" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icone.png">
+    <link rel="icon" type="image/png" href="icone.png">
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -105,7 +105,7 @@
         </div>
 
         <nav style="padding:20px; display:flex; flex-direction:column; gap:10px;">
-            <button id="btn-install" onclick="triggerInstall()" style="display:none; width:100%; padding:12px; border-radius:10px; background:rgba(0,242,255,0.1); border:1px solid var(--neon); color:var(--neon); font-weight:bold; cursor: pointer; margin-bottom: 5px;"><i class="fa-solid fa-download"></i> INSTALAR APP NATIVO</button>
+            <button id="btn-install" onclick="triggerInstall()" style="display:none; width:100%; padding:12px; border-radius:10px; background:rgba(0,242,255,0.1); border:1px solid var(--neon); color:var(--neon); font-weight:bold; cursor: margin-bottom: 5px;"><i class="fa-solid fa-download"></i> INSTALAR APP NATIVO</button>
             
             <hr style="opacity:0.1; margin: 5px 0;">
             <button onclick="Core.clearChat()" style="width:100%; padding:12px; border-radius:10px; background:rgba(239,68,68,0.1); border:1px solid #ef4444; color:#ef4444; font-weight:bold; cursor: pointer;"><i class="fa-solid fa-trash"></i> LIMPAR CHAT</button>
@@ -262,4 +262,14 @@
                     if (choiceResult.outcome === 'accepted') {
                         console.log('O Mestre aceitou a instalação nativa!');
                     }
-                    deferredP
+                    deferredPrompt = null;
+                    document.getElementById('btn-install').style.display = 'none';
+                    UI.menu(false); 
+                });
+            }
+        }
+
+        window.onload = () => Core.init();
+    </script>
+</body>
+</html>
