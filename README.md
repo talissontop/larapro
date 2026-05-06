@@ -1,29 +1,29 @@
-# 🛰️ LARA ELITE — OMEGA SEARCH v30.8
+# 🛰️ LARA ELITE — OMEGA SEARCH v30.9
 
 ![Status](https://img.shields.io/badge/STATUS-OPERACIONAL-brightgreen)
-![Version](https://img.shields.io/badge/VERSION-30.8%20OMEGA-gold)
+![Version](https://img.shields.io/badge/VERSION-30.9%20OMEGA-gold)
 ![Engine](https://img.shields.io/badge/ENGINE-GEMINI%20SEARCH-blue)
 
-**Lara Elite** é uma interface de inteligência artificial de alta performance, projetada para oferecer uma experiência fluida, estética e tecnologicamente avançada. O projeto combina o poder do motor de busca Gemini com uma arquitetura PWA (Progressive Web App) de última geração.
+**Lara Elite** é uma interface de inteligência artificial de alta performance, projetada para oferecer uma experiência fluida, estética e tecnologicamente avançada. O projeto combina o poder do motor de busca Gemini 2026 com uma arquitetura PWA (Progressive Web App) de última geração.
 
 ## 💎 DESIGN & IDENTIDADE
-O design, a interface e a concepção deste projeto foram criados exclusivamente por **Talisson Francisco**. A Lara Elite v30.8 foca em:
+O design, a interface e a concepção deste projeto foram criados exclusivamente por **Talisson Francisco**. A Lara Elite v30.9 foca em:
 
 * **Estética Cyber-Gold:** Uma UI limpa, luxuosa e responsiva.
-* **Experiência Imersiva:** Backgrounds dinâmicos de alta qualidade (Manga/Anime Aesthetic).
-* **Foco no Usuário:** Interface projetada para mestre, com controle total de perfil e chat.
+* **Experiência Imersiva:** Backgrounds dinâmicos de alta qualidade (Aesthetic Cyberpunk/Anime).
+* **Foco no Mestre:** Interface projetada para controle total de perfil, skins e histórico.
 * **Log de Sistema Integrado:** Painel de novidades direto no menu lateral para acompanhamento de evolução em tempo real.
 
-## ⚡ FUNCIONALIDADES OMEGA (v30.8)
-* **Purga de Cache Atômica:** O Service Worker v30.8 elimina automaticamente fragmentos de versões antigas para garantir performance máxima (Protocolo Buster).
+## ⚡ FUNCIONALIDADES OMEGA (v30.9)
+* **Protocolo de Sobrevivência (Update):** Notificações inteligentes que resistem ao reinício do sistema, garantindo que o mestre sempre saiba quando o upgrade foi concluído.
+* **Purga de Cache Atômica:** O Service Worker v30.9 (Protocolo Buster) elimina automaticamente fragmentos de versões antigas.
 * **Log de Sincronia:** Visualização direta no Cockpit (Menu) de todas as melhorias da versão atual.
 * **Omega Search 2026:** Incursão em tempo real na rede para respostas atualizadas e precisas.
-* **Modo Projeção (PiP):** Suporte nativo para Picture-in-Picture, permitindo que a Lara flutue sobre outros apps no Android.
-* **Notificações de Elite:** Canal de voz e alertas sincronizados diretamente com o sistema.
+* **Notificações de Elite:** Sistema de alertas visuais e de sistema sincronizados diretamente com o Android.
 
 ## 🛠️ TECNOLOGIAS UTILIZADAS
 * **Linguagens:** HTML5, CSS3 (Modern Flex/Grid), JavaScript (ES6+).
-* **Arquitetura:** PWA com Service Worker v30.8 (Stale-While-Revalidate + Cache Buster).
+* **Arquitetura:** PWA com Service Worker v30.9 (Stale-While-Revalidate + Cache Buster).
 * **IA:** Pollinations.ai & OpenAI Integration.
 * **Markdown:** Renderização via `marked.js`.
 
