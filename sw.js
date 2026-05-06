@@ -2,32 +2,45 @@
   "id": "/larapro/",
   "name": "Lara Elite v31.0 OMEGA",
   "short_name": "Lara Elite",
-  "description": "Interface Neural de Alta Performance",
+  "description": "Cockpit de Inteligência Artificial e Interface PWA de Alta Performance.",
   "start_url": "/larapro/index.html",
   "scope": "/larapro/",
   "display": "standalone",
-  "display_override": ["standalone", "window-controls-overlay"],
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
   "orientation": "portrait",
   "background_color": "#050811",
   "theme_color": "#050811",
-  "launch_handler": {
-    "client_mode": "navigate-existing"
-  },
   "icons": [
     {
-      "src": "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png",
+      "src": "/larapro/icons/192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png",
+      "src": "/larapro/icons/512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "maskable"
     }
   ],
-  "categories": ["productivity", "utilities"],
-  "lang": "pt-BR",
-  "dir": "ltr"
+  "screenshots": [
+    {
+      "src": "/larapro/icons/512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Interface Mobile OMEGA"
+    },
+    {
+      "src": "/larapro/icons/512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Interface PC"
+    }
+  ]
 }
