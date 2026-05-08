@@ -4,59 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#050811">
-    
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
-    
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Lara Elite">
-    
-    <title>Lara Elite v21.11 - Mobile PWA</title>
+    <title>Lara Elite v21.11</title>
 
-    <link rel="apple-touch-icon" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png">
-
-    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Lara%20Elite%22%2C%22short_name%22%3A%22LaraElite%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23050811%22%2C%22theme_color%22%3A%22%232563eb%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fspicy-harlequin-pqaujlkovi.edgeone.app%2Fpngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fspicy-harlequin-pqaujlkovi.edgeone.app%2Fpngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
-
-    <link rel="preconnect" href="https://text.pollinations.ai">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Fira+Code:wght@400;500&display=swap');
         
-        /* TEMAS DINÂMICOS */
         :root { --accent: #2563eb; --gold: #D4AF37; --bg: #050811; --card-bg: rgba(15, 20, 35, 0.85); --neon: #00f2ff; }
-        
         body.theme-cyber { --accent: #c026d3; --gold: #22d3ee; --bg: #020617; --card-bg: rgba(30, 0, 60, 0.7); --neon: #f0abfc; }
         body.theme-stealth { --accent: #334155; --gold: #94a3b8; --bg: #0f172a; --card-bg: rgba(15, 23, 42, 0.95); --neon: #cbd5e1; }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
-        code, pre { font-family: 'Fira Code', monospace !important; font-size: 13px; }
-
-        html, body { background: #000; color: #fff; height: 100%; width: 100%; overflow: hidden; position: fixed; inset: 0; transition: background 0.5s ease; }
-        #bg-container { position: fixed; inset: 0; z-index: -2; background: #000; }
         
+        html, body { background: #050811; color: #fff; height: 100dvh; width: 100vw; overflow: hidden; transition: background 0.5s ease; overscroll-behavior-y: none; }
+        
+        #bg-container { position: fixed; inset: 0; z-index: -2; background: #050811; }
         @keyframes bgPan { 0% { transform: scale(1); } 100% { transform: scale(1.08); } }
         .bg-slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 2s ease-in-out; animation: bgPan 30s infinite alternate ease-in-out; }
-        .bg-slide.active { opacity: 1; }
+        .bg-slide.active { opacity: 1; background: radial-gradient(circle at 50% 50%, #1a2035 0%, #050811 100%); }
         #vignette { position: fixed; inset: 0; z-index: -1; background: radial-gradient(circle, transparent 30%, #000 130%); pointer-events: none; }
 
         header { position: fixed; top: 0; left: 0; width: 100%; height: 85px; background: rgba(10, 15, 25, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 100; display: flex; align-items: center; justify-content: center; padding-top: 15px; }
         .h-wrap { width: 100%; max-width: 800px; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        
         .status-badge { font-size: 9px; background: rgba(34, 197, 94, 0.1); color: #22c55e; padding: 4px 8px; border-radius: 20px; border: 1px solid rgba(34, 197, 94, 0.2); display: flex; align-items: center; gap: 4px; font-weight: 800; text-transform: uppercase; }
         .status-dot { width: 5px; height: 5px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 5px #22c55e; }
-        h1 { font-size: 18px; font-weight: 900; background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; transition: 0.3s; }
+        h1 { font-size: 18px; font-weight: 900; background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
 
         main.chat { position: fixed; top: 85px; bottom: 90px; left: 0; width: 100%; overflow-y: auto; padding: 25px 15px; display: flex; flex-direction: column; align-items: center; scroll-behavior: smooth; }
         .chat-wrap { width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 20px; padding-bottom: 30px; }
@@ -65,66 +41,38 @@
         .msg.user { justify-content: flex-end; }
         .avatar { width: 36px; height: 38px; border-radius: 50%; background: #000; border: 2px solid var(--gold); flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 5px; box-shadow: 0 0 10px rgba(212, 175, 55, 0.2); transition: 0.3s; }
         
-        @keyframes floatAvatar {
-            0% { transform: translateY(0px); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
-            50% { transform: translateY(-4px); box-shadow: 0 0 20px rgba(0, 242, 255, 0.7); border-color: var(--neon); }
-            100% { transform: translateY(0px); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
-        }
+        @keyframes floatAvatar { 0% { transform: translateY(0px); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); } 50% { transform: translateY(-4px); box-shadow: 0 0 20px rgba(0, 242, 255, 0.7); border-color: var(--neon); } 100% { transform: translateY(0px); box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); } }
         .ai .avatar { animation: floatAvatar 3s infinite ease-in-out; border-color: rgba(0, 242, 255, 0.4); }
 
         .bubble-container { display: flex; flex-direction: column; max-width: calc(100vw - 80px); }
-        .bubble { padding: 14px 18px; font-size: 15px; line-height: 1.6; border-radius: 20px; backdrop-filter: blur(10px); transition: 0.3s; }
+        .bubble { padding: 14px 18px; font-size: 14px; line-height: 1.6; border-radius: 20px; backdrop-filter: blur(10px); transition: 0.3s; }
         
-        @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        .user .bubble { 
-            background: linear-gradient(135deg, var(--accent), #1d4ed8, #0ea5e9, var(--accent)); 
-            background-size: 300% 300%; 
-            animation: gradientFlow 6s ease infinite; 
-            color: #fff; 
-            border-bottom-right-radius: 4px; 
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); 
-        }
-
-        @keyframes holoScan { 0% { transform: translateX(-150%) rotate(45deg); } 100% { transform: translateX(150%) rotate(45deg); } }
-        .ai .bubble { 
-            background: var(--card-bg); color: #f3f4f6; border: 1px solid rgba(255,255,255,0.08); border-bottom-left-radius: 4px; 
-            position: relative; overflow: hidden; box-shadow: inset 0 0 15px rgba(0, 242, 255, 0.03), 0 4px 15px rgba(0,0,0,0.5); 
-        }
-        .ai .bubble::after { 
-            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; 
-            background: linear-gradient(to right, transparent, rgba(0, 242, 255, 0.05), transparent); 
-            transform: rotate(45deg); animation: holoScan 5s infinite linear; pointer-events: none; 
-        }
-
+        .ai .bubble { background: var(--card-bg); color: #f3f4f6; border: 1px solid rgba(255,255,255,0.08); border-bottom-left-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .user .bubble { background: linear-gradient(135deg, var(--accent), #1d4ed8); color: #fff; border-bottom-right-radius: 4px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
         .timestamp { font-size: 9px; color: rgba(255,255,255,0.3); margin-top: 5px; font-weight: 600; padding: 0 5px; }
-        .user .timestamp { text-align: right; }
-
-        pre { position: relative; overflow: hidden; border-radius: 12px; margin-top: 10px; border: 1px solid rgba(255,255,255,0.1); }
-        .code-copy { position: absolute; top: 8px; right: 8px; background: var(--gold); color: #000; border: none; padding: 5px 10px; border-radius: 6px; font-size: 10px; font-weight: 800; cursor: pointer; z-index: 10; transition: 0.2s; }
 
         footer { position: fixed; bottom: 0; left: 0; width: 100%; height: 90px; background: linear-gradient(to top, #000 70%, transparent); display: flex; justify-content: center; z-index: 2000; padding-bottom: env(safe-area-inset-bottom); }
         .in-box { width: 92%; max-width: 800px; background: rgba(25, 30, 45, 0.95); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 8px 12px; display: flex; align-items: center; gap: 8px; height: 55px; margin-top: 5px; }
         textarea { flex: 1; background: none; border: none; color: #fff; font-size: 15px; outline: none; resize: none; max-height: 40px; padding: 8px; }
         .btn-send { background: var(--accent); border: none; width: 42px; height: 42px; border-radius: 50%; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 0 15px rgba(37, 99, 235, 0.4); }
 
-        aside.sidebar { position: fixed; top: 0; left: -100%; width: 300px; height: 100%; z-index: 3000; background: rgba(5, 8, 17, 0.98); backdrop-filter: blur(30px); transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-right: 1px solid rgba(212, 175, 55, 0.1); overflow-y: auto; padding-bottom: 20px; }
+        /* CSS DO MENU LATERAL */
+        aside.sidebar { position: fixed; top: 0; left: -100%; width: 300px; height: 100%; z-index: 3000; background: rgba(5, 8, 17, 0.98); backdrop-filter: blur(30px); transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); border-right: 1px solid rgba(212, 175, 55, 0.1); overflow-y: auto; padding-bottom: 20px; box-shadow: none; }
         .sidebar.open { left: 0; box-shadow: 20px 0 50px rgba(0,0,0,0.9); }
+        #sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 2999; display: none; opacity: 0; transition: 0.4s; }
+        #sidebar-overlay.show { display: block; opacity: 1; }
         
-        .u-box { padding: 60px 25px 20px; text-align: center; background: linear-gradient(to bottom, rgba(212, 175, 55, 0.05), transparent); }
-        .u-img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); transition: 0.3s; }
-
+        .u-box { padding: 60px 25px 20px; text-align: center; background: linear-gradient(to bottom, rgba(212, 175, 55, 0.05), transparent); position: relative; }
+        .u-img { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--gold); margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; overflow: hidden; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3); }
         .sys-info { margin: 10px 20px 15px; padding: 18px; border-radius: 20px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); }
         .sys-info p { font-size: 10px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
         .sys-info span { font-size: 13px; color: #fff; font-weight: 700; }
-
-        /* SEÇÃO DE SKINS NO MENU */
         .skin-panel { margin: 15px 20px; padding: 15px; border-radius: 20px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); }
         .skin-title { font-size: 10px; color: var(--gold); text-transform: uppercase; font-weight: 900; letter-spacing: 1px; margin-bottom: 12px; display: block; }
         .skin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-        .skin-btn { aspect-ratio: 1; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; font-size: 8px; font-weight: 800; color: #aaa; transition: 0.2s; }
+        .skin-btn { aspect-ratio: 1; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: transparent; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; font-size: 8px; font-weight: 800; color: #aaa; transition: 0.2s; }
         .skin-btn i { font-size: 14px; }
         .skin-btn.active { border-color: var(--gold); color: #fff; background: rgba(212,175,55,0.1); }
-
         .update-panel { margin: 0 20px 20px; border-radius: 20px; background: rgba(0,0,0,0.4); border: 1px solid rgba(37, 99, 235, 0.2); overflow: hidden; }
         .update-header { background: rgba(37, 99, 235, 0.1); padding: 12px 18px; font-size: 11px; font-weight: 900; color: #60a5fa; display: flex; align-items: center; justify-content: space-between; }
         .update-body { padding: 15px; }
@@ -132,419 +80,155 @@
         .update-version { font-size: 12px; color: var(--gold); font-weight: 800; }
         .update-text { font-size: 11px; color: #aaa; margin-top: 2px; line-height: 1.4; }
 
-        #smart-install-banner { position: fixed; bottom: -150px; left: 0; width: 100%; background: rgba(10, 15, 25, 0.95); backdrop-filter: blur(25px); border-top: 1px solid var(--gold); z-index: 4000; padding: 20px 20px calc(20px + env(safe-area-inset-bottom)); transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1); display: flex; justify-content: space-between; align-items: center; box-shadow: 0 -10px 40px rgba(0,0,0,0.8); border-radius: 25px 25px 0 0; }
-        #smart-install-banner.show { bottom: 0; }
-        
-        #update-splash { position: fixed; inset: 0; background: #050811; z-index: 99999; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; }
-        .pulse-img { width: 110px; height: 110px; border-radius: 25px; border: 2px solid var(--neon); box-shadow: 0 0 30px rgba(0,242,255,0.4); margin-bottom: 25px; animation: glowPulse 2s infinite alternate; object-fit: cover; }
-        @keyframes glowPulse { from { box-shadow: 0 0 10px rgba(0,242,255,0.2); transform: scale(1); } to { box-shadow: 0 0 40px rgba(0,242,255,0.6); transform: scale(1.05); } }
-        .u-title { color: #fff; font-size: 17px; font-weight: 900; letter-spacing: 1px; margin-bottom: 5px; }
-        .u-subtitle { color: #888; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 35px; }
+        /* TELA DE LOADING */
+        #update-splash { position: fixed; inset: 0; background: #050811; z-index: 99999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; text-align: center; transition: opacity 0.8s ease, transform 0.8s ease; }
+        .pulse-img { width: 110px; height: 110px; border-radius: 25px; border: 2px solid var(--neon); box-shadow: 0 0 30px rgba(0,242,255,0.4); margin-bottom: 25px; object-fit: cover; filter: grayscale(100%) brightness(0.5); transition: filter 1.5s ease-in-out; }
+        .loading-active .pulse-img { filter: grayscale(0%) brightness(1); }
         .progress-container { width: 100%; max-width: 280px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; position: relative; }
         #u-progress { width: 0%; height: 100%; background: var(--neon); box-shadow: 0 0 10px var(--neon); transition: width 0.3s ease; }
-        #u-perc { color: var(--neon); font-size: 15px; font-weight: 900; margin-top: 15px; }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-        #gatekeeper, #onboarding { position: fixed; inset: 0; background: #050811; z-index: 9999; display: none; align-items: center; justify-content: center; }
         
-        @media (display-mode: standalone) {
-            header { padding-top: 40px; height: 100px; }
-            main.chat { top: 100px; }
-            #smart-install-banner { display: none !important; } 
-            #onboarding { display: none !important; } 
-        }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
-    <div id="bg-container"><div class="bg-slide active"></div><div class="bg-slide"></div></div>
+    <div id="bg-container"><div class="bg-slide active"></div></div>
     <div id="vignette"></div>
-    <div id="toast" style="position:fixed; bottom:110px; left:50%; transform:translateX(-50%); background:var(--gold); color:#000; padding:10px 25px; border-radius:30px; font-size:12px; font-weight:900; display:none; z-index:10000; box-shadow: 0 5px 20px rgba(0,0,0,0.5);"></div>
 
     <div id="update-splash">
         <img src="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png" class="pulse-img">
-        <h2 class="u-title">ATUALIZAÇÃO DE SISTEMA</h2>
-        <p class="u-subtitle">Aplicando pacotes de rede neural...</p>
+        <h2 style="color:#fff; font-size:17px; font-weight:900; margin-bottom:5px;">SISTEMA LARA ELITE</h2>
+        <p style="color:#888; font-size:11px; letter-spacing:2px; margin-bottom:35px;">Iniciando conexões...</p>
         <div class="progress-container"><div id="u-progress"></div></div>
-        <div id="u-perc">0%</div>
+        <div id="u-perc" style="color:var(--neon); font-size:15px; font-weight:900; margin-top:15px;">0%</div>
     </div>
 
-    <div id="smart-install-banner">
-        <div style="display:flex; align-items:center; gap:15px;">
-            <img src="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png" style="width:45px; height:45px; border-radius:12px; border:1px solid var(--gold); object-fit: cover;">
-            <div>
-                <h4 style="color:var(--gold); margin:0; font-size:15px; font-weight:900;">Lara Elite App</h4>
-                <p style="color:#aaa; margin:0; font-size:11px; margin-top:2px;">Instale para acesso rápido na tela inicial.</p>
-            </div>
+    <div id="sidebar-overlay" onclick="UI.menu(false)"></div>
+    <aside class="sidebar" id="sidebar">
+        <div class="u-box">
+            <button onclick="UI.menu(false)" style="position:absolute; top:20px; right:20px; background:none; border:none; color:#888; font-size:22px; cursor:pointer;"><i class="fa-solid fa-xmark"></i></button>
+            <div class="u-img"><i class="fa-solid fa-user" style="color:var(--gold); font-size:35px;"></i></div>
+            <h3 style="font-size:16px; font-weight:900; color:var(--gold);">Visitante</h3>
+            <p style="font-size:11px; color:#aaa; margin-top:5px;">Status: Conectado</p>
         </div>
-        <div style="display:flex; gap:12px;">
-            <button onclick="Core.hideInstallBanner()" style="background:none; border:none; color:#888; font-weight:bold; font-size:11px; cursor:pointer;">AGORA NÃO</button>
-            <button onclick="Core.triggerInstall()" style="background:var(--accent); border:none; color:#fff; font-weight:900; font-size:12px; padding:10px 18px; border-radius:12px; box-shadow:0 0 15px rgba(37,99,235,0.4); cursor:pointer;">INSTALAR</button>
-        </div>
-    </div>
 
-    <section id="onboarding">
-        <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 360px; box-shadow: 0 10px 40px rgba(0,0,0,0.8);">
-            <i class="fa-solid fa-rocket" style="color:var(--gold); font-size: 40px; margin-bottom: 20px;"></i>
-            <h2 style="color:var(--gold); margin-bottom: 10px;">LARA ELITE v21.11</h2>
-            <p style="font-size: 13px; color: #888; margin-bottom: 20px;">Bem-vindo ao sistema! Para a experiência completa e off-line, instale o aplicativo oficial no seu aparelho.</p>
-            
-            <button onclick="Core.triggerInstallOnboarding()" style="width:100%; padding:15px; background:linear-gradient(135deg, var(--accent), #1d4ed8); border:none; border-radius:15px; color:#fff; font-weight:900; cursor:pointer; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);"><i class="fa-solid fa-download"></i> INSTALAR APP AGORA</button>
-            
-            <div style="background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.15); padding: 12px; border-radius: 12px; margin-bottom: 25px; text-align: left;">
-                <p style="font-size: 11px; color: #bbb; margin: 0; line-height: 1.5;">
-                    <strong style="color:var(--gold);">Instalação Manual:</strong> Se o botão acima não abrir, clique nos <strong>3 pontinhos (⋮)</strong> no canto do seu navegador e selecione <strong>"Adicionar à tela inicial"</strong>.
-                </p>
-            </div>
-
-            <button onclick="Core.initOnboarding()" style="width:100%; padding:15px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:15px; color:#fff; font-weight:bold; cursor:pointer;">JÁ INSTALEI / CONTINUAR</button>
-        </div>
-    </section>
-
-    <section id="gatekeeper">
-        <div style="background: #0a0f1e; padding: 40px; border-radius: 40px; border: 1px solid var(--gold); text-align: center; max-width: 360px;">
-            <div id="preview" style="width:90px; height:90px; border-radius:50%; background:#000; margin:0 auto 20px; border:2px solid var(--gold); display:flex; align-items:center; justify-content:center; cursor:pointer; overflow:hidden;" onclick="document.getElementById('up').click()"><i class="fa-solid fa-user" style="color:var(--gold); font-size:30px;"></i></div>
-            <input type="file" id="up" accept="image/*" hidden onchange="Core.up(event)">
-            <input type="text" id="p-name" placeholder="Seu Nome de Desenvolvedor" style="width:100%; padding:16px; background:#000; border:1px solid #333; border-radius:18px; color:#fff; margin-bottom:20px; text-align:center; font-weight: bold;">
-            <button onclick="Core.save()" style="width:100%; padding:18px; background:var(--accent); border:none; border-radius:18px; color:#fff; font-weight:900; cursor:pointer;">SALVAR PERFIL</button>
-        </div>
-    </section>
-
-    <header><div class="h-wrap">
-        <button onclick="UI.menu(true)" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;"><i class="fa-solid fa-bars-staggered"></i></button>
-        <div style="text-align:center;">
-            <h1>Lara Elite</h1>
-            <div style="display:flex; gap:6px; align-items:center; justify-content:center; margin-top:3px;">
-                <div class="status-badge"><div class="status-dot"></div> Online</div>
-                <div class="status-badge" style="background:rgba(0,242,255,0.05); color:var(--neon); border-color:rgba(0,242,255,0.2);">⚡ 12ms</div>
-            </div>
-        </div>
-        <div id="p-btn-top" style="width:38px; height:38px; border-radius:50%; border:2px solid var(--gold); overflow:hidden; box-shadow: 0 0 10px rgba(212,175,55,0.2);"></div>
-    </div></header>
-
-    <div id="overlay" style="position:fixed; inset:0; background:rgba(0,0,0,0.7); display:none; z-index:2500; backdrop-filter: blur(5px);" onclick="UI.menu(false)"></div>
-    
-    <aside id="menu" class="sidebar">
-        <div class="u-box"><div class="u-img" id="menu-photo">👤</div><p id="menu-name" style="font-weight:900; letter-spacing: 0.5px;">Mestre</p></div>
-        
         <div class="sys-info">
-            <p><i class="fa-solid fa-shield-halved"></i> Security Status</p>
-            <span>Cloud Network Confortável</span>
+            <p>Modelo Neural</p>
+            <span>Lara Elite v21.11</span>
         </div>
 
-        <!-- NOVO PAINEL DE SKINS -->
         <div class="skin-panel">
-            <span class="skin-title">Seletor de Aparência Elite</span>
+            <span class="skin-title">Aparência do Sistema</span>
             <div class="skin-grid">
-                <button onclick="UI.setSkin('gold')" id="skin-gold" class="skin-btn active"><i class="fa-solid fa-crown"></i>Elite Gold</button>
-                <button onclick="UI.setSkin('cyber')" id="skin-cyber" class="skin-btn"><i class="fa-solid fa-bolt"></i>Cyber Neon</button>
-                <button onclick="UI.setSkin('stealth')" id="skin-stealth" class="skin-btn"><i class="fa-solid fa-user-ninja"></i>Modo Furtivo</button>
+                <button class="skin-btn active" onclick="UI.setTheme('default', this)"><i class="fa-solid fa-bolt"></i> Padrão</button>
+                <button class="skin-btn" onclick="UI.setTheme('cyber', this)"><i class="fa-solid fa-microchip"></i> Cyber</button>
+                <button class="skin-btn" onclick="UI.setTheme('stealth', this)"><i class="fa-solid fa-moon"></i> Stealth</button>
             </div>
         </div>
 
         <div class="update-panel">
-            <div class="update-header">
-                <span><i class="fa-solid fa-code-branch"></i> Updates Automáticos</span>
-                <div class="status-dot" style="background:var(--neon); box-shadow: 0 0 10px var(--neon);"></div>
-            </div>
-            <div class="update-body" id="changelog-area">
+            <div class="update-header"><span><i class="fa-solid fa-code"></i> CHANGELOG</span> <span>v21.11</span></div>
+            <div class="update-body">
                 <div class="update-item">
-                    <div class="update-version">v21.11 - Seletor de Skins</div>
-                    <div class="update-text">Novos temas visuais aplicados: Cyber Neon e Modo Furtivo. Troca de cores em tempo real via menu.</div>
-                </div>
-                <div class="update-item">
-                    <div class="update-version">v21.10 - Chat Imersivo</div>
-                    <div class="update-text">Fundo parallax e animações holográficas em todas as bolhas de chat.</div>
+                    <div class="update-version">Interface UI/UX</div>
+                    <div class="update-text">Implementação do Menu e Sistema de Temas.</div>
                 </div>
             </div>
         </div>
-
-        <nav style="padding:0 20px 20px; display:flex; flex-direction:column; gap:10px;">
-            <button onclick="Core.exportChat()" style="width:100%; padding:15px; border-radius:15px; background:rgba(37, 99, 235, 0.1); border:1px solid var(--accent); color:#fff; font-weight:bold; cursor:pointer;"><i class="fa-solid fa-download"></i> EXPORTAR LOG</button>
-            <button onclick="UI.togglePix(true)" style="width:100%; padding:15px; border-radius:15px; background:linear-gradient(to right, #ffd700, #ff8c00); border:none; color:#000; font-weight:900; cursor:pointer;"><i class="fa-solid fa-heart"></i> APOIAR PROJETO</button>
-            <button onclick="Core.clearChat()" style="width:100%; padding:15px; border-radius:15px; background:rgba(239, 68, 68, 0.1); border:1px solid #ef4444; color:#ef4444; font-weight:bold; cursor:pointer;"><i class="fa-solid fa-trash"></i> LIMPAR HISTÓRICO</button>
-            <button onclick="Core.logout()" style="width:100%; padding:15px; border-radius:15px; background:rgba(255, 255, 255, 0.05); border:1px solid rgba(255,255,255,0.1); color:#ccc; font-weight:bold; cursor:pointer; margin-top:10px;"><i class="fa-solid fa-right-from-bracket"></i> TROCAR PERFIL</button>
-        </nav>
     </aside>
 
-    <div id="modal-pix" style="position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:5000; display:none; align-items:center; justify-content:center; padding:20px; backdrop-filter: blur(15px);">
-        <div class="card-pix">
-            <h2 style="color:var(--gold); font-size:22px; font-weight:900;">ELITE SUPPORT</h2>
-            <p style="color:#888; font-size:13px; margin:20px 0;">Sua ajuda mantém os servidores de alta performance online.</p>
-            <div id="pix-area" onclick="Core.copy('61318165300')" style="background:rgba(255,255,255,0.05); padding:18px; border-radius:20px; border:1px dashed var(--gold); color:#fff; font-size:13px; cursor:pointer; font-weight: 800; word-break: break-all;">61318165300</div>
-            <button onclick="UI.togglePix(false)" style="width:100%; padding:15px; margin-top:20px; border-radius:15px; background:#ef4444; border:none; color:#fff; font-weight:900; cursor:pointer;">VOLTAR AO CHAT</button>
+    <header><div class="h-wrap">
+        <button onclick="UI.menu(true)" style="background:none; border:none; color:#fff; font-size:22px; cursor:pointer;"><i class="fa-solid fa-bars-staggered"></i></button>
+        <div style="text-align: center;">
+            <h1>LARA ELITE</h1>
+            <div class="status-badge"><div class="status-dot"></div> ONLINE</div>
         </div>
-    </div>
+        <div style="width:22px;"></div>
+    </div></header>
 
-    <main class="chat" id="chat-main"><div class="chat-wrap" id="chat-box"></div></main>
-    
+    <main class="chat" id="chat-box">
+        <div class="chat-wrap" id="chat-content">
+            </div>
+    </main>
+
     <footer>
         <div class="in-box">
-            <textarea id="u-in" rows="1" placeholder="Escreva aqui, mestre..." oninput="UI.size(this)" onkeydown="if(event.key==='Enter' && !event.shiftKey) { event.preventDefault(); Core.send(); }"></textarea>
-            <button type="button" class="btn-send" onclick="Core.send()"><i class="fa-solid fa-paper-plane"></i></button>
+            <textarea id="user-input" placeholder="Comunicação com o sistema..."></textarea>
+            <button class="btn-send"><i class="fa-solid fa-paper-plane"></i></button>
         </div>
     </footer>
 
     <script>
-        const Storage = { set: (k, v) => localStorage.setItem(k, JSON.stringify(v)), get: (k) => JSON.parse(localStorage.getItem(k)) };
-        const VERSION = "21.11"; 
-        const AI_AVATAR_URL = "https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png";
-        
-        let deferredPrompt; 
-        let installPromptCount = Storage.get('l_install_count') || 0;
-
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-        });
-
-        const Visual = {
-            slides: document.querySelectorAll('.bg-slide'), current: 0,
-            list: ["Naruto", "Sasuke", "Luffy", "Goku", "Zoro", "Vegeta", "Itachi"],
-            async update() {
-                const char = this.list[Math.floor(Math.random() * this.list.length)];
-                const url = `https://image.pollinations.ai/prompt/anime_${char}_dark_aesthetic_professional_4k?width=1080&height=1920&model=flux&nologo=true&seed=${Math.random()}`;
-                const next = this.slides[1 - this.current];
-                const img = new Image();
-                img.onload = () => { next.style.backgroundImage = `url(${url})`; this.slides[this.current].classList.remove('active'); next.classList.add('active'); this.current = 1 - this.current; };
-                img.src = url;
-            },
-            init() { this.update(); setInterval(() => this.update(), 60000); }
-        };
-
-        const Core = {
-            h: [], typing: false, name: '', photo: '', safetyTimer: null,
-            init() {
-                this.photo = Storage.get('l_photo') || ''; 
-                this.name = Storage.get('l_name') || ''; 
-                this.h = Storage.get('l_chat') || [];
-                
-                if(this.name) document.getElementById('p-name').value = this.name;
-                UI.update(); this.h.forEach(m => UI.draw(m.r, m.t));
-                
-                // Carrega Skin Salva
-                const savedSkin = Storage.get('l_skin') || 'gold';
-                UI.setSkin(savedSkin);
-                
-                if (window.matchMedia('(display-mode: standalone)').matches) {
-                    this.forceNetworkUpdate();
-                } else if (!Storage.get('l_onboard')) {
-                    document.getElementById('onboarding').style.display = 'flex';
-                } else if (!Storage.get('l_active')) {
-                    document.getElementById('gatekeeper').style.display = 'flex';
-                } else {
-                    this.startInstallLoop();
-                    this.forceNetworkUpdate();
-                }
-
-                Visual.init();
-                this.checkUpdates();
-            },
-            
-            async forceNetworkUpdate() {
-                try {
-                    const res = await fetch(window.location.href.split('?')[0] + '?bypassCache=' + new Date().getTime(), { cache: 'no-store' });
-                    const txt = await res.text();
-                    const vMatch = txt.match(/const VERSION\s*=\s*"([^"]+)"/);
-                    if (vMatch && vMatch[1] && vMatch[1] !== VERSION) {
-                        Storage.set('l_version', VERSION);
-                        window.location.reload(true); 
-                    }
-                } catch(e) {}
-            },
-
-            triggerInstallOnboarding() {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
-                } else UI.toast("Use os 3 pontinhos do navegador!");
-            },
-
-            initOnboarding() {
-                if (window.Notification) Notification.requestPermission();
-                Storage.set('l_onboard', true);
-                location.reload();
-            },
-
-            logout() {
-                if(confirm("Deseja sair da sessão?")) {
-                    Storage.set('l_active', false);
-                    location.reload();
-                }
-            },
-
-            startInstallLoop() {
-                if (!window.matchMedia('(display-mode: standalone)').matches && installPromptCount < 3) {
-                    setInterval(() => {
-                        if (deferredPrompt && installPromptCount < 3) {
-                            document.getElementById('smart-install-banner').classList.add('show');
-                            installPromptCount++;
-                            Storage.set('l_install_count', installPromptCount);
-                        }
-                    }, 120000); 
-                }
-            },
-
-            hideInstallBanner() { document.getElementById('smart-install-banner').classList.remove('show'); },
-
-            triggerInstall() {
-                this.hideInstallBanner();
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    deferredPrompt = null;
-                }
-            },
-
-            checkUpdates() {
-                const lastV = Storage.get('l_version');
-                if (lastV === VERSION) return;
-                if (lastV && lastV !== VERSION && Storage.get('l_active')) {
-                    const splash = document.getElementById('update-splash');
-                    const bar = document.getElementById('u-progress');
-                    const perc = document.getElementById('u-perc');
-                    splash.style.display = 'flex';
-                    let p = 0;
-                    const interval = setInterval(() => {
-                        p += Math.floor(Math.random() * 15) + 5; 
-                        if (p >= 100) p = 100;
-                        bar.style.width = p + '%';
-                        perc.innerText = p + '%';
-                        if (p === 100) {
-                            clearInterval(interval);
-                            setTimeout(() => {
-                                splash.style.display = 'none'; 
-                                UI.notify("Sistema Atualizado!", `Mestre, v${VERSION} instalada.`);
-                                Storage.set('l_version', VERSION);
-                            }, 600);
-                        }
-                    }, 150);
-                } else Storage.set('l_version', VERSION);
-            },
-
-            save() { this.name = document.getElementById('p-name').value || 'Mestre'; Storage.set('l_name', this.name); Storage.set('l_photo', this.photo); Storage.set('l_active', true); location.reload(); },
-            
-            async requestAI() {
-                const sys = `LARA ELITE v${VERSION}. Mestre: ${this.name}. Respostas CURTAS.`;
-                try {
-                    const seed = Math.floor(Math.random() * 1000000);
-                    const prompt = encodeURIComponent(`[SYSTEM: ${sys}] User: ${this.h.slice(-1)[0].t}`);
-                    const res = await fetch(`https://text.pollinations.ai/${prompt}?private=true&seed=${seed}`);
-                    clearTimeout(this.safetyTimer);
-                    let w = document.getElementById('dots');
-                    if (w) w.removeAttribute('id');
-                    else {
-                        w = document.createElement('div'); w.className = 'msg ai';
-                        w.innerHTML = `<div class="avatar"><img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;"></div><div class="bubble-container"><div class="bubble"></div><div class="timestamp">${UI.getTime()}</div></div>`;
-                        UI.box.appendChild(w);
-                    }
-                    const rend = w.querySelector('.bubble');
-                    if (!res.body) {
-                        const txt = await res.text();
-                        rend.innerHTML = marked.parse(txt.split(/Ad 🌸|Support/i)[0].trim());
-                        this.finalizeMessage(txt, w);
-                        return;
-                    }
-                    const reader = res.body.getReader();
-                    const decoder = new TextDecoder('utf-8');
-                    let fullTxt = '';
-                    while (true) {
-                        const { done, value } = await reader.read();
-                        if (done) break;
-                        fullTxt += decoder.decode(value, { stream: true });
-                        rend.innerHTML = marked.parse(fullTxt.replace(/Ad 🌸|Support|pollinations/gi, ''));
-                        UI.scrollToEnd();
-                    }
-                    this.finalizeMessage(fullTxt, w);
-                } catch(e) { UI.dots(false); this.typing = false; }
-            },
-
-            finalizeMessage(txt, bubbleElement) {
-                const finalTxt = txt.replace(/Ad 🌸|Support|pollinations/gi, '').trim();
-                this.typing = false;
-                this.h.push({t: finalTxt, r:'ai'});
-                Storage.set('l_chat', this.h.slice(-20));
-                UI.applyCodeUI(bubbleElement);
-                UI.scrollToEnd();
-            },
-
-            send() {
-                if (this.typing) return;
-                const i = document.getElementById('u-in'); const t = i.value.trim(); if(!t) return;
-                this.typing = true; i.value = ""; i.style.height = "auto";
-                UI.draw('user', t); UI.dots(true);
-                this.h.push({t, r:'user'}); this.requestAI();
-                this.safetyTimer = setTimeout(() => { if(this.typing) { this.typing = false; UI.dots(false); } }, 15000);
-            },
-            
-            copy(text) { navigator.clipboard.writeText(text).then(() => UI.toast("COPIADO!")); },
-            clearChat() { if(confirm("Apagar histórico?")) { Storage.set('l_chat', []); location.reload(); } },
-            exportChat() {
-                let text = `=== LARA ELITE LOG ===\n\n`;
-                this.h.forEach(m => { text += `[${m.r.toUpperCase()}]: ${m.t}\n\n`; });
-                const blob = new Blob([text], { type: 'text/plain' });
-                const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-                a.download = `Log_${new Date().getTime()}.txt`; a.click();
-            },
-            up(e) {
-                const f = e.target.files[0]; const r = new FileReader();
-                r.onload = (ev) => { this.photo = ev.target.result; document.getElementById('preview').innerHTML = `<img src="${this.photo}" style="width:100%;height:100%;object-fit:cover;">`; };
-                r.readAsDataURL(f);
-            }
-        };
-
+        // LÓGICA DA INTERFACE (MENU E TEMAS)
         const UI = {
-            box: document.getElementById('chat-box'),
-            main: document.getElementById('chat-main'),
-            setSkin(skin) {
-                document.body.className = skin === 'gold' ? '' : `theme-${skin}`;
-                document.querySelectorAll('.skin-btn').forEach(b => b.classList.remove('active'));
-                document.getElementById(`skin-${skin}`).classList.add('active');
-                Storage.set('l_skin', skin);
-                this.toast(`TEMA ${skin.toUpperCase()} ATIVADO!`);
-            },
-            togglePix(s) { document.getElementById('modal-pix').style.display = s ? 'flex' : 'none'; if(s) this.menu(false); },
-            toast(m) { const t = document.getElementById('toast'); t.innerHTML = m; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 3000); },
-            getTime() { return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }); },
-            notify(title, body) {
-                if (window.Notification && Notification.permission === "granted") {
-                    navigator.serviceWorker.ready.then(reg => {
-                        reg.showNotification(title, { body: body, icon: AI_AVATAR_URL });
-                    });
+            menu: (abrir) => {
+                const sidebar = document.getElementById('sidebar');
+                const overlay = document.getElementById('sidebar-overlay');
+                if(abrir) {
+                    sidebar.classList.add('open');
+                    overlay.classList.add('show');
+                } else {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('show');
                 }
             },
-            scrollToEnd() { requestAnimationFrame(() => { this.main.scrollTop = this.main.scrollHeight; }); },
-            draw(r, t) {
-                const w = document.createElement('div'); w.className = `msg ${r}`;
-                let av = r === 'user' ? (Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fa-solid fa-user-secret"></i>') : `<img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;">`;
-                w.innerHTML = `${r === 'ai' ? `<div class="avatar">${av}</div>` : ''}<div class="bubble-container"><div class="bubble">${marked.parse(t)}</div><div class="timestamp">${this.getTime()}</div></div>${r === 'user' ? `<div class="avatar">${av}</div>` : ''}`;
-                this.box.appendChild(w); this.applyCodeUI(w); this.scrollToEnd();
-            },
-            applyCodeUI(el) {
-                el.querySelectorAll('pre code').forEach((block) => {
-                    if (block.parentElement.querySelector('.code-copy')) return;
-                    const btn = document.createElement('button'); btn.className = 'code-copy'; btn.innerHTML = '<i class="fa-solid fa-copy"></i>';
-                    btn.onclick = () => Core.copy(block.innerText); block.parentElement.appendChild(btn);
-                });
-            },
-            dots(s) { 
-                if(s) { 
-                    const d = document.createElement('div'); d.id='dots'; d.className='msg ai'; 
-                    d.innerHTML=`<div class="avatar"><img src="${AI_AVATAR_URL}" style="width:100%;height:100%;object-fit:cover;"></div><div class="bubble-container"><div class="bubble" style="letter-spacing:3px;">...</div></div>`; 
-                    this.box.appendChild(d); 
-                } else { const d = document.getElementById('dots'); if(d) d.remove(); }
-                this.scrollToEnd();
-            },
-            size(t) { t.style.height='auto'; t.style.height=t.scrollHeight+'px'; this.scrollToEnd(); },
-            menu(s) { document.getElementById('menu').classList.toggle('open', s); document.getElementById('overlay').style.display = s ? 'block' : 'none'; },
-            update() {
-                const img = Core.photo ? `<img src="${Core.photo}" style="width:100%;height:100%;object-fit:cover;">` : '<i class="fa-solid fa-user-secret"></i>';
-                document.getElementById('p-btn-top').innerHTML = img; 
-                document.getElementById('menu-photo').innerHTML = img; 
-                document.getElementById('menu-name').textContent = Core.name || 'Mestre';
+            setTheme: (tema, btnElement) => {
+                // Tira todas as classes de tema do body
+                document.body.className = '';
+                if(tema !== 'default') document.body.classList.add('theme-' + tema);
+                
+                // Atualiza o botão ativo
+                document.querySelectorAll('.skin-btn').forEach(btn => btn.classList.remove('active'));
+                btnElement.classList.add('active');
             }
         };
 
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js').catch(() => {});
-        }
-        window.onload = () => Core.init();
+        // LÓGICA DO LOADING E PRIMEIRA MENSAGEM
+        const CoreSplash = {
+            iniciar: () => {
+                const splash = document.getElementById('update-splash');
+                const progress = document.getElementById('u-progress');
+                const perc = document.getElementById('u-perc');
+                setTimeout(() => splash.classList.add('loading-active'), 100);
+
+                let value = 0;
+                const interval = setInterval(() => {
+                    value += Math.floor(Math.random() * 15) + 5; 
+                    if (value >= 100) {
+                        value = 100;
+                        clearInterval(interval);
+                        setTimeout(CoreSplash.finalizar, 800); 
+                    }
+                    progress.style.width = value + '%';
+                    perc.innerText = value + '%';
+                }, 200);
+            },
+
+            finalizar: () => {
+                const splash = document.getElementById('update-splash');
+                splash.style.opacity = '0';
+                splash.style.transform = 'scale(1.1)'; 
+                
+                setTimeout(() => { 
+                    splash.style.display = 'none'; 
+                    CoreSplash.boasVindas(); // Chama a mensagem logo que a tela some
+                }, 800);
+            },
+
+            boasVindas: () => {
+                const chat = document.getElementById('chat-content');
+                chat.innerHTML = `
+                    <div class="msg ai">
+                        <div class="avatar"><img src="https://spicy-harlequin-pqaujlkovi.edgeone.app/pngtree-beautiful-ai-generated-girl-so-much-attractive-png-image_12342109.png" style="width:100%; height:100%; object-fit:cover;"></div>
+                        <div class="bubble-container">
+                            <div class="bubble">Sistemas online e otimizados. Menu lateral operante. Como posso te auxiliar neste momento?</div>
+                            <div class="timestamp">AGORA</div>
+                        </div>
+                    </div>
+                `;
+            }
+        };
+
+        window.onload = () => { CoreSplash.iniciar(); };
     </script>
+</body>
+</html>
